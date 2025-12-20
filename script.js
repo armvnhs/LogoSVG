@@ -1,134 +1,91 @@
-const GITHUB_USERNAME = "armvnhs"; // نام کاربری گیت‌هاب شما
-const REPO_NAME = "LogoBox";      // نام مخزن (مثلاً my-website)
+// ==========================================
+// تنظیمات اتصال به گیت‌هاب
+// ==========================================
+const GITHUB_USERNAME = "armvnhs";   // نام کاربری شما
+const REPO_NAME = "LogoBox";        // نام مخزنی که می‌سازید (دقیق وارد کنید)
+const FOLDER_NAME = "logos";         // نام پوشه لوگوها
 // ==========================================
 
-const translations = {
-    fa: {
-        brand: "اس‌وی‌جی گالری",
-        title: "بهترین لوگوهای SVG جهان را کشف کنید",
-        subtitle: "گرافیک‌های برداری با کیفیت بالا و مقیاس‌پذیر برای پروژه بعدی شما",
-        searchPlaceholder: "جستجوی لوگو...",
-        footer: "© 1403 تمامی حقوق محفوظ است.",
-        langBtnText: "English",
-        loading: "در حال دریافت لوگوها..."
-    },
-    en: {
-        brand: "SVG Gallery",
-        title: "Discover the World’s Best SVG Logos",
-        subtitle: "High-quality, scalable vector graphics for your next project",
-        searchPlaceholder: "Search logos...",
-        footer: "© 2025 All rights reserved.",
-        langBtnText: "فارسی",
-        loading: "Loading logos..."
-    }
-};
-
-let currentLang = 'fa';
-let allLogos = []; // لیست لوگوها اینجا ذخیره می‌شود
-
-// عناصر DOM
 const gallery = document.getElementById('gallery');
 const searchInput = document.getElementById('searchInput');
-const langBtn = document.getElementById('langBtn');
-const htmlTag = document.documentElement;
+let allLogos = [];
 
-// --- تابع اصلی: دریافت اتوماتیک فایل‌ها از گیت‌هاب ---
-async function fetchLogosFromGitHub() {
-    gallery.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #888;">${translations[currentLang].loading}</p>`;
-    
+async function fetchLogos() {
+    const apiUrl = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${FOLDER_NAME}`;
+
     try {
-        // درخواست به API گیت‌هاب برای گرفتن لیست فایل‌های پوشه logos
-        const response = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/logos`);
+        const response = await fetch(apiUrl);
         
-        if (!response.ok) throw new Error("Connection Error");
-        
+        if (!response.ok) {
+            if(response.status === 404) throw new Error("پوشه یا مخزن پیدا نشد. نام‌ها را چک کنید.");
+            if(response.status === 403) throw new Error("محدودیت درخواست گیت‌هاب. کمی صبر کنید.");
+            throw new Error("خطا در ارتباط با سرور");
+        }
+
         const data = await response.json();
 
-        // تبدیل داده‌های خام گیت‌هاب به فرمت مورد نیاز ما
+        // فیلتر کردن و آماده‌سازی داده‌ها
         allLogos = data
-            .filter(file => file.name.endsWith('.svg')) // فقط فایل‌های svg
+            .filter(file => file.name.endsWith('.svg')) // فقط فایل‌های SVG
             .map(file => {
-                // پاک کردن پسوند .svg و زیبا کردن متن (مثلاً google-cloud -> Google Cloud)
-                const rawName = file.name.replace('.svg', '').replace(/-/g, ' ');
-                const formattedName = rawName.charAt(0).toUpperCase() + rawName.slice(1);
+                // تبدیل نام فایل "brand-name.svg" به "Brand Name"
+                let cleanName = file.name.replace('.svg', '').replace(/[-_]/g, ' ');
+                // بزرگ کردن حرف اول کلمات (اختیاری برای زیبایی)
+                cleanName = cleanName.replace(/\b\w/g, l => l.toUpperCase());
 
                 return {
-                    name: formattedName, // اسم لوگو از روی اسم فایل برداشته می‌شود
-                    fileName: file.name,
-                    downloadUrl: file.download_url // لینک دانلود مستقیم از گیت‌هاب
+                    name: cleanName,
+                    downloadUrl: file.download_url
                 };
             });
 
-        renderLogos(allLogos);
+        renderGallery(allLogos);
 
     } catch (error) {
+        gallery.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; color: red; padding: 20px;">
+                <p>⚠️ خطا: ${error.message}</p>
+                <small>لطفاً مطمئن شوید نام مخزن <b>${REPO_NAME}</b> و نام پوشه <b>${FOLDER_NAME}</b> در گیت‌هاب درست است.</small>
+            </div>
+        `;
         console.error(error);
-        gallery.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: red;">Error loading logos. Check username/repo name.</p>`;
     }
 }
 
-// --- تابع تغییر زبان ---
-function toggleLanguage() {
-    currentLang = currentLang === 'fa' ? 'en' : 'fa';
-    updateContent();
-    
-    if(currentLang === 'en') {
-        htmlTag.setAttribute('dir', 'ltr');
-        document.body.style.fontFamily = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
-    } else {
-        htmlTag.setAttribute('dir', 'rtl');
-        document.body.style.fontFamily = "'Vazirmatn', sans-serif";
-    }
-}
-
-// --- آپدیت متون ---
-function updateContent() {
-    const t = translations[currentLang];
-    
-    document.querySelectorAll('[data-key]').forEach(el => {
-        const key = el.getAttribute('data-key');
-        if (t[key]) el.textContent = t[key];
-    });
-
-    searchInput.placeholder = t.searchPlaceholder;
-    langBtn.textContent = t.langBtnText;
-    
-    // اگر لوگوها لود شده‌اند دوباره رندر کن (شاید بخواهیم بعدا منطق زبان را روی اسم‌ها هم اعمال کنیم)
-    if(allLogos.length > 0) renderLogos(allLogos);
-}
-
-// --- ساخت کارت‌ها ---
-function renderLogos(items) {
+function renderGallery(logos) {
     gallery.innerHTML = '';
-    
-    items.forEach(logo => {
-        const card = document.createElement('div');
+
+    if (logos.length === 0) {
+        gallery.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">هیچ لوگویی پیدا نشد.</p>';
+        return;
+    }
+
+    logos.forEach(logo => {
+        // ایجاد کارت لینک‌دار (کل کارت لینک دانلود است)
+        const card = document.createElement('a');
+        card.href = logo.downloadUrl;
         card.className = 'card';
-        // مسیر مستقیم فایل از گیت‌هاب
-        const filePath = `logos/${logo.fileName}`; 
+        card.setAttribute('download', ''); // پیشنهاد دانلود به مرورگر
+        card.target = "_blank"; // باز شدن در تب جدید (گاهی برای دانلود لازم است)
 
         card.innerHTML = `
-            <img src="${filePath}" alt="${logo.name}" title="${logo.name}" loading="lazy">
-            <div class="card-title" style="position: absolute; bottom: -30px; opacity: 0;">${logo.name}</div>
-            
-            <a href="${filePath}" download="${logo.fileName}" class="card-download" title="Download">
-                <i class="fas fa-arrow-down"></i>
-            </a>
+            <img src="${logo.downloadUrl}" alt="${logo.name}" loading="lazy">
+            <div class="card-title">${logo.name}</div>
+            <div class="download-hint">دانلود <i class="fas fa-arrow-down"></i></div>
         `;
+
         gallery.appendChild(card);
     });
 }
 
-// --- رویدادها ---
-langBtn.addEventListener('click', toggleLanguage);
-
+// قابلیت جستجو
 searchInput.addEventListener('input', (e) => {
-    const term = e.target.value.toLowerCase();
-    const filtered = allLogos.filter(logo => 
-        logo.name.toLowerCase().includes(term)
+    const searchTerm = e.target.value.toLowerCase();
+    const filteredLogos = allLogos.filter(logo => 
+        logo.name.toLowerCase().includes(searchTerm)
     );
-    renderLogos(filtered);
+    renderGallery(filteredLogos);
 });
 
 // شروع برنامه
-fetchLogosFromGitHub();
+fetchLogos();
