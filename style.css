@@ -4,7 +4,7 @@
     --text-main: #1D1D1F;      /* رنگ متن اصلی */
     --text-muted: #86868B;     /* رنگ متن توضیحات */
     --accent: #0071E3;         /* آبی اپل */
-    --radius: 20px;            /* گردی گوشه‌ها */
+    --radius: 15px;            /* گردی گوشه‌ها */
     --shadow: 0 4px 20px rgba(0, 0, 0, 0.04); /* سایه بسیار نرم */
     --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.08);
 }
@@ -60,7 +60,7 @@ header p {
 .search-box input {
     width: 100%;
     padding: 16px 50px 16px 20px;
-    border-radius: 16px;
+    border-radius: 15px;
     border: 1px solid transparent;
     background: var(--card-bg);
     font-family: inherit;
