@@ -1,1 +1,57 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Gallery</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- فونت وزیرمتن -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <!-- آیکون‌ها -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
 
+    <!-- نوار ناوبری بالا -->
+    <nav class="navbar">
+        <div class="nav-brand" data-key="brand">SVG Gallery</div>
+        <div class="nav-actions">
+            <button id="langBtn" class="lang-btn">English</button>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        
+        <!-- بخش متن اصلی -->
+        <header class="hero-section">
+            <h1 data-key="title">بهترین لوگوهای SVG جهان را کشف کنید</h1>
+            <p data-key="subtitle">گرافیک‌های برداری با کیفیت بالا و مقیاس‌پذیر برای پروژه بعدی شما</p>
+        </header>
+
+        <!-- پنل شیشه‌ای بزرگ (مثل تصویر ارسالی) -->
+        <div class="glass-panel">
+            
+            <!-- نوار جستجو داخل پنل -->
+            <div class="toolbar">
+                <div class="search-wrapper">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="جستجوی لوگو...">
+                </div>
+            </div>
+
+            <!-- گرید لوگوها -->
+            <div id="gallery" class="gallery-grid">
+                <!-- کارت‌ها اینجا ساخته می‌شوند -->
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <p data-key="footer">© 1403 تمامی حقوق محفوظ است.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
