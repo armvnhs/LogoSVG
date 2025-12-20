@@ -118,10 +118,10 @@ header p {
 .card img {
     width: auto;
     height: auto;
-    max-width: 100%;
-    max-height: 120px;
+    max-width: 80%;
+    max-height: 100px;
     object-fit: contain;  
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     filter: grayscale(0%);
 }
 
