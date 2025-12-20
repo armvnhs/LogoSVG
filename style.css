@@ -116,11 +116,13 @@ header p {
 }
 
 .card img {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 120px;
+    object-fit: contain;  
     margin-bottom: 20px;
-    filter: grayscale(0%); /* لوگوها رنگی باشند */
+    filter: grayscale(0%);
 }
 
 .card-title {
