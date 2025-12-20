@@ -20,7 +20,7 @@ const translations = {
 
 // --- لیست لوگوها ---
 const logos = [
-    { name: { fa: "اپل", en: "Apple" }, fileName: "apple.svg" },
+    { name: { fa: "افق استودیو", en: "Ofoq Studio" }, fileName: "Logo Ofoq Studio.svg" },
     { name: { fa: "گوگل", en: "Google" }, fileName: "google.svg" },
     { name: { fa: "مایکروسافت", en: "Microsoft" }, fileName: "microsoft.svg" },
     { name: { fa: "اسپاتیفای", en: "Spotify" }, fileName: "spotify.svg" },
