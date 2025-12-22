@@ -60,62 +60,57 @@
     <!-- فوتر -->
     <footer>
         <div class="footer-content">
+            <div class="made-with">
+                <span>ساخته شده با ❤️ و کمی ☕</span>
+            </div>
             <div class="github-link">
                 <span class="material-symbols-outlined">code</span> <!-- لوگوی گیت‌هاب نمادین -->
                 <span>armvnhs</span>
             </div>
-            <div class="made-with">
-                <span>ساخته شده با ❤️ و کمی ☕</span>
-            </div>
         </div>
     </footer>
 
-    <!-- مودال ارسال لوگو (شروع) -->
+<!-- Modal Structure -->
 <div id="uploadModal" class="modal-overlay">
     <div class="modal-content">
         <div class="modal-header">
             <h3>ارسال لوگوی جدید</h3>
-            <span class="material-symbols-outlined close-btn" onclick="closeModal()">close</span>
+            <span class="close-btn" onclick="toggleModal(false)">&times;</span>
         </div>
         
-        <!-- فرم ارسال به سرویس FormSubmit -->
-        <!-- جای YOUR_EMAIL@EXAMPLE.COM ایمیل خودتان را بنویسید -->
-        <form action="https://formsubmit.co/armunhs@gmail.com" method="POST" enctype="multipart/form-data">
+        <!-- فرم ارسال -->
+        <form id="logoForm" action="https://formsubmit.co/ajax/armvnhs@gmail.com" method="POST" enctype="multipart/form-data">
             
-            <!-- تنظیمات فرم (کاربر این‌ها را نمی‌بیند) -->
-            <input type="hidden" name="_captcha" value="false"> <!-- حذف کپچا -->
-            <input type="hidden" name="_subject" value="یک لوگوی جدید در سایت آپلود شد!">
-            <!-- بعد از ارسال، کاربر به همین صفحه برمی‌گردد -->
-            <input type="hidden" name="_next" value="https://logosvg.ir/"> 
-
-            <!-- ورودی نام برند -->
+            <input type="hidden" name="_subject" value="New Logo Submission">
+            <input type="hidden" name="_captcha" value="false">
+            
             <div class="form-group">
                 <label>نام برند</label>
-                <input type="text" name="brand_name" required placeholder="مثلاً: دیجیکالا" class="input-field">
+                <input type="text" name="BrandName" class="input-field" placeholder="مثلاً: دیجیکالا" required>
             </div>
 
-            <!-- ورودی فایل لوگو -->
             <div class="form-group">
                 <label>فایل لوگو (SVG)</label>
-                <div class="file-upload-wrapper">
-                    <input type="file" name="attachment" accept=".svg" required id="fileInput">
-                    <label for="fileInput" class="file-label">
-                        <span class="material-symbols-outlined">cloud_upload</span>
-                        انتخاب فایل SVG
-                    </label>
+                <!-- کادر آپلود -->
+                <div class="file-upload-wrapper" id="uploadBox" style="cursor: pointer;" onclick="document.getElementById('realFileInput').click();">
+                    
+                    <!-- اینپوت اصلی که مخفی است -->
+                    <input type="file" name="logoFile" id="realFileInput" accept=".svg" required style="display: none;">
+                    
+                    <!-- ظاهر نمایشی -->
+                    <div class="file-label" style="pointer-events: none;">
+                        <span id="uploadText">برای انتخاب فایل کلیک کنید</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- دکمه ارسال -->
-            <button type="submit" class="btn btn-dark full-width">
-                <span class="material-symbols-outlined">send</span>
+            <button type="submit" class="btn full-width" id="finalSubmitBtn" style="margin-top: 20px;">
                 ارسال برای بررسی
             </button>
         </form>
     </div>
 </div>
-<!-- مودال ارسال لوگو (پایان) -->
-    
+
     <script src="script.js"></script>    
 </body>
 </html>
