@@ -235,41 +235,38 @@ footer {
     }
 }
 
-/* تنظیم سایز لوگو در هدر */
+/* =========================================
+   استایل‌های لوگو و هدر
+   ========================================= */
 .site-logo {
-    height: 45px; /* ارتفاع مناسب برای هدر */
-    width: auto;  /* عرض خودکار برای حفظ نسبت تصویر */
+    height: 45px;
+    width: auto;
     display: block;
-    object-fit: contain; /* اطمینان از نمایش کامل لوگو */
 }
 
-/* در موبایل کمی کوچک‌تر شود */
-@media (max-width: 768px) {
-    .site-logo {
-        height: 35px;
-    }
-}
-
-
-/* --- استایل‌های مودال (پاپ‌آپ) --- */
+/* =========================================
+   استایل‌های مودال (پاپ‌آپ آپلود)
+   ========================================= */
 .modal-overlay {
-    position: fixed;
+    position: fixed; /* ثابت روی کل صفحه */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6); /* پس‌زمینه تاریک */
-    backdrop-filter: blur(4px);      /* تار کردن پشت صفحه */
+    background: rgba(0, 0, 0, 0.6); /* پس‌زمینه دودی */
+    backdrop-filter: blur(5px);      /* تار کردن پشت */
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2000; /* بالاتر از همه چیز */
+    z-index: 9999; /* روی تمام عناصر */
+    
+    /* مخفی بودن در حالت پیش‌فرض */
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
 }
 
-/* کلاسی که با جاوااسکریپت اضافه می‌شود تا مودال نمایش داده شود */
+/* کلاسی که جاوااسکریپت اضافه می‌کند تا مودال دیده شود */
 .modal-overlay.active {
     opacity: 1;
     visibility: visible;
@@ -278,13 +275,14 @@ footer {
 .modal-content {
     background: #fff;
     padding: 30px;
-    border-radius: 24px;
+    border-radius: 20px;
     width: 90%;
-    max-width: 420px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-    transform: translateY(30px);
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    text-align: right; /* راست‌چین */
+    max-width: 400px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    text-align: right;
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.3s;
 }
 
 .modal-overlay.active .modal-content {
@@ -295,60 +293,55 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     border-bottom: 1px solid #eee;
-    padding-bottom: 15px;
+    padding-bottom: 10px;
 }
 
 .modal-header h3 {
     margin: 0;
-    font-size: 1.1rem;
-    font-weight: 800;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .close-btn {
     cursor: pointer;
-    padding: 8px;
-    border-radius: 50%;
     background: #f5f5f5;
-    transition: 0.2s;
-}
-
-.close-btn:hover {
-    background: #e0e0e0;
-    color: #ff4757;
+    border-radius: 50%;
+    padding: 5px;
+    font-size: 20px;
+    line-height: 1;
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 8px;
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: #444;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
 }
 
 .input-field {
     width: 100%;
-    padding: 12px 15px;
-    border: 2px solid #eee;
-    border-radius: 12px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
     font-family: inherit;
-    transition: 0.3s;
-    outline: none;
+    box-sizing: border-box; /* مهم برای جلوگیری از بیرون زدن */
 }
 
-.input-field:focus {
-    border-color: #000;
-}
-
-/* استایل آپلود فایل */
 .file-upload-wrapper {
     position: relative;
-    height: 60px;
+    height: 50px;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fafafa;
 }
 
 .file-upload-wrapper input[type="file"] {
@@ -357,37 +350,18 @@ footer {
     height: 100%;
     opacity: 0;
     cursor: pointer;
-    z-index: 2;
 }
 
 .file-label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
-    border: 2px dashed #ccc;
-    border-radius: 12px;
+    gap: 8px;
+    font-size: 14px;
     color: #666;
-    background: #fafafa;
-    transition: 0.3s;
-}
-
-/* وقتی موس روی فایل می‌رود */
-.file-upload-wrapper input[type="file"]:hover + .file-label {
-    border-color: #000;
-    background: #fff;
-    color: #000;
 }
 
 .full-width {
     width: 100%;
-    justify-content: center;
-    padding: 14px;
     margin-top: 10px;
-    font-size: 1rem;
+    justify-content: center;
 }
