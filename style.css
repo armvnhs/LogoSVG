@@ -369,3 +369,7 @@ footer {
 button, .btn {
     font-family: 'Vazirmatn', sans-serif !important;
 }
+
+.modal-content button {
+    font-family: 'Vazirmatn', sans-serif !important;
+}
