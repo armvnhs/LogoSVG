@@ -96,13 +96,12 @@
                 <input type="text" name="BrandName" class="input-field" placeholder="مثلاً: دیجیکالا" required>
             </div>
 
-            <!-- ورودی فایل (ظاهر سفارشی) -->
+
             <div class="form-group">
                 <label>فایل لوگو (SVG)</label>
                 <div class="file-upload-box" id="uploadDropZone" onclick="document.getElementById('realFileBtn').click()">
                     <!-- اینپوت اصلی مخفی -->
-                    <input type="file" <!-- اینپوت اصلی مخفی -->
-<input type="file" name="attachment" id="realFileBtn" accept=".svg" required style="display: none;"> id="realFileBtn" accept=".svg" required style="display: none;">
+                    <input type="file" name="logoFile" id="realFileBtn" accept=".svg" required style="display: none;">
                     
                     <!-- ظاهر گرافیکی -->
                     <div class="upload-content">
@@ -110,7 +109,7 @@
                         <span id="fileNameDisplay">برای انتخاب فایل کلیک کنید</span>
                     </div>
                 </div>
-        
+            </div>
 
             <!-- دکمه ارسال -->
             <button type="submit" class="submit-btn" id="finalBtn">
