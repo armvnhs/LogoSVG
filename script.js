@@ -128,81 +128,96 @@ searchInput.addEventListener('input', (e) => {
 // شروع برنامه
 fetchLogos();
 
-/* =========================================
-   مدیریت مودال و ارسال فرم (نسخه نهایی)
-   ========================================= */
+/* ================================================
+   مدیریت کامل مودال و فرم (نسخه نهایی و سالم)
+   ================================================ */
 
-// 1. باز و بسته کردن مودال
-function toggleModal(show) {
-    const modal = document.getElementById('uploadModal');
-    if (show) {
-        modal.classList.add('active');
+// 1. تابع باز و بسته کردن مودال
+function toggleModal(shouldShow) {
+    const modal = document.getElementById('customModal');
+    if (!modal) return;
+
+    if (shouldShow) {
+        modal.classList.add('show');
     } else {
-        modal.classList.remove('active');
-        // پاکسازی فرم موقع بستن
-        document.getElementById('logoForm').reset();
-        resetUploadBox();
+        modal.classList.remove('show');
+        // پاکسازی فرم موقع بستن (اختیاری)
+        setTimeout(() => {
+            resetForm();
+        }, 300);
     }
 }
 
-// بستن با کلیک بیرون
-window.onclick = function(event) {
-    const modal = document.getElementById('uploadModal');
-    if (event.target == modal) {
+// بستن مودال اگر کاربر بیرون باکس کلیک کرد
+window.addEventListener('click', function(e) {
+    const modal = document.getElementById('customModal');
+    if (e.target === modal) {
         toggleModal(false);
-    }
-}
-
-// اتصال دکمه هدر به تابع باز کردن (جهت اطمینان)
-document.addEventListener('DOMContentLoaded', () => {
-    const headerBtn = document.querySelector('.header-btn'); // کلاس دکمه هدر
-    if(headerBtn) {
-        headerBtn.onclick = function() { toggleModal(true); };
     }
 });
 
-// 2. تغییر ظاهر وقتی فایل انتخاب شد
-const realFileInput = document.getElementById('realFileInput');
-const uploadText = document.getElementById('uploadText');
-const uploadBox = document.getElementById('uploadBox');
+// 2. تنظیم دکمه هدر برای باز کردن مودال
+// وقتی صفحه لود شد، دکمه هدر را پیدا کن و به تابع وصل کن
+document.addEventListener('DOMContentLoaded', () => {
+    // کلاس دکمه هدر شما طبق عکس‌هایی که فرستادید
+    const headerBtn = document.querySelector('.header-btn'); 
+    
+    // یا اگر دکمه شما آیدی دارد، اینجا وارد کنید
+    // const headerBtn = document.getElementById('MY_BUTTON_ID');
 
-if (realFileInput) {
-    realFileInput.addEventListener('change', function() {
-        if (this.files && this.files[0]) {
-            // نام فایل را نشان بده
-            uploadText.innerText = "✅ فایل انتخاب شد: " + this.files[0].name;
-            uploadBox.style.borderColor = "green";
-            uploadBox.style.background = "#e6fffa";
+    if (headerBtn) {
+        headerBtn.onclick = function(e) {
+            e.preventDefault(); // جلوگیری از لینک شدن
+            toggleModal(true);
+        };
+    }
+});
+
+// 3. نمایش نام فایل پس از انتخاب
+const realFileBtn = document.getElementById('realFileBtn');
+const fileNameDisplay = document.getElementById('fileNameDisplay');
+const uploadDropZone = document.getElementById('uploadDropZone');
+const uploadIcon = document.getElementById('uploadIcon');
+
+if (realFileBtn) {
+    realFileBtn.addEventListener('change', function() {
+        if (this.files && this.files.length > 0) {
+            // فایل انتخاب شده
+            fileNameDisplay.innerText = this.files[0].name;
+            uploadDropZone.classList.add('has-file');
+            uploadIcon.innerText = "✅"; // تغییر آیکون به تیک
         } else {
-            resetUploadBox();
+            resetForm();
         }
     });
 }
 
-function resetUploadBox() {
-    if(uploadText) uploadText.innerText = "برای انتخاب فایل کلیک کنید";
-    if(uploadBox) {
-        uploadBox.style.borderColor = "#ccc";
-        uploadBox.style.background = "#fafafa";
-    }
+function resetForm() {
+    const form = document.getElementById('submissionForm');
+    if (form) form.reset();
+    
+    if (fileNameDisplay) fileNameDisplay.innerText = "برای انتخاب فایل کلیک کنید";
+    if (uploadDropZone) uploadDropZone.classList.remove('has-file');
+    if (uploadIcon) uploadIcon.innerText = "📂";
 }
 
-// 3. ارسال فرم بدون رفرش (AJAX)
-const form = document.getElementById('logoForm');
-const btn = document.getElementById('finalSubmitBtn');
+// 4. ارسال فرم به صورت AJAX (بدون رفرش صفحه)
+const form = document.getElementById('submissionForm');
+const finalBtn = document.getElementById('finalBtn');
 
 if (form) {
     form.addEventListener('submit', function(e) {
-        e.preventDefault(); // جلوگیری از رفرش صفحه
+        e.preventDefault(); // مهم: جلوگیری از رفرش و رفتن به صفحه دیگر
 
-        // تغییر دکمه به حالت لودینگ
-        const originalText = btn.innerText;
-        btn.innerText = "⏳ در حال آپلود...";
-        btn.disabled = true;
-        btn.style.opacity = "0.7";
+        // تغییر ظاهر دکمه
+        const originalText = finalBtn.innerText;
+        finalBtn.innerText = "⏳ در حال ارسال...";
+        finalBtn.disabled = true;
 
+        // آماده‌سازی داده‌ها
         const formData = new FormData(form);
 
+        // ارسال به سرور
         fetch(form.action, {
             method: 'POST',
             body: formData,
@@ -212,22 +227,20 @@ if (form) {
         })
         .then(response => {
             if (response.ok) {
-                alert("🎉 عالی! لوگوی شما با موفقیت ارسال شد.");
+                alert("🎉 لوگوی شما با موفقیت ارسال شد!");
                 toggleModal(false); // بستن مودال
             } else {
                 alert("❌ خطا در ارسال. لطفاً دوباره تلاش کنید.");
             }
         })
         .catch(error => {
-            alert("❌ خطای شبکه. اینترنت خود را چک کنید.");
-            console.error('Error:', error);
+            console.error(error);
+            alert("❌ خطای اینترنت. لطفاً اتصال خود را بررسی کنید.");
         })
         .finally(() => {
             // برگرداندن دکمه به حالت اول
-            btn.innerText = originalText;
-            btn.disabled = false;
-            btn.style.opacity = "1";
+            finalBtn.innerText = originalText;
+            finalBtn.disabled = false;
         });
     });
 }
-
