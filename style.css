@@ -399,3 +399,62 @@ button, .btn {
     background-color: #ccc;
     cursor: not-allowed;
 }
+
+/* --- تنظیمات مخصوص موبایل (ریسپانسیو) --- */
+@media screen and (max-width: 768px) {
+    
+    /* 1. اصلاح هدر: لوگو بالا، دکمه‌ها پایین */
+    header {
+        flex-direction: column; /* چیدمان ستونی */
+        height: auto !important; /* ارتفاع خودکار */
+        padding: 20px 0; /* کمی فاصله از بالا و پایین */
+        gap: 15px; /* فاصله بین لوگو و دکمه‌ها */
+    }
+
+    /* پیدا کردن بخش لوگو و آوردن به اول صف */
+    header .logo, 
+    header .site-logo, 
+    header a[href="/"] { 
+        order: -1; /* اولویت نمایش: اول */
+        margin-right: 0; /* حذف فاصله اضافی */
+    }
+
+    /* تنظیم دکمه‌های سمت چپ (ارسال لوگو و حمایت) */
+    header > div:last-child {
+        width: 100%;
+        justify-content: center; /* وسط‌چین کردن دکمه‌ها */
+        display: flex;
+        gap: 10px;
+    }
+}
+
+/* 2. اصلاح کارت‌های دانلود در موبایل */
+@media screen and (max-width: 768px) {
+    
+    .logo-card {
+        /* جلوگیری از پرش صفحه */
+        overflow: hidden; 
+    }
+
+    /* وسط‌چین کردن دقیق دکمه‌های دانلود */
+    .logo-card .overlay {
+        display: flex;
+        flex-direction: row; /* دکمه‌ها کنار هم */
+        align-items: center;
+        justify-content: center;
+        gap: 10px; /* فاصله بین دو دکمه */
+    }
+
+    /* استایل دکمه‌ها در موبایل (کمی کوچکتر برای جا شدن) */
+    .logo-card .download-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+        min-width: 70px; /* حداقل عرض برای دکمه */
+        text-align: center;
+    }
+    
+    /* رفع مشکل کشیدگی عکس در موبایل */
+    .logo-image-wrapper {
+        height: 160px; /* ارتفاع کمتر برای موبایل */
+    }
+}
