@@ -134,19 +134,90 @@ fetchLogos();
 // ==========================================
 const modal = document.getElementById('uploadModal');
 
-// تابع باز کردن مودال
+// مدیریت باز و بسته کردن مودال
 function openModal() {
-    modal.classList.add('active');
+    document.getElementById('uploadModal').classList.add('active');
 }
 
-// تابع بستن مودال
 function closeModal() {
-    modal.classList.remove('active');
+    document.getElementById('uploadModal').classList.remove('active');
+    // پاک کردن فرم بعد از بستن (اختیاری)
+    document.getElementById('uploadForm').reset();
+    document.getElementById('fileNameText').innerText = "انتخاب فایل SVG";
+    document.getElementById('dropZone').style.borderColor = "#ccc";
 }
 
-// بستن مودال اگر کاربر روی فضای تیره بیرون کلیک کرد
-modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
+// بستن مودال با کلیک روی فضای بیرون
+window.onclick = function(event) {
+    const modal = document.getElementById('uploadModal');
+    if (event.target == modal) {
         closeModal();
+    }
+}
+
+// --------------------------------------------------
+// بخش جدید: نمایش نام فایل و ارسال بدون رفرش (AJAX)
+// --------------------------------------------------
+
+document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('fileInput');
+    const fileNameText = document.getElementById('fileNameText');
+    const dropZone = document.getElementById('dropZone');
+    const uploadForm = document.getElementById('uploadForm');
+    const submitBtn = document.getElementById('submitBtn');
+
+    // 1. نمایش نام فایل انتخاب شده
+    if(fileInput) {
+        fileInput.addEventListener('change', function() {
+            if (this.files && this.files.length > 0) {
+                fileNameText.innerText = this.files[0].name;
+                dropZone.style.borderColor = "#4CAF50"; // سبز شدن کادر
+                dropZone.style.backgroundColor = "#e8f5e9";
+            } else {
+                fileNameText.innerText = "انتخاب فایل SVG";
+                dropZone.style.borderColor = "#ccc";
+                dropZone.style.backgroundColor = "#fafafa";
+            }
+        });
+    }
+
+    // 2. مدیریت ارسال فرم (جلوگیری از صفحه 404)
+    if(uploadForm) {
+        uploadForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // جلوگیری از رفرش صفحه
+
+            // تغییر دکمه به حالت "در حال ارسال..."
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.innerText = "در حال ارسال...";
+            submitBtn.disabled = true;
+
+            const formData = new FormData(uploadForm);
+
+            fetch(uploadForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // موفقیت
+                    alert("✅ لوگوی شما با موفقیت ارسال شد و پس از بررسی اضافه خواهد شد.");
+                    closeModal();
+                } else {
+                    // خطا
+                    alert("❌ مشکلی در ارسال پیش آمد. لطفاً دوباره تلاش کنید.");
+                }
+            })
+            .catch(error => {
+                alert("❌ خطای شبکه. لطفاً اتصال اینترنت خود را بررسی کنید.");
+            })
+            .finally(() => {
+                // برگرداندن دکمه به حالت اول
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
+            });
+        });
     }
 });
