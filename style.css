@@ -399,25 +399,3 @@ button, .btn {
     background-color: #ccc;
     cursor: not-allowed;
 }
-
-
-/* فیکس کردن وسط‌چین شدن لوگو داخل کارت */
-.logo-card .logo-image-wrapper {
-    height: 200px; /* ارتفاع ثابت برای بخش عکس */
-    display: flex; /* فعال کردن فلکس باکس */
-    align-items: center; /* وسط‌چین کردن عمودی */
-    justify-content: center; /* وسط‌چین کردن افقی */
-    padding: 20px; /* فاصله امن از لبه‌ها */
-    background-color: #f8f9fa; /* رنگ پس‌زمینه خیلی روشن برای محدوده عکس */
-    border-radius: 12px 12px 0 0;
-    overflow: hidden;
-}
-
-/* تنظیم سایز عکس که از کادر بیرون نزند */
-.logo-card img {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto; /* جلوگیری از کشیده شدن عکس */
-    height: auto; /* جلوگیری از کشیده شدن عکس */
-    object-fit: contain; /* عکس را کامل نشان می‌دهد بدون بریدگی */
-}
