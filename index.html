@@ -84,7 +84,7 @@
 
         <!-- فرم ارسال -->
         <!-- نکته مهم: آدرس اکشن باید شامل /ajax/ باشد -->
-        <form id="submissionForm" action="https://formsubmit.co/ajax/armunhs@gmail.com" method="POST" enctype="multipart/form-data">
+        <form id="submissionForm"<form id="submissionForm" action="https://formsubmit.co/armunhs@gmail.com" method="POST" enctype="multipart/form-data">
             
             <!-- تنظیمات مخفی FormSubmit -->
             <input type="hidden" name="_subject" value="New Logo Submission">
@@ -101,15 +101,27 @@
                 <label>فایل لوگو (SVG)</label>
                 <div class="file-upload-box" id="uploadDropZone" onclick="document.getElementById('realFileBtn').click()">
                     <!-- اینپوت اصلی مخفی -->
-                    <input type="file" name="logoFile" id="realFileBtn" accept=".svg" required style="display: none;">
+                    <input type="file" <!-- اینپوت اصلی مخفی -->
+<input type="file" name="attachment" id="realFileBtn" accept=".svg" required style="display: none;"> id="realFileBtn" accept=".svg" required style="display: none;">
                     
                     <!-- ظاهر گرافیکی -->
-                    <div class="upload-content">
-                        <span id="uploadIcon">📂</span>
-                        <span id="fileNameDisplay">برای انتخاب فایل کلیک کنید</span>
-                    </div>
-                </div>
-            </div>
+<div class="upload-content">
+    <div id="uploadIconWrapper">
+        <!-- آیکون ۱: فولدر آپلود (پیش‌فرض) -->
+        <svg class="icon-svg icon-folder" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22 19C22 20.1046 21.1046 21 20 21H4C2.89543 21 2 20.1046 2 19V5C2 3.89543 2.89543 3 4 3H9.5L11.5 5H20C21.1046 5 22 5.89543 22 7V19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 17V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9 13L12 10L15 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9 17H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+
+        <!-- آیکون ۲: تیک تأیید (مخفی در ابتدا) -->
+        <svg class="icon-svg icon-check" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </div>
+    <span id="fileNameDisplay">برای انتخاب فایل کلیک کنید</span>
+</div>
 
             <!-- دکمه ارسال -->
             <button type="submit" class="submit-btn" id="finalBtn">
