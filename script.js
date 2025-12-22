@@ -127,3 +127,26 @@ searchInput.addEventListener('input', (e) => {
 
 // شروع برنامه
 fetchLogos();
+
+
+// ==========================================
+// منطق مودال (ارسال لوگو)
+// ==========================================
+const modal = document.getElementById('uploadModal');
+
+// تابع باز کردن مودال
+function openModal() {
+    modal.classList.add('active');
+}
+
+// تابع بستن مودال
+function closeModal() {
+    modal.classList.remove('active');
+}
+
+// بستن مودال اگر کاربر روی فضای تیره بیرون کلیک کرد
+modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        closeModal();
+    }
+});
