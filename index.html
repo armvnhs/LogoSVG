@@ -3,51 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوگو باکس | گالری لوگوهای SVG</title>
+    <title>LogoSVG - کتابخانه لوگوهای ایرانی</title>
     
     <!-- فونت وزیرمتن -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
     
-    <!-- آیکون‌ها -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- آیکون‌های گوگل (Material Symbols) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     
-    <!-- فایل استایل -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- هدر سایت -->
     <header>
-        <div class="container header-content">
-            <h1>لوگو باکس</h1>
-            <p>مرجع دانلود لوگوها با فرمت SVG</p>
-            
-            <div class="search-box">
-                <i class="fas fa-search search-icon"></i>
-                <input type="text" id="searchInput" placeholder="جستجوی نام برند...">
+        <div class="header-container">
+            <div class="logo-area">
+                <!-- لوگوی سایت اصلی (بالا چپ) - می‌توانید با عکس جایگزین کنید -->
+                <span class="material-symbols-outlined logo-icon">folder_zip</span>
+                <span class="site-name">LogoSVG</span>
+            </div>
+            <div class="actions-area">
+                <a href="#" class="btn btn-outline">
+                    <span class="material-symbols-outlined">favorite</span>
+                    حمایت مالی
+                </a>
+                <a href="#" class="btn btn-dark">
+                    <span class="material-symbols-outlined">north_east</span>
+                    ارسال لوگو
+                </a>
             </div>
         </div>
     </header>
 
-    <main class="container">
-        <div id="gallery" class="gallery-grid">
-            <!-- کارت‌های لوگو اینجا توسط جاوااسکریپت ساخته می‌شوند -->
-            <div class="loading">
-                <div class="spinner"></div>
-                <p>در حال دریافت لوگوها از مخزن...</p>
-            </div>
+    <!-- محتوای اصلی -->
+    <main>
+        <h1 class="main-title">کتابخانه لوگوهای ایرانی</h1>
+        
+        <!-- جستجو -->
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="جستجوی نام برند...">
+            <span class="material-symbols-outlined search-icon">search</span>
+        </div>
+
+        <!-- گرید لوگوها -->
+        <div class="logos-grid" id="logosGrid">
+            <!-- لوگوها توسط جاوااسکریپت اینجا ساخته می‌شوند -->
         </div>
     </main>
 
+    <!-- فوتر -->
     <footer>
-        <p>
-            ساخته شده با ❤️ و کمی ☕ | 
-            <a href="https://github.com/armvnhs" target="_blank">armvnhs</a>
-        </p>
+        <div class="footer-content">
+            <div class="github-link">
+                <span class="material-symbols-outlined">code</span> <!-- لوگوی گیت‌هاب نمادین -->
+                <span>armvnhs</span>
+            </div>
+            <div class="made-with">
+                <span>ساخته شده با ❤️ و کمی ☕</span>
+            </div>
+        </div>
     </footer>
 
-    <!-- فایل جاوااسکریپت -->
     <script src="script.js"></script>
 </body>
 </html>
