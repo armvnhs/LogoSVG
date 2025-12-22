@@ -33,9 +33,9 @@
                 </a>
                 <!-- دکمه متصل به مودال آپلود -->
                 <a href="#" class="btn btn-dark" onclick="openModal()">
-                    <span class="material-symbols-outlined">north_east</span>
-                    ارسال لوگو
-                </a>
+    <span class="material-symbols-outlined">north_east</span>
+    ارسال لوگو
+</a>
             </div>
         </div>
     </header>
@@ -69,6 +69,52 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- مودال ارسال لوگو (شروع) -->
+<div id="uploadModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>ارسال لوگوی جدید</h3>
+            <span class="material-symbols-outlined close-btn" onclick="closeModal()">close</span>
+        </div>
+        
+        <!-- فرم ارسال به سرویس FormSubmit -->
+        <!-- جای YOUR_EMAIL@EXAMPLE.COM ایمیل خودتان را بنویسید -->
+        <form action="https://formsubmit.co/armunhs@gmail.com" method="POST" enctype="multipart/form-data">
+            
+            <!-- تنظیمات فرم (کاربر این‌ها را نمی‌بیند) -->
+            <input type="hidden" name="_captcha" value="false"> <!-- حذف کپچا -->
+            <input type="hidden" name="_subject" value="یک لوگوی جدید در سایت آپلود شد!">
+            <!-- بعد از ارسال، کاربر به همین صفحه برمی‌گردد -->
+            <input type="hidden" name="_next" value="https://armvnhs.github.io/LogoBox/"> 
+
+            <!-- ورودی نام برند -->
+            <div class="form-group">
+                <label>نام برند</label>
+                <input type="text" name="brand_name" required placeholder="مثلاً: دیجیکالا" class="input-field">
+            </div>
+
+            <!-- ورودی فایل لوگو -->
+            <div class="form-group">
+                <label>فایل لوگو (SVG)</label>
+                <div class="file-upload-wrapper">
+                    <input type="file" name="attachment" accept=".svg" required id="fileInput">
+                    <label for="fileInput" class="file-label">
+                        <span class="material-symbols-outlined">cloud_upload</span>
+                        انتخاب فایل SVG
+                    </label>
+                </div>
+            </div>
+
+            <!-- دکمه ارسال -->
+            <button type="submit" class="btn btn-dark full-width">
+                <span class="material-symbols-outlined">send</span>
+                ارسال برای بررسی
+            </button>
+        </form>
+    </div>
+</div>
+<!-- مودال ارسال لوگو (پایان) -->
+    
+    <script src="script.js"></script>    
 </body>
 </html>
