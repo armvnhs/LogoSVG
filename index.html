@@ -18,17 +18,8 @@
     <!-- هدر سایت -->
     <header>
         <div class="header-container">
-            <div class="logo-area">
-                <!-- لینک به صفحه اصلی -->
-                <a href="index.html" style="display: flex; align-items: center;">
-                    <img src="https://raw.githubusercontent.com/armvnhs/LogoSVG/refs/heads/main/LogoSVG-ir.png" 
-                        alt="LogoSVG" 
-                        class="site-logo" 
-                        style="height: 40px; width: auto;">
-                </a>
-            </div>
-            <div class="actions-area">
-                <a href="#" class="btn btn-outline">
+                    <div class="actions-area">
+                <a href="https://daramet.com/armvnhs" class="btn btn-outline">
                     <span class="material-symbols-outlined">favorite</span>
                     حمایت مالی
                 </a>
@@ -38,7 +29,16 @@
     ارسال لوگو
 </a>
             </div>
-        </div>
+            <div class="logo-area">
+                <!-- لینک به صفحه اصلی -->
+                <a href="index.html" style="display: flex; align-items: center;">
+                    <img src="https://raw.githubusercontent.com/armvnhs/LogoSVG/refs/heads/main/LogoSVG-ir.png" 
+                        alt="LogoSVG" 
+                        class="site-logo" 
+                        style="height: 40px; width: auto;">
+                </a>
+            </div>
+    </div>
     </header>
 
     <!-- محتوای اصلی -->
@@ -70,47 +70,55 @@
         </div>
     </footer>
 
-<!-- Modal Structure -->
-<div id="uploadModal" class="modal-overlay">
+<!-- ========================================= -->
+<!-- شروع کد مودال (پنجره آپلود) -->
+<!-- ========================================= -->
+<div id="customModal" class="modal-overlay">
     <div class="modal-content">
+        <!-- هدر مودال -->
         <div class="modal-header">
             <h3>ارسال لوگوی جدید</h3>
             <span class="close-btn" onclick="toggleModal(false)">&times;</span>
         </div>
-        
+
         <!-- فرم ارسال -->
-        <form id="logoForm" action="https://formsubmit.co/ajax/armvnhs@gmail.com" method="POST" enctype="multipart/form-data">
+        <!-- نکته مهم: آدرس اکشن باید شامل /ajax/ باشد -->
+        <form id="submissionForm" action="https://formsubmit.co/ajax/armunhs@gmail.com" method="POST" enctype="multipart/form-data">
             
+            <!-- تنظیمات مخفی FormSubmit -->
             <input type="hidden" name="_subject" value="New Logo Submission">
             <input type="hidden" name="_captcha" value="false">
-            
+
+            <!-- ورودی نام برند -->
             <div class="form-group">
                 <label>نام برند</label>
                 <input type="text" name="BrandName" class="input-field" placeholder="مثلاً: دیجیکالا" required>
             </div>
 
+            <!-- ورودی فایل (ظاهر سفارشی) -->
             <div class="form-group">
                 <label>فایل لوگو (SVG)</label>
-                <!-- کادر آپلود -->
-                <div class="file-upload-wrapper" id="uploadBox" style="cursor: pointer;" onclick="document.getElementById('realFileInput').click();">
+                <div class="file-upload-box" id="uploadDropZone" onclick="document.getElementById('realFileBtn').click()">
+                    <!-- اینپوت اصلی مخفی -->
+                    <input type="file" name="logoFile" id="realFileBtn" accept=".svg" required style="display: none;">
                     
-                    <!-- اینپوت اصلی که مخفی است -->
-                    <input type="file" name="logoFile" id="realFileInput" accept=".svg" required style="display: none;">
-                    
-                    <!-- ظاهر نمایشی -->
-                    <div class="file-label" style="pointer-events: none;">
-                        <span id="uploadText">برای انتخاب فایل کلیک کنید</span>
+                    <!-- ظاهر گرافیکی -->
+                    <div class="upload-content">
+                        <span id="uploadIcon">📂</span>
+                        <span id="fileNameDisplay">برای انتخاب فایل کلیک کنید</span>
                     </div>
                 </div>
             </div>
 
-            <button type="submit" class="btn full-width" id="finalSubmitBtn" style="margin-top: 20px;">
+            <!-- دکمه ارسال -->
+            <button type="submit" class="submit-btn" id="finalBtn">
                 ارسال برای بررسی
             </button>
         </form>
     </div>
 </div>
-
-    <script src="script.js"></script>    
+    
+    
+<script src="script.js"></script>    
 </body>
 </html>
