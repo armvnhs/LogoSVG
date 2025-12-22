@@ -234,3 +234,18 @@ footer {
         grid-template-columns: repeat(2, 1fr); /* دو ستون در موبایل */
     }
 }
+
+/* تنظیم سایز لوگو در هدر */
+.site-logo {
+    height: 45px; /* ارتفاع مناسب برای هدر */
+    width: auto;  /* عرض خودکار برای حفظ نسبت تصویر */
+    display: block;
+    object-fit: contain; /* اطمینان از نمایش کامل لوگو */
+}
+
+/* در موبایل کمی کوچک‌تر شود */
+@media (max-width: 768px) {
+    .site-logo {
+        height: 35px;
+    }
+}
