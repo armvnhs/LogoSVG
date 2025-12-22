@@ -248,3 +248,154 @@ button, .btn {
 .modal-content button {
     font-family: 'Vazirmatn', sans-serif !important;
 }
+
+
+/* =========================================
+   استایل‌های جدید و تمیز برای مودال
+   ========================================= */
+
+/* 1. پس‌زمینه تاریک کل صفحه */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 10000;
+    display: flex; /* برای وسط‌چین کردن */
+    justify-content: center;
+    align-items: center;
+    
+    /* مخفی بودن پیش‌فرض */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+/* کلاسی برای نمایش مودال */
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 2. باکس سفید وسط */
+.modal-content {
+    background: #fff;
+    width: 90%;
+    max-width: 400px;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    text-align: right;
+    direction: rtl;
+    font-family: 'Vazirmatn', sans-serif;
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-overlay.show .modal-content {
+    transform: scale(1);
+}
+
+/* 3. اجزای داخلی */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.close-btn {
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    color: #666;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-family: 'Vazirmatn', sans-serif;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+/* 4. باکس آپلود فایل */
+.file-upload-box {
+    border: 2px dashed #cbd5e0;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    background: #f7fafc;
+    transition: all 0.2s;
+}
+
+.file-upload-box:hover {
+    border-color: #a0aec0;
+    background: #edf2f7;
+}
+
+/* وقتی فایل انتخاب شد */
+.file-upload-box.has-file {
+    border-color: #48bb78; /* سبز */
+    background: #f0fff4;
+    border-style: solid;
+}
+
+.upload-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: #718096;
+    font-size: 13px;
+}
+
+/* 5. دکمه ارسال */
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Vazirmatn', sans-serif !important; /* فونت اجباری */
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s;
+}
+
+.submit-btn:hover {
+    background-color: #333;
+}
+
+.submit-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
