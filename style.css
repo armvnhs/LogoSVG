@@ -365,3 +365,7 @@ footer {
     margin-top: 10px;
     justify-content: center;
 }
+
+button, .btn {
+    font-family: 'Vazirmatn', sans-serif !important;
+}
