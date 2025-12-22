@@ -128,96 +128,106 @@ searchInput.addEventListener('input', (e) => {
 // شروع برنامه
 fetchLogos();
 
+/* =========================================
+   مدیریت مودال و ارسال فرم (نسخه نهایی)
+   ========================================= */
 
-// ==========================================
-// منطق مودال (ارسال لوگو)
-// ==========================================
-const modal = document.getElementById('uploadModal');
-
-// مدیریت باز و بسته کردن مودال
-function openModal() {
-    document.getElementById('uploadModal').classList.add('active');
+// 1. باز و بسته کردن مودال
+function toggleModal(show) {
+    const modal = document.getElementById('uploadModal');
+    if (show) {
+        modal.classList.add('active');
+    } else {
+        modal.classList.remove('active');
+        // پاکسازی فرم موقع بستن
+        document.getElementById('logoForm').reset();
+        resetUploadBox();
+    }
 }
 
-function closeModal() {
-    document.getElementById('uploadModal').classList.remove('active');
-    // پاک کردن فرم بعد از بستن (اختیاری)
-    document.getElementById('uploadForm').reset();
-    document.getElementById('fileNameText').innerText = "انتخاب فایل SVG";
-    document.getElementById('dropZone').style.borderColor = "#ccc";
-}
-
-// بستن مودال با کلیک روی فضای بیرون
+// بستن با کلیک بیرون
 window.onclick = function(event) {
     const modal = document.getElementById('uploadModal');
     if (event.target == modal) {
-        closeModal();
+        toggleModal(false);
     }
 }
 
-// --------------------------------------------------
-// بخش جدید: نمایش نام فایل و ارسال بدون رفرش (AJAX)
-// --------------------------------------------------
-
-document.addEventListener('DOMContentLoaded', function() {
-    const fileInput = document.getElementById('fileInput');
-    const fileNameText = document.getElementById('fileNameText');
-    const dropZone = document.getElementById('dropZone');
-    const uploadForm = document.getElementById('uploadForm');
-    const submitBtn = document.getElementById('submitBtn');
-
-    // 1. نمایش نام فایل انتخاب شده
-    if(fileInput) {
-        fileInput.addEventListener('change', function() {
-            if (this.files && this.files.length > 0) {
-                fileNameText.innerText = this.files[0].name;
-                dropZone.style.borderColor = "#4CAF50"; // سبز شدن کادر
-                dropZone.style.backgroundColor = "#e8f5e9";
-            } else {
-                fileNameText.innerText = "انتخاب فایل SVG";
-                dropZone.style.borderColor = "#ccc";
-                dropZone.style.backgroundColor = "#fafafa";
-            }
-        });
-    }
-
-    // 2. مدیریت ارسال فرم (جلوگیری از صفحه 404)
-    if(uploadForm) {
-        uploadForm.addEventListener('submit', function(e) {
-            e.preventDefault(); // جلوگیری از رفرش صفحه
-
-            // تغییر دکمه به حالت "در حال ارسال..."
-            const originalBtnText = submitBtn.innerText;
-            submitBtn.innerText = "در حال ارسال...";
-            submitBtn.disabled = true;
-
-            const formData = new FormData(uploadForm);
-
-            fetch(uploadForm.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    // موفقیت
-                    alert("✅ لوگوی شما با موفقیت ارسال شد و پس از بررسی اضافه خواهد شد.");
-                    closeModal();
-                } else {
-                    // خطا
-                    alert("❌ مشکلی در ارسال پیش آمد. لطفاً دوباره تلاش کنید.");
-                }
-            })
-            .catch(error => {
-                alert("❌ خطای شبکه. لطفاً اتصال اینترنت خود را بررسی کنید.");
-            })
-            .finally(() => {
-                // برگرداندن دکمه به حالت اول
-                submitBtn.innerText = originalBtnText;
-                submitBtn.disabled = false;
-            });
-        });
+// اتصال دکمه هدر به تابع باز کردن (جهت اطمینان)
+document.addEventListener('DOMContentLoaded', () => {
+    const headerBtn = document.querySelector('.header-btn'); // کلاس دکمه هدر
+    if(headerBtn) {
+        headerBtn.onclick = function() { toggleModal(true); };
     }
 });
+
+// 2. تغییر ظاهر وقتی فایل انتخاب شد
+const realFileInput = document.getElementById('realFileInput');
+const uploadText = document.getElementById('uploadText');
+const uploadBox = document.getElementById('uploadBox');
+
+if (realFileInput) {
+    realFileInput.addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+            // نام فایل را نشان بده
+            uploadText.innerText = "✅ فایل انتخاب شد: " + this.files[0].name;
+            uploadBox.style.borderColor = "green";
+            uploadBox.style.background = "#e6fffa";
+        } else {
+            resetUploadBox();
+        }
+    });
+}
+
+function resetUploadBox() {
+    if(uploadText) uploadText.innerText = "برای انتخاب فایل کلیک کنید";
+    if(uploadBox) {
+        uploadBox.style.borderColor = "#ccc";
+        uploadBox.style.background = "#fafafa";
+    }
+}
+
+// 3. ارسال فرم بدون رفرش (AJAX)
+const form = document.getElementById('logoForm');
+const btn = document.getElementById('finalSubmitBtn');
+
+if (form) {
+    form.addEventListener('submit', function(e) {
+        e.preventDefault(); // جلوگیری از رفرش صفحه
+
+        // تغییر دکمه به حالت لودینگ
+        const originalText = btn.innerText;
+        btn.innerText = "⏳ در حال آپلود...";
+        btn.disabled = true;
+        btn.style.opacity = "0.7";
+
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                alert("🎉 عالی! لوگوی شما با موفقیت ارسال شد.");
+                toggleModal(false); // بستن مودال
+            } else {
+                alert("❌ خطا در ارسال. لطفاً دوباره تلاش کنید.");
+            }
+        })
+        .catch(error => {
+            alert("❌ خطای شبکه. اینترنت خود را چک کنید.");
+            console.error('Error:', error);
+        })
+        .finally(() => {
+            // برگرداندن دکمه به حالت اول
+            btn.innerText = originalText;
+            btn.disabled = false;
+            btn.style.opacity = "1";
+        });
+    });
+}
+
