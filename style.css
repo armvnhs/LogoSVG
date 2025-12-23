@@ -1,41 +1,25 @@
 /* =========================================
-   1. متغیرها و تنظیمات پایه
+   استایل نهایی و اصلاح شده (Force Style)
    ========================================= */
 :root {
     --bg-color: #ffffff;
     --text-color: #000000;
     --gray-text: #888888;
     --border-color: #e0e0e0;
-    --hover-overlay: rgba(0, 0, 0, 0.85);
     --font-primary: 'Vazirmatn', sans-serif;
-    --success-color: #48bb78;
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
     font-family: var(--font-primary);
     background-color: var(--bg-color);
     direction: rtl;
     color: var(--text-color);
-    line-height: 1.6;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
 }
 
-/* =========================================
-   2. هدر (Header)
-   ========================================= */
-header {
-    padding: 25px 40px;
-    background-color: #fff;
-    border-bottom: 1px solid transparent;
-}
+/* --- Header --- */
+header { padding: 20px; border-bottom: 1px solid #f0f0f0; }
 
 .header-container {
     display: flex;
@@ -43,352 +27,149 @@ header {
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    width: 100%;
+    flex-wrap: wrap; /* اجازه شکستن خط در موبایل */
+    gap: 15px;
 }
 
-.logo-area {
-    display: flex;
-    align-items: center;
-}
+.site-logo { height: 40px; width: auto; }
 
-.site-logo {
-    height: 40px;
-    width: auto;
-    display: block;
-}
-
-.actions-area {
-    display: flex;
-    gap: 10px;
-}
+.actions-area { display: flex; gap: 8px; }
 
 .btn {
-    text-decoration: none;
-    padding: 8px 18px;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 500;
-    font-family: var(--font-primary) !important;
-    transition: all 0.2s ease;
-    cursor: pointer;
-    white-space: nowrap; /* جلوگیری از شکستن متن دکمه */
+    text-decoration: none; padding: 8px 16px; border-radius: 50px;
+    font-size: 0.85rem; display: flex; align-items: center; gap: 6px;
+    cursor: pointer; font-family: var(--font-primary) !important;
 }
 
-.btn-outline {
-    border: 1px solid var(--border-color);
-    color: var(--text-color);
-    background: transparent;
-}
+.btn-outline { border: 1px solid #ddd; color: #333; }
+.btn-dark { background: #000; color: #fff; border: 1px solid #000; }
 
-.btn-dark {
-    background-color: #000;
-    color: #fff;
-    border: 1px solid #000;
-}
+/* --- Main --- */
+main { max-width: 1200px; margin: 40px auto; padding: 0 15px; text-align: center; }
 
-/* =========================================
-   3. بدنه اصلی (Main)
-   ========================================= */
-main {
-    flex: 1;
-    max-width: 1200px;
-    width: 100%;
-    margin: 30px auto 60px auto;
-    padding: 0 20px;
-    text-align: center;
-}
+.main-title { font-size: 1.8rem; margin-bottom: 20px; font-weight: 900; }
 
-.main-title {
-    font-size: 1.8rem;
-    margin-bottom: 25px;
-    font-weight: 800;
-    color: #111;
-}
-
-.search-container {
-    position: relative;
-    max-width: 500px;
-    margin: 0 auto 40px auto;
-}
+.search-container { position: relative; max-width: 500px; margin: 0 auto 40px auto; }
 
 #searchInput {
-    width: 100%;
-    padding: 14px 50px 14px 20px;
-    border-radius: 14px;
-    border: 1px solid var(--border-color);
-    font-family: var(--font-primary);
-    font-size: 0.95rem;
-    outline: none;
-    background-color: #f9f9f9;
+    width: 100%; padding: 12px 45px 12px 15px; border-radius: 12px;
+    border: 1px solid #ddd; outline: none; font-family: var(--font-primary);
 }
 
-.search-icon {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--gray-text);
-}
+.search-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #999; }
 
-/* =========================================
-   4. گرید لوگوها و کارت‌ها (Grid & Cards)
-   ========================================= */
+/* --- GRID SYSTEM (مهم) --- */
 .logos-grid {
     display: grid;
-    /* در دسکتاپ: ستون‌ها خودکار تنظیم می‌شوند */
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    /* در دسکتاپ: تعداد ستون خودکار */
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 20px;
+    width: 100%;
 }
 
-/* --- استایل کارت برای وسط‌چین کردن دقیق --- */
+/* --- CARD STYLE (وسط‌چین تضمینی) --- */
 .card {
     background: #fff;
-    border: 1px solid var(--border-color);
+    border: 1px solid #eee;
     border-radius: 16px;
-    padding: 20px;
+    padding: 15px;
     
-    /* Flexbox برای چیدمان عمودی */
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* وسط‌چین کردن عمودی کل محتوا */
-    align-items: center;     /* وسط‌چین کردن افقی کل محتوا */
+    /* تنظیمات فلکس برای وسط‌چین کردن */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important; /* وسط‌چین عمودی */
+    align-items: center !important;     /* وسط‌چین افقی */
     
     position: relative;
-    overflow: hidden;
-    aspect-ratio: 1 / 1; /* کارت همیشه مربع است */
-    transition: transform 0.2s ease;
+    aspect-ratio: 1 / 1; /* مربع کامل */
+    height: auto;
 }
 
-.card:hover {
-    transform: translateY(-3px);
-    border-color: #000;
-}
-
-/* دربرگیرنده عکس برای گرفتن فضای وسط */
-.logo-image-wrapper {
-    flex: 1; /* تمام فضای خالی عمودی را می‌گیرد */
-    display: flex;
-    align-items: center; /* لوگو را در مرکز عمودی خود قرار می‌دهد */
-    justify-content: center; /* لوگو را در مرکز افقی خود قرار می‌دهد */
-    width: 100%;
-    margin-bottom: 5px; /* کمی فاصله تا متن پایین */
-}
-
+/* عکس لوگو */
 .card img.logo-img {
-    max-width: 85%;
-    max-height: 70px; /* محدودیت ارتفاع برای جلوگیری از له شدن متن */
-    object-fit: contain;
-    display: block;
+    /* مارجین خودکار عکس را در فضای خالی وسط هل می‌دهد */
+    margin-top: auto !important; 
+    margin-bottom: auto !important;
+    
+    max-width: 80% !important;
+    max-height: 50% !important; /* جلوگیری از بزرگ شدن بیش از حد */
+    object-fit: contain !important;
+    display: block !important;
 }
 
+/* نام برند */
 .card .brand-name {
-    color: var(--gray-text);
+    margin-top: 0 !important;
+    padding-top: 10px;
     font-size: 0.8rem;
-    font-weight: 500;
-    margin-top: auto; /* اطمینان از قرارگیری در پایین، اگر wrapper پر نشد */
-    padding-top: 5px;
+    color: #888;
+    height: 25px; /* ارتفاع ثابت برای جلوگیری از پرش */
 }
 
-/* --- هاور و دکمه دانلود --- */
+/* --- Hover Overlay --- */
 .card-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--hover-overlay);
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.2s ease;
-    z-index: 10;
-    backdrop-filter: blur(2px);
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8); border-radius: 16px;
+    display: flex; justify-content: center; align-items: center; gap: 5px;
+    opacity: 0; transition: opacity 0.2s; z-index: 5;
 }
-
-.card:hover .card-overlay {
-    opacity: 1;
-    visibility: visible;
-}
+.card:hover .card-overlay { opacity: 1; }
 
 .download-btn {
-    background: #fff;
-    color: #000;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-family: var(--font-primary);
-    font-weight: 700;
-    font-size: 0.7rem;
-    cursor: pointer;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    min-width: 60px;
-    justify-content: center;
+    background: #fff; color: #000; padding: 6px 12px; border-radius: 6px;
+    font-size: 0.75rem; text-decoration: none; font-weight: bold;
 }
 
-/* =========================================
-   5. مودال (Modal)
-   ========================================= */
+/* --- Footer --- */
+footer { background: #000; color: #fff; padding: 20px; margin-top: auto; text-align: center; }
+.footer-content { display: flex; justify-content: space-between; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; gap: 10px; }
+.footer-content > div { width: 100%; text-align: center; } /* وسط‌چین کردن متن فوتر در موبایل */
+@media(min-width: 600px) { .footer-content > div { width: auto; } }
+
+/* --- Modal Styles --- */
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); backdrop-filter: blur(3px);
+    z-index: 9999; display: flex; justify-content: center; align-items: center;
+    opacity: 0; visibility: hidden; transition: 0.3s;
 }
-
-.modal-overlay.show {
-    opacity: 1;
-    visibility: visible;
-}
-
+.modal-overlay.show { opacity: 1; visibility: visible; }
 .modal-content {
-    background: #fff;
-    width: 90%;
-    max-width: 400px;
-    padding: 25px;
-    border-radius: 18px;
-    text-align: right;
-    direction: rtl;
-    transform: scale(0.95);
-    transition: transform 0.3s;
+    background: #fff; width: 90%; max-width: 380px; padding: 20px;
+    border-radius: 16px; direction: rtl; text-align: right;
 }
-
-.modal-overlay.show .modal-content {
-    transform: scale(1);
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #f0f0f0;
-    padding-bottom: 10px;
-}
-
-.close-btn {
-    font-size: 24px;
-    cursor: pointer;
-    color: #999;
-}
-
-.form-group { margin-bottom: 15px; }
-.form-group label { display: block; margin-bottom: 6px; font-size: 0.85rem; }
-.input-field {
-    width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-family: var(--font-primary);
-}
-
-.file-upload-box {
-    border: 2px dashed #cbd5e0;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-    cursor: pointer;
-    background: #f8fafc;
-}
-
-.file-upload-box.has-file {
-    border-color: var(--success-color);
-    background: #f0fff4;
-    border-style: solid;
-}
-
-.submit-btn {
-    width: 100%;
-    padding: 12px;
-    background-color: #000;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    font-family: var(--font-primary) !important;
-    cursor: pointer;
-    margin-top: 10px;
-}
+.modal-header { display: flex; justify-content: space-between; margin-bottom: 15px; }
+.close-btn { font-size: 24px; cursor: pointer; }
+.input-field { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 10px; font-family: var(--font-primary); }
+.file-upload-box { border: 2px dashed #ccc; padding: 20px; text-align: center; border-radius: 10px; margin-bottom: 10px; cursor: pointer; }
+.file-upload-box.has-file { border-color: #48bb78; background: #f0fff4; }
+.submit-btn { width: 100%; background: #000; color: #fff; padding: 12px; border: none; border-radius: 10px; cursor: pointer; font-family: var(--font-primary); }
 
 /* =========================================
-   6. فوتر (Footer)
+   مهم: تنظیمات موبایل (Force 2 Columns)
    ========================================= */
-footer {
-    background-color: #000;
-    color: #fff;
-    padding: 20px 40px;
-    margin-top: auto;
-}
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.8rem;
-}
-.github-link { color: #fff; text-decoration: none; display: flex; align-items: center; gap: 5px; }
-
-/* =========================================
-   7. ریسپانسیو اختصاصی موبایل (مهم)
-   ========================================= */
-
 @media screen and (max-width: 768px) {
-    /* 1. هدر ستونی برای موبایل */
-    .header-container {
-        flex-direction: column;
-        gap: 15px;
-    }
+    /* هدر ستونی */
+    .header-container { flex-direction: column; }
     
-    .actions-area {
-        width: 100%;
-        justify-content: center;
-        order: 2; /* دکمه‌ها پایین */
-    }
-    
-    .logo-area {
-        order: 1; /* لوگو بالا */
-        justify-content: center;
-    }
-
-    /* 2. گرید موبایل: حتماً 2 ستون */
+    /* گرید موبایل: حتما ۲ ستون */
     .logos-grid {
-        /* اجبار کردن به دو ستون مساوی */
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 12px; /* فاصله کمتر بین کارت‌ها در موبایل */
+        grid-template-columns: 1fr 1fr !important; /* دو ستون مساوی */
+        gap: 12px !important;
     }
 
-    /* 3. اصلاح کارت‌ها برای سایز کوچک موبایل */
+    /* تنظیمات کارت در موبایل */
     .card {
-        padding: 15px 10px; /* پدینگ کمتر */
-        border-radius: 12px;
+        padding: 10px !important;
+        border-radius: 12px !important;
     }
-
+    
+    /* عکس در موبایل کمی کوچکتر */
     .card img.logo-img {
-        max-height: 50px; /* لوگوی کوچکتر در موبایل */
+        max-height: 45% !important;
     }
-
+    
     .card .brand-name {
-        font-size: 0.7rem; /* فونت کوچکتر برای جلوگیری از شکستن خط */
-    }
-
-    /* 4. فوتر */
-    .footer-content {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
-        justify-content: center;
+        font-size: 0.7rem !important;
     }
 }
