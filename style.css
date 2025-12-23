@@ -129,11 +129,11 @@ main {
 .card {
     border: 1px solid var(--border-color);
     border-radius: 20px;
-    padding: 20px; /* پدینگ متعادل */
+    padding: 25px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; /* این خط محتویات را عمودی وسط‌چین می‌کند */
+    flex-direction: column; /* چیدمان ستونی */
+    align-items: center;    /* وسط‌چین افقی */
+    justify-content: center; /* وسط‌چین عمودی (این خط لوگو را پایین می‌آورد) */
     background: #fff;
     position: relative;
     overflow: hidden;
@@ -142,18 +142,19 @@ main {
 }
 
 .card img.logo-img {
-    max-width: 80%;
-    max-height: 60%; /* ارتفاع لوگو را محدود میکنیم تا جا برای متن باشد */
+    max-width: 75%;   /* عرض لوگو را کمی محدودتر کردم تا زیباتر شود */
+    max-height: 55%;  /* ارتفاع را محدود کردم تا به متن نچسبد */
     object-fit: contain;
-    margin: auto; /* این معجزه می‌کند: لوگو را در فضای موجود وسط می‌اندازد */
+    margin: 0;        /* حذف مارجین‌های مزاحم */
     display: block;
 }
 
 .card .brand-name {
     color: var(--gray-text);
     font-size: 0.9rem;
-    margin-top: 10px; /* فاصله ثابت از لوگو (به جای auto) */
+    margin-top: 15px; /* فاصله ثابت و تمیز بین لوگو و متن */
     font-weight: 500;
+    /* نکته مهم: margin-top: auto حذف شد */
 }
 
 /* --- Hover Overlay --- */
