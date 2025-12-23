@@ -129,29 +129,31 @@ main {
 .card {
     border: 1px solid var(--border-color);
     border-radius: 20px;
-    padding: 30px;
+    padding: 20px; /* پدینگ متعادل */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* این خط محتویات را عمودی وسط‌چین می‌کند */
     background: #fff;
     position: relative;
-    overflow: hidden; /* مهم برای هاور */
-    aspect-ratio: 1 / 1; /* مربع کامل */
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
     transition: transform 0.2s;
 }
 
 .card img.logo-img {
     max-width: 80%;
-    max-height: 60%;
+    max-height: 60%; /* ارتفاع لوگو را محدود میکنیم تا جا برای متن باشد */
     object-fit: contain;
-    margin-bottom: 15px;
+    margin: auto; /* این معجزه می‌کند: لوگو را در فضای موجود وسط می‌اندازد */
+    display: block;
 }
 
 .card .brand-name {
     color: var(--gray-text);
     font-size: 0.9rem;
-    margin-top: auto;
+    margin-top: 10px; /* فاصله ثابت از لوگو (به جای auto) */
+    font-weight: 500;
 }
 
 /* --- Hover Overlay --- */
