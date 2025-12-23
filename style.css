@@ -1,10 +1,15 @@
+/* =========================================
+   1. متغیرها و تنظیمات پایه (Reset)
+   ========================================= */
 :root {
     --bg-color: #ffffff;
     --text-color: #000000;
     --gray-text: #888888;
     --border-color: #e0e0e0;
-    --hover-overlay: #1a1a1a;
+    --hover-overlay: rgba(0, 0, 0, 0.85); /* کمی تیره‌تر برای خوانایی بهتر */
     --font-primary: 'Vazirmatn', sans-serif;
+    --primary-color: #000;
+    --success-color: #48bb78;
 }
 
 * {
@@ -18,11 +23,19 @@ body {
     background-color: var(--bg-color);
     direction: rtl;
     color: var(--text-color);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-/* --- Header --- */
+/* =========================================
+   2. هدر (Header)
+   ========================================= */
 header {
-    padding: 40px 40px;
+    padding: 30px 40px;
+    background-color: #fff;
+    border-bottom: 1px solid transparent; /* برای زیبایی */
 }
 
 .header-container {
@@ -31,37 +44,47 @@ header {
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
+    width: 100%;
 }
 
 .logo-area {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-weight: bold;
-    font-size: 1.2rem;
+}
+
+.site-logo {
+    height: 45px; /* طبق درخواست شما */
+    width: auto;
+    display: block;
 }
 
 .actions-area {
     display: flex;
-    gap: 10px;
+    gap: 12px;
 }
 
 .btn {
     text-decoration: none;
-    padding: 8px 16px;
+    padding: 10px 20px;
     border-radius: 50px;
     font-size: 0.9rem;
     display: flex;
     align-items: center;
     gap: 8px;
     font-weight: 500;
+    font-family: var(--font-primary) !important;
     transition: all 0.2s ease;
+    cursor: pointer;
 }
 
 .btn-outline {
-    border: 1px solid var(--text-color);
+    border: 1px solid var(--border-color);
     color: var(--text-color);
     background: transparent;
+}
+
+.btn-outline:hover {
+    border-color: #000;
 }
 
 .btn-dark {
@@ -70,43 +93,52 @@ header {
     border: 1px solid #000;
 }
 
-.btn:hover {
-    opacity: 0.8;
+.btn-dark:hover {
+    background-color: #333;
+    border-color: #333;
 }
 
-/* --- Main --- */
+/* =========================================
+   3. بدنه اصلی و جستجو (Main & Search)
+   ========================================= */
 main {
-    max-width: 1000px;
-    margin: 60px auto 100px auto;
+    flex: 1; /* برای چسبیدن فوتر به پایین */
+    max-width: 1200px;
+    width: 100%;
+    margin: 40px auto 80px auto;
     padding: 0 20px;
     text-align: center;
 }
 
 .main-title {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     margin-bottom: 30px;
-    font-weight: 900;
+    font-weight: 800;
+    color: #111;
 }
 
 .search-container {
     position: relative;
-    max-width: 600px;
-    margin: 0 auto 60px auto;
+    max-width: 500px;
+    margin: 0 auto 50px auto;
 }
 
 #searchInput {
     width: 100%;
-    padding: 15px 50px 15px 20px; /* فضای خالی برای آیکون */
-    border-radius: 50px;
+    padding: 16px 50px 16px 20px;
+    border-radius: 16px; /* کمی گردتر */
     border: 1px solid var(--border-color);
     font-family: var(--font-primary);
     font-size: 1rem;
     outline: none;
-    transition: border 0.3s;
+    transition: all 0.3s ease;
+    background-color: #f9f9f9;
 }
 
 #searchInput:focus {
     border-color: #000;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 .search-icon {
@@ -118,43 +150,69 @@ main {
     pointer-events: none;
 }
 
-/* --- Grid System --- */
+/* =========================================
+   4. گرید لوگوها و کارت‌ها (Grid & Cards)
+   ========================================= */
 .logos-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 25px;
 }
 
-/* --- Logo Card --- */
 .card {
+    background: #fff;
     border: 1px solid var(--border-color);
     border-radius: 20px;
-    padding: 30px;
+    padding: 25px;
+    
+    /* تنظیمات فلکس برای وسط‌چین کردن دقیق لوگو */
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    background: #fff;
+    
     position: relative;
-    overflow: hidden; /* مهم برای هاور */
+    overflow: hidden;
     aspect-ratio: 1 / 1; /* مربع کامل */
-    transition: transform 0.2s;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    border-color: #000;
+}
+
+/* کانتینر تصویر داخل کارت برای اطمینان از وسط‌چین بودن */
+.logo-image-wrapper {
+    flex: 1; /* فضای موجود را پر کند */
+    display: flex;
+    align-items: center; /* عمودی وسط */
+    justify-content: center; /* افقی وسط */
+    width: 100%;
 }
 
 .card img.logo-img {
-    max-width: 80%;
-    max-height: 60%;
+    max-width: 90%;
+    max-height: 80px; /* جلوگیری از بزرگ شدن بیش از حد */
     object-fit: contain;
-    margin-bottom: 15px;
+    /* فیلتر سیاه و سفید پیش‌فرض (اختیاری - اگر می‌خواهید رنگی باشد این خط را حذف کنید) */
+    /* filter: grayscale(100%); */
+    transition: filter 0.3s;
+}
+
+.card:hover img.logo-img {
+    filter: grayscale(0%);
 }
 
 .card .brand-name {
     color: var(--gray-text);
-    font-size: 0.9rem;
-    margin-top: auto;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-top: 10px;
 }
 
-/* --- Hover Overlay --- */
+/* --- هاور و دکمه‌های دانلود --- */
 .card-overlay {
     position: absolute;
     top: 0;
@@ -162,45 +220,213 @@ main {
     width: 100%;
     height: 100%;
     background-color: var(--hover-overlay);
+    
     display: flex;
+    flex-direction: row; /* دکمه‌ها کنار هم */
     justify-content: center;
     align-items: center;
     gap: 10px;
-    opacity: 0; /* مخفی در حالت عادی */
-    transition: opacity 0.3s ease;
+    
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
     z-index: 10;
+    backdrop-filter: blur(2px);
 }
 
-/* نمایش اورلی وقتی موس روی کارت میرود */
 .card:hover .card-overlay {
     opacity: 1;
+    visibility: visible;
 }
 
 .download-btn {
     background: #fff;
     color: #000;
     border: none;
-    padding: 8px 16px;
-    border-radius: 50px;
+    padding: 8px 14px;
+    border-radius: 8px;
     font-family: var(--font-primary);
-    font-weight: bold;
-    font-size: 0.8rem;
+    font-weight: 700;
+    font-size: 0.75rem;
     cursor: pointer;
+    text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 5px;
-    text-decoration: none;
+    justify-content: center;
+    min-width: 70px;
+    transition: transform 0.1s;
 }
 
 .download-btn:hover {
-    background: #e0e0e0;
+    background: #f0f0f0;
+    transform: scale(1.05);
 }
 
-/* --- Footer --- */
+/* =========================================
+   5. مودال آپلود (Modal Styles)
+   ========================================= */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    z-index: 9999;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: #fff;
+    width: 90%;
+    max-width: 420px;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    text-align: right;
+    direction: rtl;
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-overlay.show .modal-content {
+    transform: scale(1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 15px;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.close-btn {
+    font-size: 24px;
+    cursor: pointer;
+    color: #999;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: #000;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: #444;
+    font-weight: 500;
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-family: var(--font-primary);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-field:focus {
+    border-color: #000;
+}
+
+/* باکس آپلود */
+.file-upload-box {
+    border: 2px dashed #cbd5e0;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    cursor: pointer;
+    background: #f8fafc;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.file-upload-box:hover {
+    border-color: #a0aec0;
+    background: #edf2f7;
+}
+
+/* کلاس فعال وقتی فایل انتخاب شد */
+.file-upload-box.has-file {
+    border-color: var(--success-color);
+    background: #f0fff4;
+    border-style: solid;
+}
+
+.upload-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: #718096;
+    font-size: 0.85rem;
+}
+
+.file-upload-box.has-file .upload-icon {
+    color: var(--success-color);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-family: var(--font-primary) !important;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background 0.2s, opacity 0.2s;
+}
+
+.submit-btn:hover {
+    background-color: #333;
+}
+
+.submit-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* =========================================
+   6. فوتر (Footer)
+   ========================================= */
 footer {
     background-color: #000;
     color: #fff;
-    padding: 20px 40px;
+    padding: 25px 40px;
     margin-top: auto;
 }
 
@@ -211,191 +437,94 @@ footer {
     justify-content: space-between;
     align-items: center;
     font-size: 0.85rem;
+    flex-wrap: wrap; /* برای موبایل */
+    gap: 15px;
 }
 
 .github-link {
     display: flex;
     align-items: center;
     gap: 8px;
+    color: #fff;
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.2s;
 }
 
-/* ریسپانسیو برای موبایل */
-@media (max-width: 600px) {
-    .header-container {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .main-title {
-        font-size: 1.8rem;
-    }
-    
-    .logos-grid {
-        grid-template-columns: repeat(2, 1fr); /* دو ستون در موبایل */
-    }
+.github-link:hover {
+    opacity: 1;
 }
-
-.site-logo {
-    height: 45px;
-    width: auto;
-    display: block;
-}
-
-button, .btn {
-    font-family: 'Vazirmatn', sans-serif !important;
-}
-
-.modal-content button {
-    font-family: 'Vazirmatn', sans-serif !important;
-}
-
 
 /* =========================================
-   استایل‌های جدید و تمیز برای مودال
+   7. ریسپانسیو (Responsive Rules)
    ========================================= */
 
-/* 1. پس‌زمینه تاریک کل صفحه */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
-    z-index: 10000;
-    display: flex; /* برای وسط‌چین کردن */
-    justify-content: center;
-    align-items: center;
+/* تبلت و موبایل (زیر 768 پیکسل) */
+@media screen and (max-width: 768px) {
     
-    /* مخفی بودن پیش‌فرض */
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
+    /* --- هدر موبایل --- */
+    .header-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .logo-area {
+        width: 100%;
+        justify-content: center;
+        order: 1; /* لوگو اول باشد */
+    }
+
+    .actions-area {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        order: 2; /* دکمه‌ها زیر لوگو */
+    }
+
+    .btn {
+        padding: 8px 16px; /* دکمه‌های کمی کوچک‌تر */
+        font-size: 0.85rem;
+    }
+
+    /* --- گرید و تایتل --- */
+    .logos-grid {
+        grid-template-columns: repeat(2, 1fr); /* دو ستون در موبایل */
+        gap: 15px;
+    }
+
+    .main-title {
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+    }
+    
+    .search-container {
+        margin-bottom: 30px;
+    }
+    
+    .card {
+        padding: 15px; /* پدینگ کمتر برای کارت‌ها */
+    }
+
+    /* --- فوتر --- */
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
 }
 
-/* کلاسی برای نمایش مودال */
-.modal-overlay.show {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* 2. باکس سفید وسط */
-.modal-content {
-    background: #fff;
-    width: 90%;
-    max-width: 400px;
-    padding: 25px;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    text-align: right;
-    direction: rtl;
-    font-family: 'Vazirmatn', sans-serif;
-    transform: scale(0.9);
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.modal-overlay.show .modal-content {
-    transform: scale(1);
-}
-
-/* 3. اجزای داخلی */
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-}
-
-.modal-header h3 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: 700;
-}
-
-.close-btn {
-    font-size: 28px;
-    cursor: pointer;
-    line-height: 20px;
-    color: #666;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 14px;
-    color: #333;
-    font-weight: 500;
-}
-
-.input-field {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    font-family: 'Vazirmatn', sans-serif;
-    box-sizing: border-box;
-    font-size: 14px;
-}
-
-/* 4. باکس آپلود فایل */
-.file-upload-box {
-    border: 2px dashed #cbd5e0;
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-    cursor: pointer;
-    background: #f7fafc;
-    transition: all 0.2s;
-}
-
-.file-upload-box:hover {
-    border-color: #a0aec0;
-    background: #edf2f7;
-}
-
-/* وقتی فایل انتخاب شد */
-.file-upload-box.has-file {
-    border-color: #48bb78; /* سبز */
-    background: #f0fff4;
-    border-style: solid;
-}
-
-.upload-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    color: #718096;
-    font-size: 13px;
-}
-
-/* 5. دکمه ارسال */
-.submit-btn {
-    width: 100%;
-    padding: 12px;
-    background-color: #000;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    font-family: 'Vazirmatn', sans-serif !important; /* فونت اجباری */
-    font-size: 15px;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: background 0.2s;
-}
-
-.submit-btn:hover {
-    background-color: #333;
-}
-
-.submit-btn:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+/* موبایل‌های خیلی کوچک (زیر 400 پیکسل) */
+@media screen and (max-width: 400px) {
+    .logos-grid {
+        grid-template-columns: 1fr; /* تک ستون */
+    }
+    
+    .actions-area {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
 }
