@@ -1,14 +1,13 @@
 /* =========================================
-   1. متغیرها و تنظیمات پایه (Reset)
+   1. متغیرها و تنظیمات پایه
    ========================================= */
 :root {
     --bg-color: #ffffff;
     --text-color: #000000;
     --gray-text: #888888;
     --border-color: #e0e0e0;
-    --hover-overlay: rgba(0, 0, 0, 0.85); /* کمی تیره‌تر برای خوانایی بهتر */
+    --hover-overlay: rgba(0, 0, 0, 0.85);
     --font-primary: 'Vazirmatn', sans-serif;
-    --primary-color: #000;
     --success-color: #48bb78;
 }
 
@@ -33,9 +32,9 @@ body {
    2. هدر (Header)
    ========================================= */
 header {
-    padding: 30px 40px;
+    padding: 25px 40px;
     background-color: #fff;
-    border-bottom: 1px solid transparent; /* برای زیبایی */
+    border-bottom: 1px solid transparent;
 }
 
 .header-container {
@@ -53,21 +52,21 @@ header {
 }
 
 .site-logo {
-    height: 45px; /* طبق درخواست شما */
+    height: 40px;
     width: auto;
     display: block;
 }
 
 .actions-area {
     display: flex;
-    gap: 12px;
+    gap: 10px;
 }
 
 .btn {
     text-decoration: none;
-    padding: 10px 20px;
+    padding: 8px 18px;
     border-radius: 50px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -75,6 +74,7 @@ header {
     font-family: var(--font-primary) !important;
     transition: all 0.2s ease;
     cursor: pointer;
+    white-space: nowrap; /* جلوگیری از شکستن متن دکمه */
 }
 
 .btn-outline {
@@ -83,36 +83,27 @@ header {
     background: transparent;
 }
 
-.btn-outline:hover {
-    border-color: #000;
-}
-
 .btn-dark {
     background-color: #000;
     color: #fff;
     border: 1px solid #000;
 }
 
-.btn-dark:hover {
-    background-color: #333;
-    border-color: #333;
-}
-
 /* =========================================
-   3. بدنه اصلی و جستجو (Main & Search)
+   3. بدنه اصلی (Main)
    ========================================= */
 main {
-    flex: 1; /* برای چسبیدن فوتر به پایین */
+    flex: 1;
     max-width: 1200px;
     width: 100%;
-    margin: 40px auto 80px auto;
+    margin: 30px auto 60px auto;
     padding: 0 20px;
     text-align: center;
 }
 
 .main-title {
-    font-size: 2.2rem;
-    margin-bottom: 30px;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
     font-weight: 800;
     color: #111;
 }
@@ -120,34 +111,26 @@ main {
 .search-container {
     position: relative;
     max-width: 500px;
-    margin: 0 auto 50px auto;
+    margin: 0 auto 40px auto;
 }
 
 #searchInput {
     width: 100%;
-    padding: 16px 50px 16px 20px;
-    border-radius: 16px; /* کمی گردتر */
+    padding: 14px 50px 14px 20px;
+    border-radius: 14px;
     border: 1px solid var(--border-color);
     font-family: var(--font-primary);
-    font-size: 1rem;
+    font-size: 0.95rem;
     outline: none;
-    transition: all 0.3s ease;
     background-color: #f9f9f9;
-}
-
-#searchInput:focus {
-    border-color: #000;
-    background-color: #fff;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 .search-icon {
     position: absolute;
-    right: 20px;
+    right: 15px;
     top: 50%;
     transform: translateY(-50%);
     color: var(--gray-text);
-    pointer-events: none;
 }
 
 /* =========================================
@@ -155,64 +138,61 @@ main {
    ========================================= */
 .logos-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 25px;
+    /* در دسکتاپ: ستون‌ها خودکار تنظیم می‌شوند */
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 20px;
 }
 
+/* --- استایل کارت برای وسط‌چین کردن دقیق --- */
 .card {
     background: #fff;
     border: 1px solid var(--border-color);
-    border-radius: 20px;
-    padding: 25px;
+    border-radius: 16px;
+    padding: 20px;
     
-    /* تنظیمات فلکس برای وسط‌چین کردن دقیق لوگو */
+    /* Flexbox برای چیدمان عمودی */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center; /* وسط‌چین کردن عمودی کل محتوا */
+    align-items: center;     /* وسط‌چین کردن افقی کل محتوا */
     
     position: relative;
     overflow: hidden;
-    aspect-ratio: 1 / 1; /* مربع کامل */
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    aspect-ratio: 1 / 1; /* کارت همیشه مربع است */
+    transition: transform 0.2s ease;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transform: translateY(-3px);
     border-color: #000;
 }
 
-/* کانتینر تصویر داخل کارت برای اطمینان از وسط‌چین بودن */
+/* دربرگیرنده عکس برای گرفتن فضای وسط */
 .logo-image-wrapper {
-    flex: 1; /* فضای موجود را پر کند */
+    flex: 1; /* تمام فضای خالی عمودی را می‌گیرد */
     display: flex;
-    align-items: center; /* عمودی وسط */
-    justify-content: center; /* افقی وسط */
+    align-items: center; /* لوگو را در مرکز عمودی خود قرار می‌دهد */
+    justify-content: center; /* لوگو را در مرکز افقی خود قرار می‌دهد */
     width: 100%;
+    margin-bottom: 5px; /* کمی فاصله تا متن پایین */
 }
 
 .card img.logo-img {
-    max-width: 90%;
-    max-height: 80px; /* جلوگیری از بزرگ شدن بیش از حد */
+    max-width: 85%;
+    max-height: 70px; /* محدودیت ارتفاع برای جلوگیری از له شدن متن */
     object-fit: contain;
-    /* فیلتر سیاه و سفید پیش‌فرض (اختیاری - اگر می‌خواهید رنگی باشد این خط را حذف کنید) */
-    /* filter: grayscale(100%); */
-    transition: filter 0.3s;
-}
-
-.card:hover img.logo-img {
-    filter: grayscale(0%);
+    display: block;
 }
 
 .card .brand-name {
     color: var(--gray-text);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 500;
-    margin-top: 10px;
+    margin-top: auto; /* اطمینان از قرارگیری در پایین، اگر wrapper پر نشد */
+    padding-top: 5px;
 }
 
-/* --- هاور و دکمه‌های دانلود --- */
+/* --- هاور و دکمه دانلود --- */
 .card-overlay {
     position: absolute;
     top: 0;
@@ -220,16 +200,14 @@ main {
     width: 100%;
     height: 100%;
     background-color: var(--hover-overlay);
-    
     display: flex;
-    flex-direction: row; /* دکمه‌ها کنار هم */
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    
+    gap: 8px;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     z-index: 10;
     backdrop-filter: blur(2px);
 }
@@ -243,27 +221,21 @@ main {
     background: #fff;
     color: #000;
     border: none;
-    padding: 8px 14px;
+    padding: 6px 12px;
     border-radius: 8px;
     font-family: var(--font-primary);
     font-weight: 700;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     cursor: pointer;
     text-decoration: none;
     display: flex;
     align-items: center;
+    min-width: 60px;
     justify-content: center;
-    min-width: 70px;
-    transition: transform 0.1s;
-}
-
-.download-btn:hover {
-    background: #f0f0f0;
-    transform: scale(1.05);
 }
 
 /* =========================================
-   5. مودال آپلود (Modal Styles)
+   5. مودال (Modal)
    ========================================= */
 .modal-overlay {
     position: fixed;
@@ -272,16 +244,14 @@ main {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(4px);
     z-index: 9999;
-    
     display: flex;
     justify-content: center;
     align-items: center;
-
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.3s;
 }
 
 .modal-overlay.show {
@@ -292,14 +262,13 @@ main {
 .modal-content {
     background: #fff;
     width: 90%;
-    max-width: 420px;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    max-width: 400px;
+    padding: 25px;
+    border-radius: 18px;
     text-align: right;
     direction: rtl;
     transform: scale(0.95);
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.3s;
 }
 
 .modal-overlay.show .modal-content {
@@ -310,114 +279,48 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     border-bottom: 1px solid #f0f0f0;
-    padding-bottom: 15px;
-}
-
-.modal-header h3 {
-    margin: 0;
-    font-size: 1.1rem;
-    font-weight: 700;
+    padding-bottom: 10px;
 }
 
 .close-btn {
     font-size: 24px;
     cursor: pointer;
     color: #999;
-    transition: color 0.2s;
 }
 
-.close-btn:hover {
-    color: #000;
-}
-
-.form-group {
-    margin-bottom: 18px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 0.9rem;
-    color: #444;
-    font-weight: 500;
-}
-
+.form-group { margin-bottom: 15px; }
+.form-group label { display: block; margin-bottom: 6px; font-size: 0.85rem; }
 .input-field {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    font-family: var(--font-primary);
-    font-size: 0.9rem;
-    outline: none;
-    transition: border-color 0.2s;
+    width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-family: var(--font-primary);
 }
 
-.input-field:focus {
-    border-color: #000;
-}
-
-/* باکس آپلود */
 .file-upload-box {
     border: 2px dashed #cbd5e0;
-    border-radius: 12px;
-    padding: 25px;
+    border-radius: 10px;
+    padding: 20px;
     text-align: center;
     cursor: pointer;
     background: #f8fafc;
-    transition: all 0.2s;
-    position: relative;
 }
 
-.file-upload-box:hover {
-    border-color: #a0aec0;
-    background: #edf2f7;
-}
-
-/* کلاس فعال وقتی فایل انتخاب شد */
 .file-upload-box.has-file {
     border-color: var(--success-color);
     background: #f0fff4;
     border-style: solid;
 }
 
-.upload-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    color: #718096;
-    font-size: 0.85rem;
-}
-
-.file-upload-box.has-file .upload-icon {
-    color: var(--success-color);
-}
-
 .submit-btn {
     width: 100%;
-    padding: 14px;
+    padding: 12px;
     background-color: #000;
     color: #fff;
     border: none;
-    border-radius: 12px;
+    border-radius: 10px;
     font-family: var(--font-primary) !important;
-    font-size: 1rem;
-    font-weight: 600;
     cursor: pointer;
-    margin-top: 15px;
-    transition: background 0.2s, opacity 0.2s;
-}
-
-.submit-btn:hover {
-    background-color: #333;
-}
-
-.submit-btn:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+    margin-top: 10px;
 }
 
 /* =========================================
@@ -426,105 +329,66 @@ main {
 footer {
     background-color: #000;
     color: #fff;
-    padding: 25px 40px;
+    padding: 20px 40px;
     margin-top: auto;
 }
-
 .footer-content {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    font-size: 0.85rem;
-    flex-wrap: wrap; /* برای موبایل */
-    gap: 15px;
+    font-size: 0.8rem;
 }
-
-.github-link {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #fff;
-    text-decoration: none;
-    opacity: 0.8;
-    transition: opacity 0.2s;
-}
-
-.github-link:hover {
-    opacity: 1;
-}
+.github-link { color: #fff; text-decoration: none; display: flex; align-items: center; gap: 5px; }
 
 /* =========================================
-   7. ریسپانسیو (Responsive Rules)
+   7. ریسپانسیو اختصاصی موبایل (مهم)
    ========================================= */
 
-/* تبلت و موبایل (زیر 768 پیکسل) */
 @media screen and (max-width: 768px) {
-    
-    /* --- هدر موبایل --- */
+    /* 1. هدر ستونی برای موبایل */
     .header-container {
         flex-direction: column;
-        gap: 20px;
-    }
-
-    .logo-area {
-        width: 100%;
-        justify-content: center;
-        order: 1; /* لوگو اول باشد */
-    }
-
-    .actions-area {
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
-        order: 2; /* دکمه‌ها زیر لوگو */
-    }
-
-    .btn {
-        padding: 8px 16px; /* دکمه‌های کمی کوچک‌تر */
-        font-size: 0.85rem;
-    }
-
-    /* --- گرید و تایتل --- */
-    .logos-grid {
-        grid-template-columns: repeat(2, 1fr); /* دو ستون در موبایل */
         gap: 15px;
     }
-
-    .main-title {
-        font-size: 1.6rem;
-        margin-bottom: 20px;
-    }
-    
-    .search-container {
-        margin-bottom: 30px;
-    }
-    
-    .card {
-        padding: 15px; /* پدینگ کمتر برای کارت‌ها */
-    }
-
-    /* --- فوتر --- */
-    .footer-content {
-        flex-direction: column;
-        text-align: center;
-    }
-}
-
-/* موبایل‌های خیلی کوچک (زیر 400 پیکسل) */
-@media screen and (max-width: 400px) {
-    .logos-grid {
-        grid-template-columns: 1fr; /* تک ستون */
-    }
     
     .actions-area {
-        flex-direction: column;
         width: 100%;
+        justify-content: center;
+        order: 2; /* دکمه‌ها پایین */
     }
     
-    .btn {
-        width: 100%;
+    .logo-area {
+        order: 1; /* لوگو بالا */
+        justify-content: center;
+    }
+
+    /* 2. گرید موبایل: حتماً 2 ستون */
+    .logos-grid {
+        /* اجبار کردن به دو ستون مساوی */
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px; /* فاصله کمتر بین کارت‌ها در موبایل */
+    }
+
+    /* 3. اصلاح کارت‌ها برای سایز کوچک موبایل */
+    .card {
+        padding: 15px 10px; /* پدینگ کمتر */
+        border-radius: 12px;
+    }
+
+    .card img.logo-img {
+        max-height: 50px; /* لوگوی کوچکتر در موبایل */
+    }
+
+    .card .brand-name {
+        font-size: 0.7rem; /* فونت کوچکتر برای جلوگیری از شکستن خط */
+    }
+
+    /* 4. فوتر */
+    .footer-content {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
         justify-content: center;
     }
 }
