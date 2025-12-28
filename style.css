@@ -126,36 +126,53 @@ main {
 }
 
 /* --- Logo Card --- */
+/* --- Logo Card --- */
 .card {
     border: 1px solid var(--border-color);
     border-radius: 20px;
-    padding: 25px;
-    display: flex;
-    flex-direction: column; /* چیدمان ستونی */
-    align-items: center;    /* وسط‌چین افقی */
-    justify-content: center; /* وسط‌چین عمودی (این خط لوگو را پایین می‌آورد) */
+    padding: 20px;
     background: #fff;
     position: relative;
     overflow: hidden;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1 / 1; /* مربع کامل */
     transition: transform 0.2s;
+
+    /* تنظیمات فلکس باکس */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content را حذف کردیم چون flex:1 در تصویر کار را انجام می‌دهد */
 }
 
 .card img.logo-img {
-    max-width: 75%;   /* عرض لوگو را کمی محدودتر کردم تا زیباتر شود */
-    max-height: 55%;  /* ارتفاع را محدود کردم تا به متن نچسبد */
-    object-fit: contain;
-    margin: 0;        /* حذف مارجین‌های مزاحم */
+    /* نکته کلیدی اینجاست: */
+    flex: 1;             /* تصویر تمام فضای عمودی موجود را اشغال می‌کند */
+    width: 65%;          /* عرض تصویر محدود می‌شود تا خیلی بزرگ نشود */
+    object-fit: contain; /* تصویر در مرکز فضای خود فیت می‌شود (بدون دفرمه شدن) */
+    
+    /* حذف مارجین‌های مزاحم */
+    margin: 0;
+    
+    /* کمی فاصله داخلی تا به سقف و متن نچسبد */
+    padding: 10px 0; 
     display: block;
 }
 
 .card .brand-name {
     color: var(--gray-text);
     font-size: 0.9rem;
-    margin-top: 15px; /* فاصله ثابت و تمیز بین لوگو و متن */
     font-weight: 500;
-    /* نکته مهم: margin-top: auto حذف شد */
+    
+    /* جلوگیری از فشرده شدن متن */
+    flex-shrink: 0;
+    
+    /* تنظیم ارتفاع ثابت برای متن تا همه کارت‌ها تراز باشند */
+    height: 30px; 
+    display: flex;
+    align-items: center; /* متن دقیقاً وسط ارتفاع خود قرار گیرد */
+    margin-bottom: 5px;  /* فاصله کم از کف کارت */
 }
+
 
 /* --- Hover Overlay --- */
 .card-overlay {
