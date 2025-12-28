@@ -419,3 +419,43 @@ button, .btn {
     background-color: #ccc;
     cursor: not-allowed;
 }
+
+/* --- اصلاحات مخصوص موبایل --- */
+@media (max-width: 768px) {
+
+    /* 1. اصلاح چیدمان هدر (لوگو بالا، دکمه‌ها پایین) */
+    .header-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* لوگو را به اولین جایگاه می‌برد */
+    .logo-area {
+        order: -1; 
+        justify-content: center;
+        width: 100%;
+    }
+
+    /* دکمه‌ها را به جایگاه دوم می‌برد */
+    .actions-area {
+        order: 1;
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* 2. اصلاح دکمه‌های دانلود داخل کارت */
+    .card-overlay {
+        /* چیدمان ستونی معکوس:
+           این کار باعث می‌شود دکمه دوم (SVG) بالا برود 
+           و دکمه اول (PNG) پایین بیاید */
+        flex-direction: column-reverse; 
+        gap: 8px;
+        padding: 20px; /* فضای بیشتر برای تاچ راحت‌تر */
+    }
+
+    .download-btn {
+        width: 100%; /* دکمه‌ها تمام عرض شوند */
+        justify-content: center; /* متن وسط دکمه */
+        height: 40px; /* ارتفاع مناسب برای انگشت */
+    }
+}
