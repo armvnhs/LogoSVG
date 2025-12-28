@@ -441,7 +441,7 @@ button, .btn {
 
     .card-overlay {
         flex-direction: column-reverse; 
-        gap: 15px;
+        gap: 12px;
         padding: 20px;
     }
 
