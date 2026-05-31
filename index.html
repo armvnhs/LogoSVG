@@ -8,33 +8,443 @@
 
     <title>Logo SVG - Iranian logo library</title>
     
-    <!-- فونت وزیرمتن -->
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
-    
-    <!-- آیکون‌های گوگل (Material Symbols) -->
+    <link href="https://cdn.jsdelivr.net/gh/aminabedi68/Estedad/dist/font-face.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --gray-text: #888888;
+            --border-color: #e0e0e0;
+            --hover-overlay: #1a1a1a;
+            --font-primary: 'Estedad', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--bg-color);
+            direction: rtl;
+            color: var(--text-color);
+        }
+
+        header {
+            padding: 40px 40px;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .actions-area {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .btn-outline {
+            border: 1px solid var(--text-color);
+            color: var(--text-color);
+            background: transparent;
+        }
+
+        .btn-dark {
+            background-color: #000;
+            color: #fff;
+            border: 1px solid #000;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 60px auto 100px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            font-weight: 900;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto 60px auto;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border-radius: 50px;
+            border: 1px solid var(--border-color);
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        #searchInput:focus {
+            border-color: #000;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-text);
+            pointer-events: none;
+        }
+
+        .logos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 20px;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card img.logo-img {
+            flex: 1;
+            width: 65%;
+            object-fit: contain;
+            margin: 0;
+            padding: 10px 0; 
+            display: block;
+        }
+
+        .card .brand-name {
+            color: var(--gray-text);
+            font-size: 0.9rem;
+            font-weight: 500;
+            flex-shrink: 0;
+            height: 30px; 
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--hover-overlay);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+        }
+
+        .card:hover .card-overlay {
+            opacity: 1;
+        }
+
+        .download-btn {
+            background: #fff;
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-family: var(--font-primary);
+            font-weight: bold;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
+        }
+
+        .download-btn:hover {
+            background: #e0e0e0;
+        }
+
+        footer {
+            background-color: #000;
+            color: #fff;
+            padding: 20px 40px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+
+        .github-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .main-title {
+                font-size: 1.8rem;
+            }
+            
+            .logos-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .site-logo {
+            height: 45px;
+            width: auto;
+            display: block;
+        }
+
+        button, .btn {
+            font-family: 'Estedad', sans-serif !important;
+        }
+
+        .modal-content button {
+            font-family: 'Estedad', sans-serif !important;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: #fff;
+            width: 90%;
+            max-width: 400px;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: right;
+            direction: rtl;
+            font-family: 'Estedad', sans-serif;
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-overlay.show .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .close-btn {
+            font-size: 28px;
+            cursor: pointer;
+            line-height: 20px;
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-family: 'Estedad', sans-serif;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        .file-upload-box {
+            border: 2px dashed #cbd5e0;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            background: #f7fafc;
+            transition: all 0.2s;
+        }
+
+        .file-upload-box:hover {
+            border-color: #a0aec0;
+            background: #edf2f7;
+        }
+
+        .file-upload-box.has-file {
+            border-color: #48bb78;
+            background: #f0fff4;
+            border-style: solid;
+        }
+
+        .upload-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: #718096;
+            font-size: 13px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Estedad', sans-serif !important;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+
+        .submit-btn:hover {
+            background-color: #333;
+        }
+
+        .submit-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .logo-area {
+                order: -1; 
+                justify-content: center;
+                width: 100%;
+            }
+
+            .actions-area {
+                order: 1;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .card-overlay {
+                flex-direction: column-reverse; 
+                gap: 12px;
+                padding: 20px;
+            }
+
+            .download-btn {
+                width: 100%;
+                justify-content: center;
+                height: 40px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- هدر سایت -->
     <header>
         <div class="header-container">
-                    <div class="actions-area">
+            <div class="actions-area">
                 <a href="https://daramet.com/armvnhs" class="btn btn-outline">
                     <span class="material-symbols-outlined">favorite</span>
                     حمایت مالی
                 </a>
-                <!-- دکمه متصل به مودال آپلود -->
-<a href="#" class="btn btn-dark" onclick="toggleModal(true); return false;">
-    <span class="material-symbols-outlined">north_east</span>
-    ارسال لوگو
-</a>
-
+                <a href="#" class="btn btn-dark" onclick="toggleModal(true); return false;">
+                    <span class="material-symbols-outlined">north_east</span>
+                    ارسال لوگو
+                </a>
             </div>
             <div class="logo-area">
-                <!-- لینک به صفحه اصلی -->
                 <a href="index.html" style="display: flex; align-items: center;">
                     <img src="https://raw.githubusercontent.com/armvnhs/LogoSVG/refs/heads/main/file/LogoSVG.png" 
                         alt="LogoSVG" 
@@ -42,87 +452,278 @@
                         style="height: 40px; width: auto;">
                 </a>
             </div>
-    </div>
+        </div>
     </header>
 
-    <!-- محتوای اصلی -->
     <main>
         <h1 class="main-title">کتابخانه لوگوهای ایرانی</h1>
         
-        <!-- جستجو -->
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="جستجوی نام برند...">
             <span class="material-symbols-outlined search-icon">search</span>
         </div>
 
-        <!-- گرید لوگوها -->
         <div class="logos-grid" id="logosGrid">
-            <!-- لوگوها توسط جاوااسکریپت اینجا ساخته می‌شوند -->
         </div>
     </main>
 
-    <!-- فوتر -->
     <footer>
         <div class="footer-content">
             <div class="made-with">
                 <span>ساخته شده با ❤️ و کمی ☕</span>
             </div>
-            <div class="github-link">
+            <a href="https://armvnhs.ir" target="_blank" class="github-link" style="text-decoration: none; color: inherit;">
                 <span>armvnhs</span>
-                <span class="material-symbols-outlined">code</span> <!-- لوگوی گیت‌هاب نمادین -->
-              </div>
+                <span class="material-symbols-outlined" style="font-size: 20px;">link</span>
+            </a>
         </div>
     </footer>
 
-<!-- ========================================= -->
-<!-- شروع کد مودال (پنجره آپلود) -->
-<!-- ========================================= -->
-<div id="customModal" class="modal-overlay">
-    <div class="modal-content">
-        <!-- هدر مودال -->
-        <div class="modal-header">
-            <h3>ارسال لوگوی جدید</h3>
-            <span class="close-btn" onclick="toggleModal(false)">&times;</span>
-        </div>
-
-        <!-- فرم ارسال -->
-        <!-- نکته مهم: آدرس اکشن باید شامل /ajax/ باشد -->
-        <form id="submissionForm"<form id="submissionForm" action="https://formsubmit.co/armunhs@gmail.com" method="POST" enctype="multipart/form-data">
-            
-            <!-- تنظیمات مخفی FormSubmit -->
-            <input type="hidden" name="_subject" value="New Logo Submission">
-            <input type="hidden" name="_captcha" value="false">
-
-            <!-- ورودی نام برند -->
-            <div class="form-group">
-                <label>نام برند</label>
-                <input type="text" name="BrandName" class="input-field" placeholder="مثلاً: دیجیکالا" required>
+    <div id="customModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>ارسال لوگوی جدید</h3>
+                <span class="close-btn" onclick="toggleModal(false)">&times;</span>
             </div>
 
+            <form id="submissionForm" action="https://formsubmit.co/armunhs@gmail.com" method="POST" enctype="multipart/form-data">
+                
+                <input type="hidden" name="_subject" value="New Logo Submission">
+                <input type="hidden" name="_captcha" value="false">
 
-            <div class="form-group">
-                <label>فایل لوگو (SVG)</label>
-                <div class="file-upload-box" id="uploadDropZone" onclick="document.getElementById('realFileBtn').click()">
-                    <!-- اینپوت اصلی مخفی -->
-                    <input type="file" name="logoFile" id="realFileBtn" accept=".svg" required style="display: none;">
-                    
-                    <!-- ظاهر گرافیکی -->
-                    <div class="upload-content">
-                        <span id="uploadIcon">📂</span>
-                        <span id="fileNameDisplay">برای انتخاب فایل کلیک کنید</span>
+                <div class="form-group">
+                    <label>نام برند</label>
+                    <input type="text" name="BrandName" class="input-field" placeholder="مثلاً: دیجیکالا" required>
+                </div>
+
+                <div class="form-group">
+                    <label>فایل لوگو (SVG)</label>
+                    <div class="file-upload-box" id="uploadDropZone" onclick="document.getElementById('realFileBtn').click()">
+                        <input type="file" name="logoFile" id="realFileBtn" accept=".svg" required style="display: none;">
+                        
+                        <div class="upload-content">
+                            <span id="uploadIcon">📂</span>
+                            <span id="fileNameDisplay">برای انتخاب فایل کلیک کنید</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- دکمه ارسال -->
-            <button type="submit" class="submit-btn" id="finalBtn">
-                ارسال برای بررسی
-            </button>
-        </form>
+                <button type="submit" class="submit-btn" id="finalBtn">
+                    ارسال برای بررسی
+                </button>
+            </form>
+        </div>
     </div>
-</div>
     
-    
-<script src="script.js"></script>    
+    <script>
+        const GITHUB_USERNAME = "armvnhs";   
+        const REPO_NAME = "LogoBox";         
+        const FOLDER_NAME = "logos";         
+
+        const gridContainer = document.getElementById('logosGrid');
+        const searchInput = document.getElementById('searchInput');
+
+        let allLogoFiles = [];
+
+        async function fetchLogos() {
+            const apiUrl = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${FOLDER_NAME}`;
+            
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error('مشکل در ارتباط با گیت‌هاب');
+                
+                const data = await response.json();
+                
+                allLogoFiles = data
+                    .filter(file => file.name.endsWith('.svg'))
+                    .map(file => file.name);
+
+                renderLogos('');
+                
+            } catch (error) {
+                console.error('Error fetching logos:', error);
+                gridContainer.innerHTML = `<p style="text-align:center; width:100%;">خطا در بارگذاری لوگوها. لطفا مطمئن شوید نام ریپازیتوری و پوشه درست است.</p>`;
+            }
+        }
+
+        function renderLogos(filterText = '') {
+            gridContainer.innerHTML = ''; 
+
+            const filteredLogos = allLogoFiles.filter(fileName => {
+                const brandName = fileName.replace('.svg', '').replace(/-/g, ' ');
+                return brandName.toLowerCase().includes(filterText.toLowerCase());
+            });
+
+            if (filteredLogos.length === 0 && allLogoFiles.length > 0) {
+                gridContainer.innerHTML = '<p style="text-align:center; width:100%;">لوگویی پیدا نشد.</p>';
+                return;
+            }
+
+            filteredLogos.forEach(fileName => {
+                const brandName = fileName.replace('.svg', '').replace(/-/g, ' ');
+                createCard(fileName, brandName);
+            });
+        }
+
+        function createCard(fileName, brandName) {
+            const card = document.createElement('div');
+            card.className = 'card';
+
+            const filePath = `${FOLDER_NAME}/${fileName}`;
+
+            card.innerHTML = `
+                <img src="${filePath}" alt="${brandName}" class="logo-img" loading="lazy">
+                <div class="brand-name">${brandName}</div>
+                
+                <div class="card-overlay">
+                    <a href="${filePath}" download="${fileName}" class="download-btn">
+                        <span class="material-symbols-outlined" style="font-size:16px;">download</span> SVG
+                    </a>
+                    <button class="download-btn" onclick="downloadAsPng('${filePath}', '${fileName}')">
+                        <span class="material-symbols-outlined" style="font-size:16px;">image</span> PNG
+                    </button>
+                </div>
+            `;
+
+            gridContainer.appendChild(card);
+        }
+
+        function downloadAsPng(svgUrl, fileName) {
+            fetch(svgUrl)
+                .then(response => response.text())
+                .then(svgText => {
+                    const img = new Image();
+                    const svgBlob = new Blob([svgText], { type: 'image/svg+xml;charset=utf-8' });
+                    const url = URL.createObjectURL(svgBlob);
+
+                    img.onload = function () {
+                        const canvas = document.createElement('canvas');
+                        const size = 1000; 
+                        canvas.width = size;
+                        canvas.height = (img.height / img.width) * size;
+
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                        const pngUrl = canvas.toDataURL('image/png');
+                        const downloadLink = document.createElement('a');
+                        downloadLink.href = pngUrl;
+                        downloadLink.download = fileName.replace('.svg', '.png');
+                        document.body.appendChild(downloadLink);
+                        downloadLink.click();
+                        document.body.removeChild(downloadLink);
+
+                        URL.revokeObjectURL(url);
+                    };
+
+                    img.src = url;
+                })
+                .catch(err => console.error('Error converting SVG to PNG:', err));
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            renderLogos(e.target.value);
+        });
+
+        fetchLogos();
+
+
+        function toggleModal(shouldShow) {
+            const modal = document.getElementById('customModal');
+            if (!modal) return;
+
+            if (shouldShow) {
+                modal.classList.add('show');
+            } else {
+                modal.classList.remove('show');
+                setTimeout(() => {
+                    resetForm();
+                }, 300);
+            }
+        }
+
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('customModal');
+            if (e.target === modal) {
+                toggleModal(false);
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const headerBtn = document.querySelector('.header-btn'); 
+
+            if (headerBtn) {
+                headerBtn.onclick = function(e) {
+                    e.preventDefault(); 
+                    toggleModal(true);
+                };
+            }
+        });
+
+        const realFileBtn = document.getElementById('realFileBtn');
+        const fileNameDisplay = document.getElementById('fileNameDisplay');
+        const uploadDropZone = document.getElementById('uploadDropZone');
+        const uploadIcon = document.getElementById('uploadIcon');
+
+        if (realFileBtn) {
+            realFileBtn.addEventListener('change', function() {
+                if (this.files && this.files.length > 0) {
+                    fileNameDisplay.innerText = this.files[0].name;
+                    uploadDropZone.classList.add('has-file');
+                    uploadIcon.innerText = "✅"; 
+                } else {
+                    resetForm();
+                }
+            });
+        }
+
+        function resetForm() {
+            const form = document.getElementById('submissionForm');
+            if (form) form.reset();
+            
+            if (fileNameDisplay) fileNameDisplay.innerText = "برای انتخاب فایل کلیک کنید";
+            if (uploadDropZone) uploadDropZone.classList.remove('has-file');
+            if (uploadIcon) uploadIcon.innerText = "📂";
+        }
+
+        const form = document.getElementById('submissionForm');
+        const finalBtn = document.getElementById('finalBtn');
+
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const originalText = finalBtn.innerText;
+                finalBtn.innerText = "⏳ در حال ارسال...";
+                finalBtn.disabled = true;
+
+                const formData = new FormData(form);
+
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        alert("🎉 لوگوی شما با موفقیت ارسال شد!");
+                        toggleModal(false); 
+                    } else {
+                        alert("❌ خطا در ارسال. لطفاً دوباره تلاش کنید.");
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert("❌ خطای اینترنت. لطفاً اتصال خود را بررسی کنید.");
+                })
+                .finally(() => {
+                    finalBtn.innerText = originalText;
+                    finalBtn.disabled = false;
+                });
+            });
+        }
+    </script>    
 </body>
 </html>
