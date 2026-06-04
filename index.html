@@ -197,12 +197,17 @@
             pointer-events: none;
         }
 
-        .logos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-        }
+.logos-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
 
+        @media (max-width: 768px) {
+    .logos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
         .card {
             border: 1px solid var(--border-color);
             border-radius: 20px;
