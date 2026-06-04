@@ -7,11 +7,18 @@
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/armvnhs/LogoSVG/refs/heads/main/file/favicon.png">
 
     <title>Logo SVG - Iranian logo library</title>
-    
-    <link href="https://cdn.jsdelivr.net/gh/aminabedi68/Estedad/dist/font-face.css" rel="stylesheet" type="text/css" />
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    
+
     <style>
+        @font-face {
+            font-family: 'Estedad';
+            src: url('file/Estedad-VariableFont_wght.ttf') format('truetype-variations');
+            font-weight: 100 900;
+            font-style: normal;
+            font-display: swap;
+        }
+
         :root {
             --bg-color: #ffffff;
             --text-color: #000000;
@@ -32,6 +39,9 @@
             background-color: var(--bg-color);
             direction: rtl;
             color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         header {
@@ -92,6 +102,7 @@
             margin: 60px auto 100px auto;
             padding: 0 20px;
             text-align: center;
+            flex: 1;
         }
 
         .main-title {
