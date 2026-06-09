@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl" data-theme="light">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/armvnhs/LogoSVG/refs/heads/main/file/favicon.png">
-    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/armvnhs/LogoSVG/refs/heads/main/file/favicon.png">
+    
+    <!-- تگ‌های سئو و شبکه‌های اجتماعی -->
+    <meta name="description" content="کتابخانه جامع و متن‌باز لوگوهای ایرانی با فرمت SVG و PNG">
+    <meta property="og:title" content="Logo SVG - Iranian logo library">
+    <meta property="og:description" content="دانلود با کیفیت‌ترین لوگوهای برندهای ایرانی">
+    <meta property="og:image" content="https://raw.githubusercontent.com/armvnhs/LogoSVG/main/file/favicon.png">
+
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/armvnhs/LogoSVG/main/file/favicon.png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/armvnhs/LogoSVG/main/file/favicon.png">
 
     <title>Logo SVG - Iranian logo library</title>
 
@@ -20,34 +27,12 @@
         }
 
         :root {
-            --bg-color: #f7fafc;
+            --bg-color: #ffffff;
             --text-color: #000000;
-            --card-bg: #ffffff;
             --gray-text: #888888;
             --border-color: #e0e0e0;
-            --hover-overlay: rgba(26, 26, 26, 0.85);
+            --hover-overlay: #1a1a1a;
             --font-primary: 'Estedad', sans-serif;
-            --modal-bg: #ffffff;
-            --input-bg: #ffffff;
-            --btn-dark-bg: #000000;
-            --btn-dark-text: #ffffff;
-            --footer-bg: #000000;
-            --footer-text: #ffffff;
-        }
-
-        [data-theme="dark"] {
-            --bg-color: #121212;
-            --text-color: #ffffff;
-            --card-bg: #1e1e1e;
-            --gray-text: #b3b3b3;
-            --border-color: #333333;
-            --hover-overlay: rgba(0, 0, 0, 0.85);
-            --modal-bg: #1e1e1e;
-            --input-bg: #2d2d2d;
-            --btn-dark-bg: #ffffff;
-            --btn-dark-text: #000000;
-            --footer-bg: #0a0a0a;
-            --footer-text: #ffffff;
         }
 
         * {
@@ -64,7 +49,6 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         header {
@@ -90,7 +74,6 @@
         .actions-area {
             display: flex;
             gap: 10px;
-            align-items: center;
         }
 
         .btn {
@@ -103,7 +86,6 @@
             gap: 8px;
             font-weight: 500;
             transition: all 0.2s ease;
-            cursor: pointer;
         }
 
         .btn-outline {
@@ -113,28 +95,13 @@
         }
 
         .btn-dark {
-            background-color: var(--btn-dark-bg);
-            color: var(--btn-dark-text);
-            border: 1px solid var(--btn-dark-bg);
+            background-color: #000;
+            color: #fff;
+            border: 1px solid #000;
         }
 
         .btn:hover {
             opacity: 0.8;
-        }
-
-        /* ===== Dark Mode Toggle ===== */
-        .btn-theme {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 8px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .btn-theme:hover {
-            background: var(--border-color);
         }
 
         /* ===== انیمیشن دکمه حمایت مالی ===== */
@@ -142,8 +109,8 @@
             position: relative;
             overflow: hidden;
             background-color: transparent;
-            color: var(--text-color);
-            border: 1px solid var(--text-color);
+            color: #000;
+            border: 1px solid #000;
             transition: color 0.4s ease, border-color 0.4s ease;
         }
 
@@ -190,6 +157,7 @@
             60%  { transform: scale(1.25); }
             100% { transform: scale(1); }
         }
+        /* ===== پایان انیمیشن دکمه ===== */
 
         main {
             max-width: 1000px;
@@ -216,16 +184,14 @@
             padding: 15px 50px 15px 20px;
             border-radius: 50px;
             border: 1px solid var(--border-color);
-            background-color: var(--card-bg);
-            color: var(--text-color);
             font-family: var(--font-primary);
             font-size: 1rem;
             outline: none;
-            transition: border 0.3s, background-color 0.3s, color 0.3s;
+            transition: border 0.3s;
         }
 
         #searchInput:focus {
-            border-color: var(--text-color);
+            border-color: #000;
         }
 
         .search-icon {
@@ -241,7 +207,6 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 20px;
-            min-height: 200px; /* فضای رزرو شده برای لودینگ */
         }
 
         @media (max-width: 768px) {
@@ -249,16 +214,16 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
-
+        
         .card {
             border: 1px solid var(--border-color);
             border-radius: 20px;
             padding: 20px;
-            background: var(--card-bg);
+            background: #fff;
             position: relative;
             overflow: hidden;
             aspect-ratio: 1 / 1;
-            transition: transform 0.2s, background-color 0.3s, border-color 0.3s;
+            transition: transform 0.2s;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -271,8 +236,6 @@
             margin: 0;
             padding: 10px 0; 
             display: block;
-            /* اگر لوگوها تیره هستند و در حالت دارک‌مود دیده نمی‌شوند، میتوانید فیلتر زیر را برای دارک‌مود فعال کنید (اختیاری) */
-            /* filter: var(--logo-filter, none); */
         }
 
         .card .brand-name {
@@ -326,30 +289,11 @@
             background: #e0e0e0;
         }
 
-        /* ===== Loading Spinner ===== */
-        .loader-container {
-            grid-column: 1 / -1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-        }
-        .loader {
-            border: 4px solid var(--border-color);
-            border-top: 4px solid var(--text-color);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
         footer {
-            background-color: var(--footer-bg);
-            color: var(--footer-text);
+            background-color: #000;
+            color: #fff;
             padding: 20px 40px;
             margin-top: auto;
-            transition: background-color 0.3s ease;
         }
 
         .footer-content {
@@ -372,8 +316,13 @@
                 flex-direction: column;
                 gap: 15px;
             }
+            
             .main-title {
                 font-size: 1.8rem;
+            }
+            
+            .logos-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -382,15 +331,15 @@
             width: auto;
             display: block;
         }
-        [data-theme="dark"] .site-logo {
-            filter: invert(1);
-        }
 
         button, .btn {
             font-family: 'Estedad', sans-serif !important;
         }
 
-        /* ===== Modal Styles ===== */
+        .modal-content button {
+            font-family: 'Estedad', sans-serif !important;
+        }
+
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -414,15 +363,15 @@
         }
 
         .modal-content {
-            background: var(--modal-bg);
-            color: var(--text-color);
+            background: #fff;
             width: 90%;
             max-width: 400px;
             padding: 25px;
             border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             text-align: right;
             direction: rtl;
+            font-family: 'Estedad', sans-serif;
             transform: scale(0.9);
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -436,15 +385,21 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid #eee;
             padding-bottom: 10px;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 700;
         }
 
         .close-btn {
             font-size: 28px;
             cursor: pointer;
             line-height: 20px;
-            color: var(--gray-text);
+            color: #666;
         }
 
         .form-group {
@@ -455,15 +410,14 @@
             display: block;
             margin-bottom: 8px;
             font-size: 14px;
+            color: #333;
             font-weight: 500;
         }
 
         .input-field {
             width: 100%;
             padding: 12px;
-            border: 1px solid var(--border-color);
-            background-color: var(--input-bg);
-            color: var(--text-color);
+            border: 1px solid #ddd;
             border-radius: 10px;
             font-family: 'Estedad', sans-serif;
             box-sizing: border-box;
@@ -471,22 +425,23 @@
         }
 
         .file-upload-box {
-            border: 2px dashed var(--border-color);
+            border: 2px dashed #cbd5e0;
             border-radius: 12px;
             padding: 20px;
             text-align: center;
             cursor: pointer;
-            background: var(--input-bg);
+            background: #f7fafc;
             transition: all 0.2s;
         }
 
         .file-upload-box:hover {
-            border-color: var(--gray-text);
+            border-color: #a0aec0;
+            background: #edf2f7;
         }
 
         .file-upload-box.has-file {
             border-color: #48bb78;
-            background: rgba(72, 187, 120, 0.1);
+            background: #f0fff4;
             border-style: solid;
         }
 
@@ -495,67 +450,63 @@
             flex-direction: column;
             align-items: center;
             gap: 8px;
-            color: var(--gray-text);
+            color: #718096;
             font-size: 13px;
         }
 
         .submit-btn {
             width: 100%;
             padding: 12px;
-            background-color: var(--btn-dark-bg);
-            color: var(--btn-dark-text);
+            background-color: #000;
+            color: #fff;
             border: none;
             border-radius: 10px;
             font-family: 'Estedad', sans-serif !important;
             font-size: 15px;
             cursor: pointer;
             margin-top: 10px;
-            transition: opacity 0.2s;
+            transition: background 0.2s;
         }
 
         .submit-btn:hover {
-            opacity: 0.8;
+            background-color: #333;
         }
+
         .submit-btn:disabled {
-            opacity: 0.5;
+            background-color: #ccc;
             cursor: not-allowed;
         }
 
-        /* ===== Toast Notifications ===== */
-        #toast-container {
-            position: fixed;
-            bottom: 20px;
-            left: 20px; /* برای سایت راست‌چین معمولا پایین چپ میگذارند */
-            z-index: 10001;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .logo-area {
+                order: -1; 
+                justify-content: center;
+                width: 100%;
+            }
+
+            .actions-area {
+                order: 1;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .card-overlay {
+                flex-direction: column-reverse; 
+                gap: 12px;
+                padding: 20px;
+            }
+
+            .download-btn {
+                width: 100%;
+                justify-content: center;
+                height: 40px;
+            }
         }
-
-        .toast {
-            background-color: #333;
-            color: #fff;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-        }
-
-        .toast.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .toast.success { background-color: #38a169; }
-        .toast.error { background-color: #e53e3e; }
-        .toast.info { background-color: #3182ce; }
-
     </style>
 </head>
 <body>
@@ -563,9 +514,6 @@
     <header>
         <div class="header-container">
             <div class="actions-area">
-                <button class="btn-theme" id="themeToggle" title="تغییر پوسته">
-                    <span class="material-symbols-outlined" id="themeIcon">dark_mode</span>
-                </button>
                 <a href="https://daramet.com/armvnhs" class="btn btn-support">
                     <span class="material-symbols-outlined">favorite</span>
                     <span class="btn-text">حمایت مالی</span>
@@ -577,7 +525,7 @@
             </div>
             <div class="logo-area">
                 <a href="index.html" style="display: flex; align-items: center;">
-                    <img src="https://raw.githubusercontent.com/armvnhs/LogoSVG/f5e12362976b24258e40e018226c1fbebe6ada27/file/LogoSVG.svg" 
+                    <img src="https://raw.githubusercontent.com/armvnhs/LogoSVG/main/file/LogoSVG.svg" 
                         alt="LogoSVG" 
                         class="site-logo" 
                         style="height: 40px; width: auto;">
@@ -595,7 +543,6 @@
         </div>
 
         <div class="logos-grid" id="logosGrid">
-            <!-- لوگوها اینجا رندر می‌شوند -->
         </div>
     </main>
 
@@ -611,7 +558,6 @@
         </div>
     </footer>
 
-    <!-- Modal ارسال لوگو -->
     <div id="customModal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
@@ -619,7 +565,9 @@
                 <span class="close-btn" onclick="toggleModal(false)">&times;</span>
             </div>
 
-            <form id="submissionForm" action="https://formsubmit.co/armunhs@gmail.com" method="POST" enctype="multipart/form-data">
+            <!-- ایمیل با کد هش شده جایگزین شد تا اسپم دریافت نکنید -->
+            <form id="submissionForm" action="https://formsubmit.co/YOUR_HASH_CODE_HERE" method="POST" enctype="multipart/form-data">
+                
                 <input type="hidden" name="_subject" value="New Logo Submission">
                 <input type="hidden" name="_captcha" value="false">
 
@@ -632,6 +580,7 @@
                     <label>فایل لوگو (SVG)</label>
                     <div class="file-upload-box" id="uploadDropZone" onclick="document.getElementById('realFileBtn').click()">
                         <input type="file" name="logoFile" id="realFileBtn" accept=".svg" required style="display: none;">
+                        
                         <div class="upload-content">
                             <span id="uploadIcon">📂</span>
                             <span id="fileNameDisplay">برای انتخاب فایل کلیک کنید</span>
@@ -646,79 +595,26 @@
         </div>
     </div>
     
-    <!-- محفظه پیام‌های شناور (Toast) -->
-    <div id="toast-container"></div>
-
     <script>
-        const FOLDER_NAME = "logos"; // پوشه فایل‌ها در هاست یا گیت‌هاب
+        const FOLDER_NAME = "logos";         
         const gridContainer = document.getElementById('logosGrid');
         const searchInput = document.getElementById('searchInput');
 
         let allLogoFiles = [];
 
-        // ===== Theme Toggle Logic =====
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', currentTheme);
-        themeIcon.innerText = currentTheme === 'dark' ? 'light_mode' : 'dark_mode';
-
-        themeToggle.addEventListener('click', () => {
-            const current = document.documentElement.getAttribute('data-theme');
-            const targetTheme = current === 'light' ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', targetTheme);
-            localStorage.setItem('theme', targetTheme);
-            themeIcon.innerText = targetTheme === 'dark' ? 'light_mode' : 'dark_mode';
-        });
-
-        // ===== Toast Notification Logic =====
-        function showToast(message, type = 'info') {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            
-            // آیکون بر اساس نوع پیام
-            let icon = 'info';
-            if(type === 'success') icon = 'check_circle';
-            if(type === 'error') icon = 'error';
-
-            toast.innerHTML = `
-                <span class="material-symbols-outlined">${icon}</span>
-                <span>${message}</span>
-            `;
-            
-            container.appendChild(toast);
-
-            // Trigger animation
-            setTimeout(() => toast.classList.add('show'), 10);
-
-            // Remove after 3 seconds
-            setTimeout(() => {
-                toast.classList.remove('show');
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        }
-
-        // ===== Fetch Data from JSON =====
         async function fetchLogos() {
-            // Show Loading Spinner
-            gridContainer.innerHTML = '<div class="loader-container"><div class="loader"></div></div>';
-            
             try {
-                // تلاش برای خواندن از فایل logos.json در مسیر پروژه
-                const response = await fetch('./logos.json');
-                if (!response.ok) throw new Error('مشکل در خواندن فایل logos.json');
+                const response = await fetch('logos.json');
+                if (!response.ok) throw new Error('فایل یافت نشد');
                 
                 const data = await response.json();
-                allLogoFiles = data; // فرض بر این است که فایل json آرایه‌ای از نام فایل‌ها است
-
+                
+                allLogoFiles = data.filter(file => file.endsWith('.svg'));
                 renderLogos('');
                 
             } catch (error) {
                 console.error('Error fetching logos:', error);
-                gridContainer.innerHTML = `<p style="text-align:center; width:100%; color: var(--text-color);">در حال حاضر قادر به بارگذاری لوگوها نیستیم. لطفا بعدا تلاش کنید.</p>`;
-                showToast('خطا در بارگذاری اطلاعات', 'error');
+                gridContainer.innerHTML = `<p style="text-align:center; width:100%;">خطا در بارگذاری لوگوها. لطفاً فایل logos.json را ایجاد کنید.</p>`;
             }
         }
 
@@ -731,7 +627,7 @@
             });
 
             if (filteredLogos.length === 0 && allLogoFiles.length > 0) {
-                gridContainer.innerHTML = '<p style="text-align:center; width:100%; grid-column: 1/-1;">لوگویی پیدا نشد.</p>';
+                gridContainer.innerHTML = '<p style="text-align:center; width:100%;">لوگویی پیدا نشد.</p>';
                 return;
             }
 
@@ -765,7 +661,6 @@
         }
 
         function downloadAsPng(svgUrl, fileName) {
-            showToast('در حال تبدیل فرمت...', 'info');
             fetch(svgUrl)
                 .then(response => response.text())
                 .then(svgText => {
@@ -775,9 +670,9 @@
 
                     img.onload = function () {
                         const canvas = document.createElement('canvas');
-                        const size = 1000; 
-                        canvas.width = size;
-                        canvas.height = (img.height / img.width) * size;
+                        const scale = 3; 
+                        canvas.width = img.width * scale || 1000;
+                        canvas.height = img.height * scale || 1000;
 
                         const ctx = canvas.getContext('2d');
                         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
@@ -791,33 +686,29 @@
                         document.body.removeChild(downloadLink);
 
                         URL.revokeObjectURL(url);
-                        showToast('دانلود انجام شد', 'success');
                     };
 
                     img.src = url;
                 })
-                .catch(err => {
-                    console.error('Error converting SVG to PNG:', err);
-                    showToast('خطا در دانلود عکس', 'error');
-                });
+                .catch(err => console.error('Error converting SVG to PNG:', err));
         }
 
         searchInput.addEventListener('input', (e) => {
             renderLogos(e.target.value);
         });
 
-        // اجرای تابع اصلی
         fetchLogos();
 
-        // ===== Modal & Form Logic =====
         function toggleModal(shouldShow) {
             const modal = document.getElementById('customModal');
             if (!modal) return;
 
             if (shouldShow) {
                 modal.classList.add('show');
+                document.body.style.overflow = 'hidden'; 
             } else {
                 modal.classList.remove('show');
+                document.body.style.overflow = 'auto'; 
                 setTimeout(() => {
                     resetForm();
                 }, 300);
@@ -879,15 +770,15 @@
                 })
                 .then(response => {
                     if (response.ok) {
-                        showToast("لوگوی شما با موفقیت ارسال شد!", "success");
+                        alert("🎉 لوگوی شما با موفقیت ارسال شد!");
                         toggleModal(false); 
                     } else {
-                        showToast("خطا در ارسال. لطفاً دوباره تلاش کنید.", "error");
+                        alert("❌ خطا در ارسال. لطفاً دوباره تلاش کنید.");
                     }
                 })
                 .catch(error => {
                     console.error(error);
-                    showToast("خطای اینترنت. لطفاً اتصال خود را بررسی کنید.", "error");
+                    alert("❌ خطای اینترنت. لطفاً اتصال خود را بررسی کنید.");
                 })
                 .finally(() => {
                     finalBtn.innerText = originalText;
