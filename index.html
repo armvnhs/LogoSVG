@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- تگ‌های سئو و شبکه‌های اجتماعی -->
     <meta name="description" content="کتابخانه جامع و متن‌باز لوگوهای ایرانی با فرمت SVG و PNG">
     <meta property="og:title" content="Logo SVG - Iranian logo library">
     <meta property="og:description" content="دانلود با کیفیت‌ترین لوگوهای برندهای ایرانی">
@@ -507,9 +506,49 @@
                 height: 40px;
             }
         }
+
+        /* استایل اختصاصی برای پیام‌های توست (نوتیفیکیشن سایت) */
+        .site-toast {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background-color: #333;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-family: 'Estedad', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 999999;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .site-toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        .site-toast.success {
+            background-color: #48bb78;
+        }
+
+        .site-toast.error {
+            background-color: #f56565;
+        }
     </style>
 </head>
 <body>
+
+    <div id="siteToast" class="site-toast">
+        <span id="toastIcon"></span>
+        <span id="toastMessage"></span>
+    </div>
 
     <header>
         <div class="header-container">
@@ -565,7 +604,6 @@
                 <span class="close-btn" onclick="toggleModal(false)">&times;</span>
             </div>
 
-            <!-- ایمیل با کد هش شده جایگزین شد تا اسپم دریافت نکنید -->
             <form id="submissionForm" action="https://formsubmit.co/YOUR_HASH_CODE_HERE" method="POST" enctype="multipart/form-data">
                 
                 <input type="hidden" name="_subject" value="New Logo Submission">
@@ -601,6 +639,26 @@
         const searchInput = document.getElementById('searchInput');
 
         let allLogoFiles = [];
+
+        // تابع نمایش پیام داخل سایت (جایگزین alert)
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('siteToast');
+            const toastMessage = document.getElementById('toastMessage');
+            const toastIcon = document.getElementById('toastIcon');
+
+            toast.className = 'site-toast'; // ریست کردن کلاس‌ها
+            toast.classList.add(type);
+            
+            toastMessage.innerText = message;
+            toastIcon.innerText = type === 'success' ? '🎉' : '❌';
+
+            toast.classList.add('show');
+
+            // بعد از 3.5 ثانیه پیام محو شود
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3500);
+        }
 
         async function fetchLogos() {
             try {
@@ -770,15 +828,15 @@
                 })
                 .then(response => {
                     if (response.ok) {
-                        alert("🎉 لوگوی شما با موفقیت ارسال شد!");
+                        showToast("لوگوی شما با موفقیت ارسال شد!", "success");
                         toggleModal(false); 
                     } else {
-                        alert("❌ خطا در ارسال. لطفاً دوباره تلاش کنید.");
+                        showToast("خطا در ارسال. لطفاً دوباره تلاش کنید.", "error");
                     }
                 })
                 .catch(error => {
                     console.error(error);
-                    alert("❌ خطای اینترنت. لطفاً اتصال خود را بررسی کنید.");
+                    showToast("خطای اینترنت. لطفاً اتصال خود را بررسی کنید.", "error");
                 })
                 .finally(() => {
                     finalBtn.innerText = originalText;
