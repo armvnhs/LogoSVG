@@ -2,13 +2,13 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
     <meta name="description" content="کتابخانه جامع و متن‌باز لوگوهای ایرانی با فرمت SVG و PNG">
     <meta property="og:title" content="Logo SVG - Iranian logo library">
     <meta property="og:description" content="دانلود با کیفیت‌ترین لوگوهای برندهای ایرانی">
     <meta property="og:image" content="https://raw.githubusercontent.com/armvnhs/LogoSVG/main/file/favicon.png">
-
+    <meta name="theme-color" content="#000000">
+    <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/armvnhs/LogoSVG/main/file/favicon.png">
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/armvnhs/LogoSVG/main/file/favicon.png">
 
@@ -156,7 +156,6 @@
             60%  { transform: scale(1.25); }
             100% { transform: scale(1); }
         }
-        /* ===== پایان انیمیشن دکمه ===== */
 
         main {
             max-width: 1000px;
@@ -310,21 +309,6 @@
             gap: 8px;
         }
 
-        @media (max-width: 600px) {
-            .header-container {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .main-title {
-                font-size: 1.8rem;
-            }
-            
-            .logos-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
         .site-logo {
             height: 45px;
             width: auto;
@@ -332,10 +316,6 @@
         }
 
         button, .btn {
-            font-family: 'Estedad', sans-serif !important;
-        }
-
-        .modal-content button {
             font-family: 'Estedad', sans-serif !important;
         }
 
@@ -401,79 +381,53 @@
             color: #666;
         }
 
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: #333;
-            font-weight: 500;
-        }
-
-        .input-field {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            font-family: 'Estedad', sans-serif;
-            box-sizing: border-box;
-            font-size: 14px;
-        }
-
-        .file-upload-box {
-            border: 2px dashed #cbd5e0;
-            border-radius: 12px;
-            padding: 20px;
+        /* ===== استایل‌های باکس تلگرام ===== */
+        .telegram-submit-box {
             text-align: center;
-            cursor: pointer;
-            background: #f7fafc;
-            transition: all 0.2s;
+            padding: 10px 0;
         }
 
-        .file-upload-box:hover {
-            border-color: #a0aec0;
-            background: #edf2f7;
+        .telegram-icon-wrapper {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 15px;
+            color: #2AABEE;
         }
 
-        .file-upload-box.has-file {
-            border-color: #48bb78;
-            background: #f0fff4;
-            border-style: solid;
-        }
-
-        .upload-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            color: #718096;
-            font-size: 13px;
-        }
-
-        .submit-btn {
+        .telegram-large-icon {
             width: 100%;
-            padding: 12px;
-            background-color: #000;
-            color: #fff;
-            border: none;
-            border-radius: 10px;
-            font-family: 'Estedad', sans-serif !important;
-            font-size: 15px;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: background 0.2s;
+            height: 100%;
         }
 
-        .submit-btn:hover {
-            background-color: #333;
+        .telegram-desc {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 25px;
         }
 
-        .submit-btn:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
+        .btn-telegram {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: #2AABEE;
+            color: #ffffff !important;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
+            box-shadow: 0 4px 12px rgba(42, 171, 238, 0.3);
+        }
+
+        .btn-telegram:hover {
+            background-color: #2298d6;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(42, 171, 238, 0.4);
         }
 
         @media (max-width: 768px) {
@@ -507,7 +461,6 @@
             }
         }
 
-        /* استایل اختصاصی برای پیام‌های توست (نوتیفیکیشن سایت) */
         .site-toast {
             position: fixed;
             top: 30px;
@@ -597,6 +550,7 @@
         </div>
     </footer>
 
+    <!-- مودال ارسال لوگو -->
     <div id="customModal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
@@ -604,32 +558,21 @@
                 <span class="close-btn" onclick="toggleModal(false)">&times;</span>
             </div>
 
-            <form id="submissionForm" action="https://formsubmit.co/YOUR_HASH_CODE_HERE" method="POST" enctype="multipart/form-data">
+            <div class="telegram-submit-box">
+                <div class="telegram-icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="telegram-large-icon">
+                        <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.32.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 2.37-.96 8.034-1.36 10.626-.16.86-.46 1.309-.76 1.343-.66.076-1.16-.42-1.805-.845-1.007-.665-1.575-1.074-2.55-1.716-1.125-.742-.396-1.15.244-1.805.167-.17 3.076-2.825 3.132-3.064a.208.208 0 0 0-.058-.202.24.24 0 0 0-.238-.033c-.092.03-1.697 1.085-4.795 3.167-.453.31-.86.463-1.22.455-.4-.008-1.17-.225-1.74-.41-.7-.228-1.25-.349-1.204-.738.024-.202.31-.41.85-.624 3.327-1.448 5.545-2.404 6.654-2.868 3.15-1.32 3.805-1.547 4.23-1.554z"/>
+                    </svg>
+                </div>
+                <p class="telegram-desc">لطفاً فایل SVG لوگوی مورد نظرتان را مستقیماً در تلگرام برای ما ارسال کنید تا پس از بررسی به سایت اضافه شود.</p>
                 
-                <input type="hidden" name="_subject" value="New Logo Submission">
-                <input type="hidden" name="_captcha" value="false">
-
-                <div class="form-group">
-                    <label>نام برند</label>
-                    <input type="text" name="BrandName" class="input-field" placeholder="مثلاً: دیجیکالا" required>
-                </div>
-
-                <div class="form-group">
-                    <label>فایل لوگو (SVG)</label>
-                    <div class="file-upload-box" id="uploadDropZone" onclick="document.getElementById('realFileBtn').click()">
-                        <input type="file" name="logoFile" id="realFileBtn" accept=".svg" required style="display: none;">
-                        
-                        <div class="upload-content">
-                            <span id="uploadIcon">📂</span>
-                            <span id="fileNameDisplay">برای انتخاب فایل کلیک کنید</span>
-                        </div>
-                    </div>
-                </div>
-
-                <button type="submit" class="submit-btn" id="finalBtn">
-                    ارسال برای بررسی
-                </button>
-            </form>
+                <a href="https://t.me/armvnpv" target="_blank" class="btn-telegram">
+                    ارسال فایل در تلگرام
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                </a>
+            </div>
         </div>
     </div>
     
@@ -640,13 +583,12 @@
 
         let allLogoFiles = [];
 
-        // تابع نمایش پیام داخل سایت (جایگزین alert)
         function showToast(message, type = 'success') {
             const toast = document.getElementById('siteToast');
             const toastMessage = document.getElementById('toastMessage');
             const toastIcon = document.getElementById('toastIcon');
 
-            toast.className = 'site-toast'; // ریست کردن کلاس‌ها
+            toast.className = 'site-toast'; 
             toast.classList.add(type);
             
             toastMessage.innerText = message;
@@ -654,7 +596,6 @@
 
             toast.classList.add('show');
 
-            // بعد از 3.5 ثانیه پیام محو شود
             setTimeout(() => {
                 toast.classList.remove('show');
             }, 3500);
@@ -767,9 +708,6 @@
             } else {
                 modal.classList.remove('show');
                 document.body.style.overflow = 'auto'; 
-                setTimeout(() => {
-                    resetForm();
-                }, 300);
             }
         }
 
@@ -779,71 +717,6 @@
                 toggleModal(false);
             }
         });
-
-        const realFileBtn = document.getElementById('realFileBtn');
-        const fileNameDisplay = document.getElementById('fileNameDisplay');
-        const uploadDropZone = document.getElementById('uploadDropZone');
-        const uploadIcon = document.getElementById('uploadIcon');
-
-        if (realFileBtn) {
-            realFileBtn.addEventListener('change', function() {
-                if (this.files && this.files.length > 0) {
-                    fileNameDisplay.innerText = this.files[0].name;
-                    uploadDropZone.classList.add('has-file');
-                    uploadIcon.innerText = "✅"; 
-                } else {
-                    resetForm();
-                }
-            });
-        }
-
-        function resetForm() {
-            const form = document.getElementById('submissionForm');
-            if (form) form.reset();
-            
-            if (fileNameDisplay) fileNameDisplay.innerText = "برای انتخاب فایل کلیک کنید";
-            if (uploadDropZone) uploadDropZone.classList.remove('has-file');
-            if (uploadIcon) uploadIcon.innerText = "📂";
-        }
-
-        const form = document.getElementById('submissionForm');
-        const finalBtn = document.getElementById('finalBtn');
-
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                const originalText = finalBtn.innerText;
-                finalBtn.innerText = "⏳ در حال ارسال...";
-                finalBtn.disabled = true;
-
-                const formData = new FormData(form);
-
-                fetch(form.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                })
-                .then(response => {
-                    if (response.ok) {
-                        showToast("لوگوی شما با موفقیت ارسال شد!", "success");
-                        toggleModal(false); 
-                    } else {
-                        showToast("خطا در ارسال. لطفاً دوباره تلاش کنید.", "error");
-                    }
-                })
-                .catch(error => {
-                    console.error(error);
-                    showToast("خطای اینترنت. لطفاً اتصال خود را بررسی کنید.", "error");
-                })
-                .finally(() => {
-                    finalBtn.innerText = originalText;
-                    finalBtn.disabled = false;
-                });
-            });
-        }
     </script>    
 </body>
 </html>
