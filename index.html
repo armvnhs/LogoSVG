@@ -32,7 +32,7 @@ nav img{height:38px;display:block}
 .btn:hover{box-shadow:0 0 0 1px rgba(10,40,90,.18),0 8px 18px rgba(10,40,90,.1),inset 0 1px 0 #fff}
 .btn:active{transform:scale(.96);transition-duration:.08s}
 .btn.main{color:#fff;background:linear-gradient(180deg,var(--b2),var(--b1));box-shadow:0 0 0 1px var(--b1),0 8px 18px rgba(31,95,214,.35),inset 0 1px 0 rgba(255,255,255,.4)}
-.btn:hover [data-i=heart]{fill:currentColor;transform:scale(1.2)}
+.btn:hover [data-i=coffee]{transform:rotate(-14deg) scale(1.15)}
 .btn.main:hover [data-i=send]{transform:translate(2px,-2px)}
 .brand{display:flex;align-items:center;gap:14px}
 .bm{display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 12px;border:0;border-radius:11px;background:#fff;color:var(--mute);font:600 .78rem Arial,sans-serif;direction:ltr;cursor:pointer;box-shadow:var(--sh);transition:transform .4s var(--spring),color .2s}
@@ -73,7 +73,16 @@ h1{margin:30px 0 24px;font-size:clamp(2.1rem,7.5vw,5.6rem);font-weight:800;line-
 .bar em{position:absolute;top:-34px;white-space:nowrap;background:var(--ink);color:#fff;font-style:normal;font-size:.72rem;padding:3px 10px;border-radius:8px}
 
 .lib{padding-bottom:clamp(64px,9vw,120px)}
-.lib h3{font-size:1.6rem;font-weight:800;margin-bottom:28px}
+.lib h3{font-size:1.6rem;font-weight:800;margin-bottom:18px}
+.cats{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 18px;margin:-4px -2px 12px;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.cats[hidden]{display:none}
+.chip2{flex:none;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border:0;border-radius:12px;background:#fff;color:var(--ink);font:600 .88rem Estedad,sans-serif;cursor:pointer;box-shadow:var(--sh);transition:transform .4s var(--spring),background .2s,color .2s}
+.chip2 b{font-weight:600;font-size:.75rem;color:var(--mute);background:var(--tint);border-radius:8px;padding:0 7px;line-height:20px}
+.chip2:hover{background:#fafafa}
+.chip2:active{transform:scale(.95);transition-duration:.08s}
+.chip2.on{background:var(--ink);color:#fff;box-shadow:0 0 0 1px var(--ink),0 6px 14px rgba(0,0,0,.2)}
+.chip2.on b{background:rgba(255,255,255,.18);color:#fff}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr));gap:clamp(14px,2vw,24px)}
 .card{position:relative;aspect-ratio:1;border-radius:30px;background:#fff;display:flex;flex-direction:column;align-items:center;padding:34px 26px 22px;box-shadow:0 0 0 1px var(--line);transition:transform .5s var(--spring),box-shadow .35s}
 .card:hover,.card:focus-within{transform:scale(1.035);box-shadow:0 0 0 1.5px var(--b2),0 22px 48px rgba(31,95,214,.16)}
@@ -139,7 +148,7 @@ h1{margin:30px 0 24px;font-size:clamp(2.1rem,7.5vw,5.6rem);font-weight:800;line-
   <nav>
     <div class="brand"><button class="bm" id="bm" title="بوکمارک کردن سایت"><svg class="i" viewBox="0 0 24 24" data-i="bm"></svg><kbd id="bmk">Ctrl + D</kbd></button><a href="index-v2.html"><img src="file/LogoSVG.svg" alt="LogoSVG"></a></div>
         <div class="acts">
-      <a class="btn sup" aria-label="حمایت مالی" href="https://daramet.com/armvnhs" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24" data-i="heart"></svg><span class="lbl">حمایت مالی</span></a>
+      <a class="btn sup" aria-label="حمایت مالی" href="https://daramet.com/armvnhs" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24" data-i="coffee"></svg><span class="lbl">حمایت مالی</span></a>
       <button class="btn main" onclick="modal(true)">ارسال لوگو<svg class="i" viewBox="0 0 24 24" data-i="send"></svg></button>
     </div>
   </nav>
@@ -171,6 +180,7 @@ h1{margin:30px 0 24px;font-size:clamp(2.1rem,7.5vw,5.6rem);font-weight:800;line-
 
   <section class="lib" id="lib">
     <h3>همه لوگوها</h3>
+    <div class="cats" id="cats" hidden></div>
     <div class="grid" id="grid"></div>
   </section>
 </div>
@@ -193,10 +203,10 @@ const $=s=>document.querySelector(s),grid=$('#grid'),qi=$('#q'),DIR='logos/';
 const esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const norm=s=>s.replace(/ي/g,'ی').replace(/ك/g,'ک').replace(/[-\s\u200c]+/g,' ').trim().toLowerCase();
 const url=f=>DIR+encodeURIComponent(f),fa=n=>n.toLocaleString('fa-IR');
-let items=[],tt;
+let items=[],tt,cat='همه',catMap={};
 const API=''; // آدرس سرویس شمارنده دانلود. خالی = خواندن از فایل stats.json
 const hit=f=>{if(API)navigator.sendBeacon(API+'/hit',JSON.stringify({f}))};
-const ic={bm:'<path d="M7 4h10a1 1 0 0 1 1 1v15l-6-4-6 4V5a1 1 0 0 1 1-1z"/>',heart:'<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',send:'<path d="M7 17 17 7M8 7h9v9"/>',x:'<path d="m6 6 12 12M18 6 6 18"/>',up:'<path d="M12 19V5m0 0-6 6m6-6 6 6"/>',search:'<circle cx="11" cy="11" r="6.5"/><path d="m20 20-4-4"/>',dl:'<path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/>',img:'<rect x="4" y="5" width="16" height="14" rx="3"/><circle cx="9" cy="10" r="1.5"/><path d="m5 17 5-4 3 3 2-2 4 3"/>',cp:'<rect x="8" y="8" width="12" height="12" rx="3"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>'};
+const ic={bm:'<path d="M7 4h10a1 1 0 0 1 1 1v15l-6-4-6 4V5a1 1 0 0 1 1-1z"/>',coffee:'<path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9z"/><path d="M16 10h1.5a2.5 2.5 0 0 1 0 5H16M8 3v2M12 3v2"/>',send:'<path d="M7 17 17 7M8 7h9v9"/>',x:'<path d="m6 6 12 12M18 6 6 18"/>',up:'<path d="M12 19V5m0 0-6 6m6-6 6 6"/>',search:'<circle cx="11" cy="11" r="6.5"/><path d="m20 20-4-4"/>',dl:'<path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/>',img:'<rect x="4" y="5" width="16" height="14" rx="3"/><circle cx="9" cy="10" r="1.5"/><path d="m5 17 5-4 3 3 2-2 4 3"/>',cp:'<rect x="8" y="8" width="12" height="12" rx="3"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>'};
 const I=k=>`<svg class="i" viewBox="0 0 24 24">${ic[k]}</svg>`;
 document.querySelectorAll('[data-i]').forEach(e=>e.innerHTML=ic[e.dataset.i]);
 
@@ -204,11 +214,21 @@ function toast(m,err){const t=$('#toast');t.textContent=m;t.className='toast sho
 function modal(on){$('#ov').classList.toggle('show',on);document.body.style.overflow=on?'hidden':''}
 
 function render(q=''){
-  const n=norm(q),list=items.filter(i=>i.n.includes(n));
+  const n=norm(q),list=items.filter(i=>i.n.includes(n)&&(cat==='همه'||i.c===cat));
   if(!list.length){grid.innerHTML='<div class="empty"><b>لوگویی پیدا نشد</b>املای نام را بررسی کنید، یا فایل SVG آن را با دکمه «ارسال لوگو» بفرستید.</div>';return}
   grid.innerHTML=list.map(i=>`<div class="card"><img class="lg" src="${url(i.f)}" alt="${esc(i.name)}" loading="lazy"><div class="nm">${esc(i.label)}</div><div class="seg" data-f="${esc(i.f)}"><i></i><button data-a="svg">${I('dl')}SVG</button><button data-a="png">${I('img')}PNG</button><button data-a="copy" title="کپی کد وکتور">${I('cp')}کد</button></div></div>`).join('');
 }
 
+async function loadCats(){
+  try{const r=await fetch('categories.json',{cache:'no-cache'});if(!r.ok)throw 0;const d=await r.json();
+  for(const[c,l]of Object.entries(d))for(const f of l)catMap[norm(f.replace(/\.svg$/i,''))]=c}catch(e){}
+}
+function buildCats(){
+  const m={};items.forEach(i=>{if(i.c)m[i.c]=(m[i.c]||0)+1});
+  const names=Object.keys(m),box=$('#cats');box.hidden=!names.length;
+  box.innerHTML=['همه',...names].map(c=>`<button class="chip2${c===cat?' on':''}" data-c="${esc(c)}">${esc(c)}<b>${fa(c==='همه'?items.length:m[c])}</b></button>`).join('');
+}
+$('#cats').addEventListener('click',e=>{const b=e.target.closest('[data-c]');if(!b)return;cat=b.dataset.c;buildCats();render(qi.value)});
 function stats(){$('#cnt').textContent=fa(items.length);loadTop()}
 async function loadTop(){
   try{
@@ -248,9 +268,9 @@ addEventListener('keydown',e=>{
 });
 
 grid.innerHTML='<div class="sk"></div>'.repeat(8);
-fetch('logos.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{
-  items=d.filter(f=>/\.svg$/i.test(f)).map(f=>{const name=f.replace(/\.svg$/i,'');return{f,name,label:name.replace(/\s*-\s*(.+)$/,' ($1)'),n:norm(name)}});
-  stats();render();
+Promise.all([fetch('logos.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.json()}),loadCats()]).then(([d])=>{
+  items=d.filter(f=>/\.svg$/i.test(f)).map(f=>{const name=f.replace(/\.svg$/i,'');return{f,name,label:name.replace(/\s*-\s*(.+)$/,' ($1)'),n:norm(name),c:catMap[norm(name)]||''}});
+  buildCats();stats();render();
 }).catch(()=>{grid.innerHTML='<div class="empty"><b>بارگذاری لوگوها انجام نشد</b>صفحه را دوباره باز کنید یا بعداً سر بزنید.</div>'});
 
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
