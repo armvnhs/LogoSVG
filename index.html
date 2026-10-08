@@ -1,761 +1,232 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
-    <meta name="description" content="کتابخانه جامع و متن‌باز لوگوهای ایرانی با فرمت SVG و PNG">
-    <meta property="og:title" content="Logo SVG - Iranian logo library">
-    <meta property="og:description" content="دانلود با کیفیت‌ترین لوگوهای برندهای ایرانی">
-    <meta property="og:image" content="https://raw.githubusercontent.com/armvnhs/LogoSVG/main/file/favicon.png">
-    <meta name="theme-color" content="#000000">
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/armvnhs/LogoSVG/main/file/favicon.png">
-    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/armvnhs/LogoSVG/main/file/favicon.png">
-
-    <title>Logo SVG - Iranian logo library</title>
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-
-    <style>
-        @font-face {
-            font-family: 'Estedad';
-            src: url('file/Estedad-VariableFont_wght.ttf') format('truetype-variations');
-            font-weight: 100 900;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        :root {
-            --bg-color: #ffffff;
-            --text-color: #000000;
-            --gray-text: #888888;
-            --border-color: #e0e0e0;
-            --hover-overlay: #1a1a1a;
-            --font-primary: 'Estedad', sans-serif;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: var(--font-primary);
-            background-color: var(--bg-color);
-            direction: rtl;
-            color: var(--text-color);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        header {
-            padding: 40px 40px;
-        }
-
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .bookmark-hint {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #f8f9fa;
-            color: #555;
-            border: 1px solid var(--border-color);
-            padding: 4px 12px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-family: Arial, sans-serif; 
-            direction: ltr; 
-            font-weight: 600;
-            cursor: help;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-        }
-
-        .bookmark-hint:hover {
-            background-color: #f0f0f0;
-            color: #000;
-            border-color: #ccc;
-        }
-
-        .actions-area {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn {
-            text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-
-        .btn-outline {
-            border: 1px solid var(--text-color);
-            color: var(--text-color);
-            background: transparent;
-        }
-
-        .btn-dark {
-            background-color: #000;
-            color: #fff;
-            border: 1px solid #000;
-        }
-
-        .btn:hover {
-            opacity: 0.8;
-        }
-
-        .btn-support {
-            position: relative;
-            overflow: hidden;
-            background-color: transparent;
-            color: #000;
-            border: 1px solid #000;
-            transition: color 0.4s ease, border-color 0.4s ease;
-        }
-
-        .btn-support::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 300px;
-            height: 300px;
-            background: linear-gradient(135deg, #ab0000, #ff465f);
-            border-radius: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            transition: transform 0.5s ease;
-            z-index: 0;
-        }
-
-        .btn-support:hover {
-            border-color: #ca001b;
-            color: #fff;
-            opacity: 1;
-        }
-
-        .btn-support:hover::before {
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .btn-support .material-symbols-outlined,
-        .btn-support .btn-text {
-            position: relative;
-            z-index: 1;
-            transition: transform 0.3s ease;
-        }
-
-        .btn-support:hover .material-symbols-outlined {
-            animation: heartBeat 0.8s ease-in-out infinite;
-            font-variation-settings: 'FILL' 1;
-        }
-
-        @keyframes heartBeat {
-            0%   { transform: scale(1); }
-            25%  { transform: scale(1.3); }
-            40%  { transform: scale(1); }
-            60%  { transform: scale(1.25); }
-            100% { transform: scale(1); }
-        }
-
-        main {
-            max-width: 1000px;
-            margin: 60px auto 100px auto;
-            padding: 0 20px;
-            text-align: center;
-            flex: 1;
-        }
-
-        .main-title {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            font-weight: 700;
-        }
-
-        .search-container {
-            position: relative;
-            max-width: 600px;
-            margin: 0 auto 60px auto;
-        }
-
-        #searchInput {
-            width: 100%;
-            padding: 15px 50px 15px 20px;
-            border-radius: 50px;
-            border: 1px solid var(--border-color);
-            font-family: var(--font-primary);
-            font-size: 1rem;
-            outline: none;
-            transition: border 0.3s;
-        }
-
-        #searchInput:focus {
-            border-color: #000;
-        }
-
-        .search-icon {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--gray-text);
-            pointer-events: none;
-        }
-
-        .logos-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .logos-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        .card {
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 20px;
-            background: #fff;
-            position: relative;
-            overflow: hidden;
-            aspect-ratio: 1 / 1;
-            transition: transform 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .card img.logo-img {
-            flex: 1;
-            width: 65%;
-            object-fit: contain;
-            margin: 0;
-            padding: 10px 0; 
-            display: block;
-        }
-
-        .card .brand-name {
-            color: var(--gray-text);
-            font-size: 0.9rem;
-            font-weight: 500;
-            flex-shrink: 0;
-            height: 30px; 
-            display: flex;
-            align-items: center;
-            margin-bottom: 5px;
-        }
-
-        .card-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--hover-overlay);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 10;
-        }
-
-        .card:hover .card-overlay {
-            opacity: 1;
-        }
-
-        .download-btn {
-            background: #fff;
-            color: #000;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-family: var(--font-primary);
-            font-weight: bold;
-            font-size: 0.8rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            text-decoration: none;
-        }
-
-        .download-btn:hover {
-            background: #e0e0e0;
-        }
-
-        footer {
-            background-color: #000;
-            color: #fff;
-            padding: 20px 40px;
-            margin-top: auto;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.85rem;
-        }
-
-        .github-link {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .site-logo {
-            height: 45px;
-            width: auto;
-            display: block;
-        }
-
-        button, .btn {
-            font-family: 'Estedad', sans-serif !important;
-        }
-
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(4px);
-            z-index: 10000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .modal-overlay.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal-content {
-            background: #fff;
-            width: 90%;
-            max-width: 400px;
-            padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            text-align: right;
-            direction: rtl;
-            font-family: 'Estedad', sans-serif;
-            transform: scale(0.9);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .modal-overlay.show .modal-content {
-            transform: scale(1);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-
-        .modal-header h3 {
-            margin: 0;
-            font-size: 18px;
-            font-weight: 700;
-        }
-
-        .close-btn {
-            font-size: 28px;
-            cursor: pointer;
-            line-height: 20px;
-            color: #666;
-        }
-
-        .telegram-submit-box {
-            text-align: center;
-            padding: 10px 0;
-        }
-
-        .telegram-icon-wrapper {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 15px;
-            color: #2AABEE;
-        }
-
-        .telegram-large-icon {
-            width: 100%;
-            height: 100%;
-        }
-
-        .telegram-desc {
-            font-size: 0.95rem;
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-
-        .btn-telegram {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background-color: #2AABEE;
-            color: #ffffff !important;
-            padding: 14px 28px;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 1rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            width: 100%;
-            box-sizing: border-box;
-            box-shadow: 0 4px 12px rgba(42, 171, 238, 0.3);
-        }
-
-        .btn-telegram:hover {
-            background-color: #2298d6;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(42, 171, 238, 0.4);
-        }
-
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                gap: 30px;
-            }
-
-            .logo-area {
-                order: -1; 
-                justify-content: center;
-                width: 100%;
-            }
-
-            .bookmark-hint {
-                display: none !important;
-            }
-
-            .actions-area {
-                order: 1;
-                width: 100%;
-                justify-content: center;
-            }
-
-            .card-overlay {
-                flex-direction: column-reverse; 
-                gap: 12px;
-                padding: 20px;
-            }
-
-            .download-btn {
-                width: 100%;
-                justify-content: center;
-                height: 40px;
-            }
-        }
-
-        .site-toast {
-            position: fixed;
-            top: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(-100px);
-            background-color: #333;
-            color: #fff;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-family: 'Estedad', sans-serif;
-            font-size: 14px;
-            font-weight: 500;
-            z-index: 999999;
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .site-toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
-
-        .site-toast.success {
-            background-color: #48bb78;
-        }
-
-        .site-toast.error {
-            background-color: #f56565;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>کتابخانه لوگوهای ایرانی | دانلود رایگان SVG و PNG</title>
+<meta name="description" content="کتابخانه متن‌باز لوگوی برندهای ایرانی. بدون ثبت‌نام، با یک کلیک SVG یا PNG بگیرید یا کد وکتور را کپی کنید.">
+<meta property="og:title" content="کتابخانه لوگوهای ایرانی">
+<meta property="og:image" content="https://raw.githubusercontent.com/armvnhs/LogoSVG/main/file/favicon.png">
+<meta name="theme-color" content="#c9e4fb">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="file/favicon.png">
+<style>
+@font-face{font-family:Estedad;src:url('file/Estedad-VariableFont_wght.ttf') format('truetype-variations');font-weight:100 900;font-display:swap}
+:root{--sky:#c9e4fb;--ink:#0a0a0a;--mute:#6b7a90;--tint:#f3f7fb;--line:#e4edf6;--b1:#1f5fd6;--b2:#4a9bff;--b3:#8ccaff;--spring:cubic-bezier(.34,1.56,.64,1);--sh:0 0 0 1px rgba(10,40,90,.09),0 1px 1px rgba(10,40,90,.05),0 4px 10px rgba(10,40,90,.06),inset 0 1px 0 #fff,inset 0 -2px 0 rgba(10,40,90,.04)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:Estedad,system-ui,sans-serif;background:var(--sky);color:var(--ink);padding:28px;line-height:1.7}
+svg{display:block;flex:none}
+:focus-visible{outline:3px solid var(--b2);outline-offset:3px}
+.i{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .4s var(--spring)}
+.frame{max-width:1280px;margin:0 auto;background:#fff;border-radius:40px;box-shadow:0 30px 80px rgba(20,70,140,.18);overflow:hidden}
+.in{padding:0 48px}
+nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:44px}
+nav img{height:38px;display:block}
+.pills{display:flex;gap:10px}
+.pill{padding:8px 20px;border-radius:999px;background:var(--tint);color:#1c2b44;font-weight:600;font-size:.9rem;text-decoration:none;transition:background .2s,transform .4s var(--spring)}
+.pill:hover,.pill.on{background:var(--line)}
+.pill:active{transform:scale(.94)}
+.acts{display:flex;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:46px;padding:0 20px;border:0;border-radius:14px;background:#fff;color:var(--ink);font:600 .95rem Estedad,sans-serif;text-decoration:none;cursor:pointer;box-shadow:var(--sh);transition:transform .4s var(--spring),box-shadow .25s}
+.btn:hover{box-shadow:0 0 0 1px rgba(10,40,90,.18),0 8px 18px rgba(10,40,90,.1),inset 0 1px 0 #fff}
+.btn:active{transform:scale(.96);transition-duration:.08s}
+.btn.main{color:#fff;background:linear-gradient(180deg,var(--b2),var(--b1));box-shadow:0 0 0 1px var(--b1),0 8px 18px rgba(31,95,214,.35),inset 0 1px 0 rgba(255,255,255,.4)}
+.btn:hover [data-i=heart]{fill:currentColor;transform:scale(1.2)}
+.btn.main:hover [data-i=send]{transform:translate(2px,-2px)}
+.hero{text-align:center;padding:96px 0 72px}
+.tag{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:999px;background:var(--tint);font-size:.85rem;font-weight:600;color:#1c2b44}
+h1{margin:30px 0 24px;font-size:clamp(2.6rem,8vw,5.8rem);font-weight:800;line-height:1.3}
+.sub{max-width:520px;margin:0 auto 44px;color:#3a4a63;line-height:2}
+.search{position:relative;max-width:560px;margin:0 auto}
+#q{width:100%;height:64px;padding:0 58px 0 74px;border:0;border-radius:20px;background:var(--tint);font:500 1.05rem Estedad,sans-serif;color:var(--ink);outline:0;box-shadow:inset 0 0 0 1px var(--line);transition:box-shadow .25s,background .25s}
+#q::placeholder{color:var(--mute)}
+#q:focus{background:#fff;box-shadow:0 0 0 2px var(--b2),0 14px 40px rgba(31,95,214,.15)}
+.search .i{position:absolute;right:22px;top:20px;width:24px;height:24px;color:var(--mute);pointer-events:none}
+.kb{position:absolute;left:17px;top:50%;transform:translateY(-50%);width:30px;height:30px;display:grid;place-items:center;font:600 .85rem Arial,sans-serif;line-height:1;color:var(--mute);background:#fff;border-radius:9px;box-shadow:0 0 0 1px var(--line);pointer-events:none}
+.stats{display:grid;grid-template-columns:1fr 1.45fr 1fr;gap:28px;padding-bottom:88px}
+.sc{border-radius:36px;padding:32px;min-height:330px;display:flex;flex-direction:column}
+.sc.w{background:#fff;box-shadow:0 0 0 1px var(--line),0 18px 44px rgba(31,95,214,.08)}
+.sc small{color:var(--mute);font-size:.9rem}
+.big{font-size:3rem;font-weight:800;line-height:1.2;margin-top:6px}
+.orb{width:44px;height:44px;border-radius:50%;margin:20px auto;background:radial-gradient(circle at 30% 28%,#fff,var(--b3) 35%,var(--b2) 75%);box-shadow:0 8px 20px rgba(74,155,255,.45)}
+.mini{margin-top:auto;border-radius:22px;background:var(--tint);padding:14px;text-align:center;font-size:.9rem;font-weight:600}
+.mini small{display:block}
+.sc.blue{color:#fff;background:radial-gradient(circle at 85% 8%,rgba(255,255,255,.6),transparent 42%),linear-gradient(140deg,#3b8cff,#7cc0ff);justify-content:space-between}
+.sc.blue .tag{background:rgba(255,255,255,.25);color:#fff;align-self:flex-start;box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)}
+.sc.blue h2{font-size:clamp(1.8rem,3.2vw,2.6rem);font-weight:800;line-height:1.4;margin:22px 0}
+.sc.blue p{color:rgba(255,255,255,.88);line-height:2}
+.bars{margin-top:auto;height:130px;display:flex;align-items:flex-end;justify-content:space-between;gap:8px;padding-top:30px}
+.bar{position:relative;flex:1;height:var(--h);min-height:10px;border-radius:10px;background:linear-gradient(180deg,var(--b3),var(--line));display:flex;justify-content:center;transition:transform .4s var(--spring)}
+.bar:hover{transform:scaleY(1.06)}
+.bar.top{background:linear-gradient(180deg,var(--b2),var(--b1))}
+.bar b{position:absolute;bottom:-28px;font-size:.85rem;font-weight:600;color:var(--mute)}
+.bar em{position:absolute;top:-34px;white-space:nowrap;background:var(--ink);color:#fff;font-style:normal;font-size:.72rem;padding:3px 10px;border-radius:8px}
+.sc.chart{padding-bottom:50px}
+.lib{padding-bottom:110px}
+.lib h3{font-size:1.6rem;font-weight:800;margin-bottom:28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:24px}
+.card{position:relative;aspect-ratio:1;border-radius:30px;background:#fff;display:flex;flex-direction:column;align-items:center;padding:34px 26px 22px;box-shadow:0 0 0 1px var(--line);transition:transform .5s var(--spring),box-shadow .35s}
+.card:hover,.card:focus-within{transform:scale(1.035);box-shadow:0 0 0 1.5px var(--b2),0 22px 48px rgba(31,95,214,.16)}
+.lg{flex:1;min-height:0;width:60%;object-fit:contain;padding:6px 0}
+.nm{height:38px;display:flex;align-items:center;font-weight:600;font-size:.92rem;color:var(--mute)}
+.seg{position:absolute;inset:auto 14px 14px;direction:ltr;display:flex;border-radius:14px;background:#fff;box-shadow:var(--sh);opacity:0;transform:translateY(14px) scale(.96);transition:opacity .2s,transform .5s var(--spring)}
+.card:hover .seg,.card:focus-within .seg{opacity:1;transform:none}
+.seg i{position:absolute;inset:0 auto 0 0;width:33.333%;border-radius:14px;background:rgba(74,155,255,.14);opacity:0;transform:translateX(calc(var(--i,0)*100%));transition:transform .4s var(--spring),opacity .2s}
+.seg:hover i{opacity:1}
+.seg button{position:relative;flex:1;height:44px;display:flex;align-items:center;justify-content:center;gap:5px;border:0;background:none;border-radius:14px;font:700 .8rem Estedad,sans-serif;color:var(--ink);cursor:pointer;transition:transform .4s var(--spring)}
+.seg button+button::before{content:"";position:absolute;left:0;top:11px;bottom:11px;width:1px;background:var(--line)}
+.seg button:active{transform:scale(.92);transition-duration:.08s}
+.seg .i{width:15px;height:15px}
+@media(hover:none){.card{aspect-ratio:auto;padding-bottom:22px}.lg{height:110px;flex:none}.seg{position:relative;inset:auto;opacity:1;transform:none;width:100%;margin-top:14px}}
+.sk{aspect-ratio:1;border-radius:30px;background:var(--tint);animation:pl 1.3s ease-in-out infinite}
+@keyframes pl{50%{opacity:.5}}
+.empty{grid-column:1/-1;text-align:center;padding:70px 20px;color:var(--mute);line-height:2}
+.empty b{display:block;color:var(--ink);font-size:1.4rem}
+.strip{background:var(--tint);padding:24px 48px;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:.9rem;color:var(--mute)}
+.strip a{color:var(--ink);font-weight:600;text-decoration:none}
+.strip a:hover{color:var(--b1)}
+.up{display:inline-flex;align-items:center;gap:10px}
+.up span{width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center}
+.up .i{width:14px;height:14px}
+.x{width:40px;height:40px;display:grid;place-items:center;border:0;border-radius:12px;background:#fff;cursor:pointer;box-shadow:var(--sh);transition:transform .4s var(--spring)}
+.x:active{transform:scale(.9)}
+.ov{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:rgba(10,40,90,.3);backdrop-filter:blur(10px);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.ov.show{opacity:1;visibility:visible}
+.md{width:90%;max-width:400px;padding:30px;border-radius:32px;background:#fff;box-shadow:0 30px 80px rgba(10,40,90,.3);transform:scale(.88) translateY(20px);transition:transform .55s var(--spring)}
+.ov.show .md{transform:none}
+.md-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.md h3{font-size:1.35rem;font-weight:800}
+.md p{color:#3a4a63;line-height:2;margin-bottom:24px}
+.md .btn{width:100%;height:52px}
+.toast{position:fixed;top:36px;left:50%;z-index:99;transform:translate(-50%,-20px) scale(.9);opacity:0;pointer-events:none;background:var(--ink);color:#fff;padding:12px 24px;border-radius:999px;font-weight:600;font-size:.92rem;transition:transform .5s var(--spring),opacity .25s}
+.toast.show{transform:translate(-50%,0);opacity:1}
+.toast.err{background:#fff;color:var(--ink);box-shadow:0 0 0 2px var(--ink)}
+@media(max-width:960px){.stats{grid-template-columns:1fr}.pills{display:none}}
+@media(max-width:640px){body{padding:12px}.frame{border-radius:28px}.in{padding:0 20px}.strip{padding:20px}nav{padding-top:28px}.btn{padding:0 14px;height:42px}.hero{padding:64px 0 48px}.kb{display:none}#q{padding-left:20px}}
+@media(prefers-reduced-motion:reduce){*{transition-duration:.01s!important;animation:none!important}}
+</style>
 </head>
 <body>
-
-    <div id="siteToast" class="site-toast">
-        <span id="toastIcon"></span>
-        <span id="toastMessage"></span>
+<div id="toast" class="toast" role="status"></div>
+<div class="frame">
+<div class="in" id="top">
+  <nav>
+    <a href="index-v2.html"><img src="file/LogoSVG.svg" alt="LogoSVG"></a>
+    <div class="pills"><a class="pill on" href="#top">خانه</a><a class="pill" href="#lib">لوگوها</a></div>
+    <div class="acts">
+      <a class="btn" href="https://daramet.com/armvnhs" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24" data-i="heart"></svg>حمایت مالی</a>
+      <button class="btn main" onclick="modal(true)">ارسال لوگو<svg class="i" viewBox="0 0 24 24" data-i="send"></svg></button>
     </div>
+  </nav>
 
-    <header>
-        <div class="header-container">
-            <div class="actions-area">
-                <a href="https://daramet.com/armvnhs" class="btn btn-support">
-                    <span class="material-symbols-outlined">favorite</span>
-                    <span class="btn-text">حمایت مالی</span>
-                </a>
-                <a href="#" class="btn btn-dark" onclick="toggleModal(true); return false;">
-                    <span class="material-symbols-outlined">north_east</span>
-                    ارسال لوگو
-                </a>
-            </div>
-            <div class="logo-area">
-                <!-- کادر راهنمای بوکمارک (چون سایت راست‌چین است، قبل از لوگو قرار می‌گیرد تا سمت راست بیفتد) -->
-                <span class="bookmark-hint" title="بوکمارک کردن سایت">Ctrl + D</span>
-                <a href="index.html" style="display: flex; align-items: center;">
-                    <img src="https://raw.githubusercontent.com/armvnhs/LogoSVG/main/file/LogoSVG.svg" 
-                        alt="LogoSVG" 
-                        class="site-logo" 
-                        style="height: 40px; width: auto;">
-                </a>
-            </div>
-        </div>
-    </header>
-
-    <main>
-        <h1 class="main-title">کتابخانه لوگوهای ایرانی</h1>
-        
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="جستجوی نام برند...">
-            <span class="material-symbols-outlined search-icon">search</span>
-        </div>
-
-        <div class="logos-grid" id="logosGrid">
-        </div>
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <div class="made-with">
-                <span>ساخته شده با ❤️ و کمی ☕</span>
-            </div>
-            <a href="https://armvnhs.ir" target="_blank" class="github-link" style="text-decoration: none; color: inherit;">
-                <span>armvnhs.ir</span>
-                <span class="material-symbols-outlined" style="font-size: 20px;">language</span>
-            </a>
-        </div>
-    </footer>
-
-    <!-- مودال ارسال لوگو -->
-    <div id="customModal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>ارسال لوگوی جدید</h3>
-                <span class="close-btn" onclick="toggleModal(false)">&times;</span>
-            </div>
-
-            <div class="telegram-submit-box">
-                <div class="telegram-icon-wrapper">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="telegram-large-icon">
-                        <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.32.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 2.37-.96 8.034-1.36 10.626-.16.86-.46 1.309-.76 1.343-.66.076-1.16-.42-1.805-.845-1.007-.665-1.575-1.074-2.55-1.716-1.125-.742-.396-1.15.244-1.805.167-.17 3.076-2.825 3.132-3.064a.208.208 0 0 0-.058-.202.24.24 0 0 0-.238-.033c-.092.03-1.697 1.085-4.795 3.167-.453.31-.86.463-1.22.455-.4-.008-1.17-.225-1.74-.41-.7-.228-1.25-.349-1.204-.738.024-.202.31-.41.85-.624 3.327-1.448 5.545-2.404 6.654-2.868 3.15-1.32 3.805-1.547 4.23-1.554z"/>
-                    </svg>
-                </div>
-                <p class="telegram-desc">لطفاً فایل SVG لوگوی مورد نظرتان را مستقیماً در تلگرام برای ما ارسال کنید تا پس از بررسی به سایت اضافه شود.</p>
-                
-                <a href="https://t.me/armvnpv" target="_blank" class="btn-telegram">
-                    ارسال فایل در تلگرام
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-                    </svg>
-                </a>
-            </div>
-        </div>
+  <header class="hero">
+    <span class="tag"><svg class="i" viewBox="0 0 24 24" data-i="img" style="width:15px;height:15px"></svg>رایگان و بدون ثبت‌نام</span>
+    <h1>کتابخانه لوگوهای ایرانی</h1>
+    <p class="sub">نام برند را جستجو کنید و فایل SVG یا PNG را همان لحظه بگیرید.</p>
+    <div class="search">
+      <input id="q" type="search" placeholder="جستجوی برند، مثلاً اسنپ" autocomplete="off" aria-label="جستجوی برند">
+      <svg class="i" viewBox="0 0 24 24" data-i="search"></svg><span class="kb">/</span>
     </div>
-    
-    <script>
-        const FOLDER_NAME = "logos";         
-        const gridContainer = document.getElementById('logosGrid');
-        const searchInput = document.getElementById('searchInput');
+  </header>
 
-        let allLogoFiles = [];
+  <section class="stats">
+    <div class="sc w">
+      <small>تعداد لوگوها</small>
+      <div class="big" id="cnt">...</div>
+      <div class="orb"></div>
+      <div class="mini"><small>فرمت خروجی</small>SVG و PNG</div>
+    </div>
+    <div class="sc blue">
+      <span class="tag">کتابخانه متن‌باز</span>
+      <h2>جستجو کن. دانلود کن. استفاده کن.</h2>
+      <p>هر لوگو را با یک کلیک به‌صورت SVG یا PNG بگیرید، یا کد وکتورش را کپی کنید و مستقیم در پروژه بگذارید.</p>
+    </div>
+    <div class="sc w chart">
+      <small>پرتکرارترین حرف اول</small>
+      <div class="big" id="topl">...</div>
+      <small id="topc"></small>
+      <div class="bars" id="bars"></div>
+    </div>
+  </section>
 
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('siteToast');
-            const toastMessage = document.getElementById('toastMessage');
-            const toastIcon = document.getElementById('toastIcon');
+  <section class="lib" id="lib">
+    <h3>همه لوگوها</h3>
+    <div class="grid" id="grid"></div>
+  </section>
+</div>
+<div class="strip">
+  <span>ساخته‌شده توسط <a href="https://armvnhs.ir" target="_blank" rel="noopener">آرمان حق‌شناس</a></span>
+  <a class="up" href="#top"><span><svg class="i" viewBox="0 0 24 24" data-i="up"></svg></span>بازگشت به بالا</a>
+</div>
+</div>
 
-            toast.className = 'site-toast'; 
-            toast.classList.add(type);
-            
-            toastMessage.innerText = message;
-            toastIcon.innerText = type === 'success' ? '🎉' : '❌';
+<div id="ov" class="ov" onclick="if(event.target===this)modal(false)">
+  <div class="md" role="dialog" aria-modal="true" aria-label="ارسال لوگوی جدید">
+    <div class="md-h"><h3>ارسال لوگوی جدید</h3><button class="x" onclick="modal(false)" aria-label="بستن"><svg class="i" viewBox="0 0 24 24" data-i="x"></svg></button></div>
+    <p>فایل SVG تمیز لوگو را مستقیم در تلگرام بفرستید. بعد از بررسی به کتابخانه اضافه می‌شود.</p>
+    <a class="btn main" href="https://t.me/armvnpv" target="_blank" rel="noopener">ارسال فایل در تلگرام<svg class="i" viewBox="0 0 24 24" data-i="send"></svg></a>
+  </div>
+</div>
 
-            toast.classList.add('show');
+<script>
+const $=s=>document.querySelector(s),grid=$('#grid'),qi=$('#q'),DIR='logos/';
+const esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const norm=s=>s.replace(/ي/g,'ی').replace(/ك/g,'ک').replace(/[-\s\u200c]+/g,' ').trim().toLowerCase();
+const url=f=>DIR+encodeURIComponent(f),fa=n=>n.toLocaleString('fa-IR');
+let items=[],tt;
+const ic={heart:'<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',send:'<path d="M7 17 17 7M8 7h9v9"/>',x:'<path d="m6 6 12 12M18 6 6 18"/>',up:'<path d="M12 19V5m0 0-6 6m6-6 6 6"/>',search:'<circle cx="11" cy="11" r="6.5"/><path d="m20 20-4-4"/>',dl:'<path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/>',img:'<rect x="4" y="5" width="16" height="14" rx="3"/><circle cx="9" cy="10" r="1.5"/><path d="m5 17 5-4 3 3 2-2 4 3"/>',cp:'<rect x="8" y="8" width="12" height="12" rx="3"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>'};
+const I=k=>`<svg class="i" viewBox="0 0 24 24">${ic[k]}</svg>`;
+document.querySelectorAll('[data-i]').forEach(e=>e.innerHTML=ic[e.dataset.i]);
 
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3500);
-        }
+function toast(m,err){const t=$('#toast');t.textContent=m;t.className='toast show'+(err?' err':'');clearTimeout(tt);tt=setTimeout(()=>t.className='toast',2800)}
+function modal(on){$('#ov').classList.toggle('show',on);document.body.style.overflow=on?'hidden':''}
 
-        async function fetchLogos() {
-            try {
-                const response = await fetch('logos.json');
-                if (!response.ok) throw new Error('فایل یافت نشد');
-                
-                const data = await response.json();
-                
-                allLogoFiles = data.filter(file => file.endsWith('.svg'));
-                renderLogos('');
-                
-            } catch (error) {
-                console.error('Error fetching logos:', error);
-                gridContainer.innerHTML = `<p style="text-align:center; width:100%;">خطا در بارگذاری لوگوها. لطفاً فایل logos.json را ایجاد کنید.</p>`;
-            }
-        }
+function render(q=''){
+  const n=norm(q),list=items.filter(i=>i.n.includes(n));
+  if(!list.length){grid.innerHTML='<div class="empty"><b>لوگویی پیدا نشد</b>املای نام را بررسی کنید، یا فایل SVG آن را با دکمه «ارسال لوگو» بفرستید.</div>';return}
+  grid.innerHTML=list.map(i=>`<div class="card"><img class="lg" src="${url(i.f)}" alt="${esc(i.name)}" loading="lazy"><div class="nm">${esc(i.label)}</div><div class="seg" data-f="${esc(i.f)}"><i></i><button data-a="svg">${I('dl')}SVG</button><button data-a="png">${I('img')}PNG</button><button data-a="copy" title="کپی کد وکتور">${I('cp')}کد</button></div></div>`).join('');
+}
 
-        function renderLogos(filterText = '') {
-            gridContainer.innerHTML = ''; 
+function stats(){
+  $('#cnt').textContent=fa(items.length);
+  const m={};items.forEach(i=>{const c=i.name.trim()[0].toUpperCase();m[c]=(m[c]||0)+1});
+  const top=Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,8),max=top[0][1];
+  $('#topl').textContent=top[0][0];$('#topc').textContent=fa(max)+' لوگو';
+  $('#bars').innerHTML=top.map(([c,n],k)=>`<div class="bar${k?'':' top'}" style="--h:${Math.max(12,n/max*100)}%" title="${fa(n)} لوگو">${k?'':`<em>${fa(n)} لوگو</em>`}<b>${esc(c)}</b></div>`).join('');
+}
 
-            const filteredLogos = allLogoFiles.filter(fileName => {
-                const brandName = fileName.replace('.svg', '').replace(/-/g, ' ');
-                return brandName.toLowerCase().includes(filterText.toLowerCase());
-            });
+function save(href,name){const a=document.createElement('a');a.href=href;a.download=name;document.body.appendChild(a);a.click();a.remove()}
+async function act(a,f){
+  try{
+    if(a==='svg'){save(url(f),f);toast('فایل SVG دانلود شد');return}
+    const txt=await(await fetch(url(f))).text();
+    if(a==='copy'){await navigator.clipboard.writeText(txt);toast('کد SVG کپی شد');return}
+    const blob=URL.createObjectURL(new Blob([txt],{type:'image/svg+xml;charset=utf-8'})),img=new Image();
+    img.onload=()=>{
+      const w=img.naturalWidth||1000,h=img.naturalHeight||1000,k=2000/Math.max(w,h),c=document.createElement('canvas');
+      c.width=w*k;c.height=h*k;c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+      save(c.toDataURL('image/png'),f.replace(/\.svg$/i,'.png'));URL.revokeObjectURL(blob);toast('فایل PNG دانلود شد');
+    };
+    img.src=blob;
+  }catch(e){toast('خطا در دریافت فایل. دوباره تلاش کنید.',1)}
+}
 
-            if (filteredLogos.length === 0 && allLogoFiles.length > 0) {
-                gridContainer.innerHTML = '<p style="text-align:center; width:100%;">لوگویی پیدا نشد.</p>';
-                return;
-            }
+grid.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b)act(b.dataset.a,b.parentElement.dataset.f)});
+grid.addEventListener('pointerover',e=>{const b=e.target.closest('.seg button');if(b){const s=b.parentElement;s.style.setProperty('--i',[...s.children].indexOf(b)-1)}});
+qi.addEventListener('input',e=>{render(e.target.value);if(e.target.value)$('#lib').scrollIntoView({block:'start'})});
+addEventListener('keydown',e=>{
+  if(e.key==='Escape')modal(false);
+  if((e.key==='/'||(e.key==='k'&&(e.ctrlKey||e.metaKey)))&&document.activeElement!==qi){e.preventDefault();qi.focus();qi.select()}
+});
 
-            filteredLogos.forEach(fileName => {
-                const brandName = fileName.replace('.svg', '').replace(/-/g, ' ');
-                createCard(fileName, brandName);
-            });
-        }
+grid.innerHTML='<div class="sk"></div>'.repeat(8);
+fetch('logos.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{
+  items=d.filter(f=>/\.svg$/i.test(f)).map(f=>{const name=f.replace(/\.svg$/i,'');return{f,name,label:name.replace(/\s*-\s*(.+)$/,' ($1)'),n:norm(name)}});
+  stats();render();
+}).catch(()=>{grid.innerHTML='<div class="empty"><b>بارگذاری لوگوها انجام نشد</b>صفحه را دوباره باز کنید یا بعداً سر بزنید.</div>'});
 
-        function createCard(fileName, brandName) {
-            const card = document.createElement('div');
-            card.className = 'card';
-
-            const filePath = `${FOLDER_NAME}/${fileName}`;
-
-            card.innerHTML = `
-                <img src="${filePath}" alt="${brandName}" class="logo-img" loading="lazy">
-                <div class="brand-name">${brandName}</div>
-                
-                <div class="card-overlay">
-                    <a href="${filePath}" download="${fileName}" class="download-btn">
-                        <span class="material-symbols-outlined" style="font-size:16px;">download</span> SVG
-                    </a>
-                    <button class="download-btn" onclick="downloadAsPng('${filePath}', '${fileName}')">
-                        <span class="material-symbols-outlined" style="font-size:16px;">image</span> PNG
-                    </button>
-                </div>
-            `;
-
-            gridContainer.appendChild(card);
-        }
-
-        function downloadAsPng(svgUrl, fileName) {
-            fetch(svgUrl)
-                .then(response => response.text())
-                .then(svgText => {
-                    const img = new Image();
-                    const svgBlob = new Blob([svgText], { type: 'image/svg+xml;charset=utf-8' });
-                    const url = URL.createObjectURL(svgBlob);
-
-                    img.onload = function () {
-                        const canvas = document.createElement('canvas');
-                        const scale = 3; 
-                        canvas.width = img.width * scale || 1000;
-                        canvas.height = img.height * scale || 1000;
-
-                        const ctx = canvas.getContext('2d');
-                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-                        const pngUrl = canvas.toDataURL('image/png');
-                        const downloadLink = document.createElement('a');
-                        downloadLink.href = pngUrl;
-                        downloadLink.download = fileName.replace('.svg', '.png');
-                        document.body.appendChild(downloadLink);
-                        downloadLink.click();
-                        document.body.removeChild(downloadLink);
-
-                        URL.revokeObjectURL(url);
-                    };
-
-                    img.src = url;
-                })
-                .catch(err => console.error('Error converting SVG to PNG:', err));
-        }
-
-        searchInput.addEventListener('input', (e) => {
-            renderLogos(e.target.value);
-        });
-
-        fetchLogos();
-
-        function toggleModal(shouldShow) {
-            const modal = document.getElementById('customModal');
-            if (!modal) return;
-
-            if (shouldShow) {
-                modal.classList.add('show');
-                document.body.style.overflow = 'hidden'; 
-            } else {
-                modal.classList.remove('show');
-                document.body.style.overflow = 'auto'; 
-            }
-        }
-
-        window.addEventListener('click', function(e) {
-            const modal = document.getElementById('customModal');
-            if (e.target === modal) {
-                toggleModal(false);
-            }
-        });
-
-        // ====== کد ثبت Service Worker برای فعال شدن PWA ======
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js').then(registration => {
-                    console.log('Service Worker با موفقیت ثبت شد:', registration);
-                }).catch(error => {
-                    console.log('ثبت Service Worker با خطا مواجه شد:', error);
-                });
-            });
-        }
-    </script>    
+if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+</script>
 </body>
 </html>
