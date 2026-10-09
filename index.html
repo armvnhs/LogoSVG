@@ -141,6 +141,23 @@ h1{margin:30px 0 24px;font-size:clamp(2.1rem,7.5vw,5.6rem);font-weight:800;line-
 .bars{margin:0;width:44%;height:52px;padding:0;gap:5px}
 .bar{min-height:6px;border-radius:6px}
 .bar img,.bar em{display:none}
+.card{cursor:pointer}
+.cnt{position:absolute;top:14px;left:14px;z-index:1;font-size:.72rem;font-weight:600;color:var(--mute);background:var(--tint);border-radius:999px;padding:1px 10px}
+.md.wide{max-width:780px;max-height:88vh;overflow:auto}
+.md h4{font-size:.95rem;font-weight:700;margin:24px 0 12px}
+.md-h small{color:var(--mute);font-size:.88rem}
+.as{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.at{border-radius:22px;box-shadow:0 0 0 1px var(--line);padding:20px 14px 14px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.at img{height:84px;max-width:80%;object-fit:contain}
+.at b{font-size:.85rem;color:var(--mute);font-weight:600;min-height:1.4em}
+.seg.st{position:relative;inset:auto;width:100%;opacity:1;transform:none;pointer-events:auto}
+.cl{display:flex;flex-wrap:wrap;gap:10px}
+.sw{display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 8px 0 16px;border:0;border-radius:14px;background:#fff;color:var(--ink);font:600 .85rem Estedad,sans-serif;cursor:pointer;box-shadow:var(--sh);transition:transform .4s var(--spring)}
+.sw:hover{transform:translateY(-2px)}
+.sw:active{transform:scale(.94);transition-duration:.08s}
+.sw i{width:28px;height:28px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+.sw b{font:600 .85rem Arial,sans-serif;direction:ltr}
+.mute{color:var(--mute);font-size:.9rem}
 @media(prefers-reduced-motion:reduce){*{transition-duration:.01s!important;animation:none!important}}
 </style>
 </head>
@@ -179,6 +196,8 @@ h1{margin:30px 0 24px;font-size:clamp(2.1rem,7.5vw,5.6rem);font-weight:800;line-
 </div></div>
 </div>
 
+<div id="bv" class="ov" onclick="if(event.target===this)closeBrand()"><div class="md wide" id="bd" role="dialog" aria-modal="true"></div></div>
+
 <div id="ov" class="ov" onclick="if(event.target===this)modal(false)">
   <div class="md" role="dialog" aria-modal="true" aria-label="ارسال لوگوی جدید">
     <div class="md-h"><h3>ارسال لوگوی جدید</h3><button class="x" onclick="modal(false)" aria-label="بستن"><svg class="i" viewBox="0 0 24 24" data-i="x"></svg></button></div>
@@ -205,7 +224,7 @@ function modal(on){$('#ov').classList.toggle('show',on);document.body.style.over
 function render(q=''){
   const n=norm(q),list=items.filter(i=>i.n.includes(n)&&(cat==='همه'||i.c===cat));
   if(!list.length){grid.innerHTML='<div class="empty"><b>لوگویی پیدا نشد</b>املای نام را بررسی کنید، یا فایل SVG آن را با دکمه «ارسال لوگو» بفرستید.</div>';return}
-  grid.innerHTML=list.map(i=>`<div class="card"><img class="lg" src="${url(i.f)}" alt="${esc(i.name)}" loading="lazy"><div class="nm">${esc(i.label)}</div><div class="seg" data-f="${esc(i.f)}"><i></i><button data-a="svg">${I('dl')}SVG</button><button data-a="png">${I('img')}PNG</button><button data-a="copy" title="کپی کد وکتور">${I('cp')}کد</button></div></div>`).join('');
+  grid.innerHTML=list.map(i=>{const f=i.assets[0].f;return`<div class="card" data-id="${i.id}">${i.assets.length>1?`<span class="cnt">${fa(i.assets.length)} فایل</span>`:''}<img class="lg" src="${url(f)}" alt="${esc(i.label)}" loading="lazy"><div class="nm">${esc(i.label)}</div><div class="seg" data-f="${esc(f)}"><i></i><button data-a="svg">${I('dl')}SVG</button><button data-a="png">${I('img')}PNG</button><button data-a="copy" title="کپی کد وکتور">${I('cp')}کد</button></div></div>`}).join('');
 }
 
 function buildCats(){
@@ -226,6 +245,41 @@ async function loadTop(){
   }catch(e){$('#topl').textContent='به‌زودی';$('#topc').textContent='آمار دانلود هنوز فعال نشده'}
 }
 
+const fn=p=>{let f=String(p).split('/').pop();try{f=decodeURIComponent(f)}catch(e){}return f};
+const TY={Icon:'آیکون',Persian:'فارسی',English:'انگلیسی',Both:'فارسی و انگلیسی',Old:'نسخه قدیمی',Slogan:'با شعار',Other:'سایر'};
+function toBrands(d){
+  const a=Array.isArray(d)?d:d.brands||d.logos||[];
+  return a.map(x=>{
+    if(typeof x==='string')x={file:x};
+    const raw=x.assets||(x.file?[{file:x.file}]:[]);
+    const assets=raw.map(k=>({f:fn(k.file||''),t:k.type||''})).filter(k=>/\.svg$/i.test(k.f));
+    if(!assets.length)return null;
+    const base=assets[0].f.replace(/\.svg$/i,''),label=x.name||base.replace(/\s*-\s*(.+)$/,' ($1)');
+    return{label,en:x.en||'',c:x.category||'',assets,colors:(x.colors||[]).filter(k=>k&&k.hex),n:norm(label+' '+(x.en||'')+' '+base)};
+  }).filter(Boolean).sort((a,b)=>a.label.localeCompare(b.label,'fa'));
+}
+function closeBrand(){$('#bv').classList.remove('show');if(!$('#ov').classList.contains('show'))document.body.style.overflow=''}
+function openBrand(id){
+  const b=items[id],btn=(a,t,k)=>`<button data-a="${a}">${I(k)}${t}</button>`;
+  $('#bd').innerHTML=`<div class="md-h"><div><h3>${esc(b.label)}</h3><small>${esc([b.en,b.c].filter(Boolean).join(' | '))}</small></div><button class="x" onclick="closeBrand()" aria-label="بستن">${I('x')}</button></div>
+<h4>لوگوها</h4><div class="as">${b.assets.map(k=>`<div class="at"><img src="${url(k.f)}" alt="" loading="lazy"><b>${esc(TY[k.t]||'')}</b><div class="seg st" data-f="${esc(k.f)}"><i></i>${btn('svg','SVG','dl')}${btn('png','PNG','img')}${btn('copy','کد','cp')}</div></div>`).join('')}</div>
+<h4>رنگ‌ها</h4><div class="cl" id="cl"></div>`;
+  $('#bv').classList.add('show');document.body.style.overflow='hidden';
+  paintColors(b);
+}
+async function paintColors(b){
+  const box=$('#cl');let list=b.colors.map(k=>({hex:k.hex.toUpperCase(),n:k.name||''}));
+  if(!list.length){
+    const set=new Set();
+    for(const k of b.assets){try{
+      const t=await(await fetch(url(k.f))).text();
+      (t.match(/#(?:[0-9a-f]{6}|[0-9a-f]{3})\b/gi)||[]).forEach(h=>{h=h.toUpperCase();if(h.length===4)h='#'+[...h.slice(1)].map(c=>c+c).join('');if(h!=='#FFFFFF')set.add(h)});
+    }catch(e){}}
+    list=[...set].slice(0,8).map(hex=>({hex,n:''}));
+  }
+  if($('#cl')!==box)return;
+  box.innerHTML=list.length?list.map(k=>`<button class="sw" data-hex="${k.hex}"><i style="background:${k.hex}"></i><span>${k.n?esc(k.n)+' ':''}<b>${k.hex}</b></span></button>`).join(''):'<span class="mute">رنگی ثبت نشده</span>';
+}
 function save(href,name){const a=document.createElement('a');a.href=href;a.download=name;document.body.appendChild(a);a.click();a.remove()}
 async function act(a,f){
   try{
@@ -244,27 +298,26 @@ async function act(a,f){
 
 grid.addEventListener('click',e=>{
   const b=e.target.closest('[data-a]');if(b){act(b.dataset.a,b.parentElement.dataset.f);return}
-  const c=e.target.closest('.card');if(c&&matchMedia('(hover:none)').matches){const o=c.classList.contains('open');grid.querySelectorAll('.card.open').forEach(x=>x.classList.remove('open'));if(!o)c.classList.add('open')}
+  const c=e.target.closest('.card');if(c)openBrand(+c.dataset.id)
 });
-addEventListener('click',e=>{if(!e.target.closest('.card'))grid.querySelectorAll('.card.open').forEach(x=>x.classList.remove('open'))});
+$('#bd').addEventListener('click',e=>{
+  const b=e.target.closest('[data-a]');if(b){act(b.dataset.a,b.parentElement.dataset.f);return}
+  const w=e.target.closest('.sw');if(w)navigator.clipboard.writeText(w.dataset.hex).then(()=>toast('کد رنگ کپی شد: '+w.dataset.hex))
+});
+$('#bd').addEventListener('pointerover',e=>{const b=e.target.closest('.seg button');if(b){const s=b.parentElement;s.style.setProperty('--i',[...s.children].indexOf(b)-1)}});
 grid.addEventListener('pointerover',e=>{const b=e.target.closest('.seg button');if(b){const s=b.parentElement;s.style.setProperty('--i',[...s.children].indexOf(b)-1)}});
 if(/Mac|iPhone|iPad/.test(navigator.userAgent))$('#bmk').textContent='⌘ D';
 $('#bm').addEventListener('click',()=>toast('برای بوکمارک، کلیدهای '+$('#bmk').textContent+' را بزنید'));
 qi.addEventListener('input',e=>{render(e.target.value);if(e.target.value)$('#lib').scrollIntoView({block:'start'})});
 addEventListener('keydown',e=>{
-  if(e.key==='Escape')modal(false);
+  if(e.key==='Escape'){modal(false);closeBrand()}
   if((e.key==='/'||(e.key==='k'&&(e.ctrlKey||e.metaKey)))&&document.activeElement!==qi){e.preventDefault();qi.focus();qi.select()}
 });
 
 grid.innerHTML='<div class="sk"></div>'.repeat(8);
-fetch('logos-data.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.json()}).catch(()=>fetch('logos.json',{cache:'no-cache'}).then(r=>r.json()).then(a=>a.map(f=>({file:f})))).then(d=>{
-  items=(Array.isArray(d)?d:d.logos||[]).filter(x=>x&&x.file).map(x=>{
-    let f=x.file.split('/').pop();try{f=decodeURIComponent(f)}catch(e){}
-    if(!/\.svg$/i.test(f))return null;
-    const base=f.replace(/\.svg$/i,''),label=x.name||base.replace(/\s*-\s*(.+)$/,' ($1)');
-    return{f,name:label,label,n:norm(label+' '+(x.en||'')+' '+base),c:x.category||''};
-  }).filter(Boolean).sort((a,b)=>a.label.localeCompare(b.label,'fa'));
-  buildCats();render();
+const J=u=>fetch(u,{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.json()});
+J('brands-data.json').catch(()=>J('logos-data.json')).catch(()=>J('logos.json')).then(d=>{
+  items=toBrands(d);items.forEach((b,k)=>b.id=k);buildCats();render();
 }).catch(()=>{grid.innerHTML='<div class="empty"><b>بارگذاری لوگوها انجام نشد</b>صفحه را دوباره باز کنید یا بعداً سر بزنید.</div>'});
 
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
