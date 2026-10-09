@@ -191,7 +191,7 @@ const $=s=>document.querySelector(s),grid=$('#grid'),qi=$('#q'),DIR='logos/';
 const esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const norm=s=>s.replace(/ي/g,'ی').replace(/ك/g,'ک').replace(/[-\s\u200c]+/g,' ').trim().toLowerCase();
 const url=f=>DIR+encodeURIComponent(f),fa=n=>n.toLocaleString('fa-IR');
-let items=[],tt,cat='همه',catMap={};
+let items=[],tt,cat='همه';
 const API=''; // آدرس سرویس شمارنده دانلود. خالی = خواندن از فایل stats.json
 const hit=f=>{if(API)navigator.sendBeacon(API+'/hit',JSON.stringify({f}))};
 const ic={bm:'<path d="M7 4h10a1 1 0 0 1 1 1v15l-6-4-6 4V5a1 1 0 0 1 1-1z"/>',coffee:'<path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9z"/><path d="M16 10h1.5a2.5 2.5 0 0 1 0 5H16M8 3v2M12 3v2"/>',send:'<path d="M7 17 17 7M8 7h9v9"/>',x:'<path d="m6 6 12 12M18 6 6 18"/>',up:'<path d="M12 19V5m0 0-6 6m6-6 6 6"/>',search:'<circle cx="11" cy="11" r="6.5"/><path d="m20 20-4-4"/>',dl:'<path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/>',img:'<rect x="4" y="5" width="16" height="14" rx="3"/><circle cx="9" cy="10" r="1.5"/><path d="m5 17 5-4 3 3 2-2 4 3"/>',cp:'<rect x="8" y="8" width="12" height="12" rx="3"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>'};
@@ -207,13 +207,9 @@ function render(q=''){
   grid.innerHTML=list.map(i=>`<div class="card"><img class="lg" src="${url(i.f)}" alt="${esc(i.name)}" loading="lazy"><div class="nm">${esc(i.label)}</div><div class="seg" data-f="${esc(i.f)}"><i></i><button data-a="svg">${I('dl')}SVG</button><button data-a="png">${I('img')}PNG</button><button data-a="copy" title="کپی کد وکتور">${I('cp')}کد</button></div></div>`).join('');
 }
 
-async function loadCats(){
-  try{const r=await fetch('categories.json',{cache:'no-cache'});if(!r.ok)throw 0;const d=await r.json();
-  for(const[c,l]of Object.entries(d))for(const f of l)catMap[norm(f.replace(/\.svg$/i,''))]=c}catch(e){}
-}
 function buildCats(){
   const m={};items.forEach(i=>{if(i.c)m[i.c]=(m[i.c]||0)+1});
-  const names=Object.keys(m),box=$('#cats');box.hidden=!names.length;
+  const names=Object.keys(m).sort((a,b)=>m[b]-m[a]),box=$('#cats');box.hidden=!names.length;
   box.innerHTML=['همه',...names].map(c=>`<button class="chip2${c===cat?' on':''}" data-c="${esc(c)}">${esc(c)}<b>${fa(c==='همه'?items.length:m[c])}</b></button>`).join('');
 }
 $('#cats').addEventListener('click',e=>{const b=e.target.closest('[data-c]');if(!b)return;cat=b.dataset.c;buildCats();render(qi.value)});
@@ -260,8 +256,13 @@ addEventListener('keydown',e=>{
 });
 
 grid.innerHTML='<div class="sk"></div>'.repeat(8);
-Promise.all([fetch('logos.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.json()}),loadCats()]).then(([d])=>{
-  items=d.filter(f=>/\.svg$/i.test(f)).map(f=>{const name=f.replace(/\.svg$/i,'');return{f,name,label:name.replace(/\s*-\s*(.+)$/,' ($1)'),n:norm(name),c:catMap[norm(name)]||''}});
+fetch('logos-data.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.json()}).catch(()=>fetch('logos.json',{cache:'no-cache'}).then(r=>r.json()).then(a=>a.map(f=>({file:f})))).then(d=>{
+  items=d.filter(x=>x&&x.file).map(x=>{
+    let f=x.file.split('/').pop();try{f=decodeURIComponent(f)}catch(e){}
+    if(!/\.svg$/i.test(f))return null;
+    const base=f.replace(/\.svg$/i,''),label=x.name||base.replace(/\s*-\s*(.+)$/,' ($1)');
+    return{f,name:label,label,n:norm(label+' '+(x.en||'')+' '+base),c:x.category||''};
+  }).filter(Boolean).sort((a,b)=>a.label.localeCompare(b.label,'fa'));
   buildCats();render();
 }).catch(()=>{grid.innerHTML='<div class="empty"><b>بارگذاری لوگوها انجام نشد</b>صفحه را دوباره باز کنید یا بعداً سر بزنید.</div>'});
 
