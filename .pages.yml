@@ -1,53 +1,65 @@
-# تنظیمات پنل مدیریت (Pages CMS) برای LogoSVG
 media:
   - name: logos
-    label: فایل لوگوها
+    label: Logo files
     input: logos
     output: /logos
     extensions: [svg]
 
 content:
   - name: logos
-    label: لوگوها
+    label: Logos
     type: file
     path: logos-data.json
     format: json
-    list: true
     fields:
-      - name: file
-        label: فایل لوگو (SVG)
-        type: image
-        required: true
-        options:
-          media: logos
-          extensions: [svg]
-      - name: name
-        label: نام نمایشی
-        type: string
-        required: true
-        description: همین نام زیر لوگو نشان داده می‌شود. مثال، اسنپ (فارسی)
-      - name: en
-        label: نام انگلیسی
-        type: string
-        description: برای جستجوی انگلیسی. مثال، Snapp
-      - name: category
-        label: دسته
-        type: select
-        required: true
-        options:
-          values:
-            - حمل‌ونقل و سفر
-            - غذا
-            - خرید و فروش
-            - مخابرات
-            - رسانه و سرگرمی
-            - فناوری و اپلیکیشن
-            - آموزش
-            - طراحی و خلاقیت
+      - name: logos
+        label: false
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.name}"
+        fields:
+          - name: file
+            label: Logo (SVG)
+            type: image
+            required: true
+            options:
+              media: logos
+              extensions: [svg]
+          - name: name
+            label: Name (Persian)
+            type: string
+            required: true
+          - name: en
+            label: Name (English)
+            type: string
+          - name: category
+            label: Category
+            type: select
+            required: true
+            options:
+              values:
+                - name: حمل‌ونقل و سفر
+                  label: Transport & Travel
+                - name: غذا
+                  label: Food
+                - name: خرید و فروش
+                  label: Shopping
+                - name: مخابرات
+                  label: Telecom
+                - name: رسانه و سرگرمی
+                  label: Media & Entertainment
+                - name: فناوری و اپلیکیشن
+                  label: Tech & Apps
+                - name: آموزش
+                  label: Education
+                - name: طراحی و خلاقیت
+                  label: Design & Creative
 
 settings:
   commit:
     templates:
-      create: "افزودن {filename}"
-      update: "ویرایش {filename}"
-      delete: "حذف {filename}"
+      create: "Add {filename}"
+      update: "Update {filename}"
+      delete: "Remove {filename}"
