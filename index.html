@@ -257,7 +257,7 @@ addEventListener('keydown',e=>{
 
 grid.innerHTML='<div class="sk"></div>'.repeat(8);
 fetch('logos-data.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.json()}).catch(()=>fetch('logos.json',{cache:'no-cache'}).then(r=>r.json()).then(a=>a.map(f=>({file:f})))).then(d=>{
-  items=d.filter(x=>x&&x.file).map(x=>{
+  items=(Array.isArray(d)?d:d.logos||[]).filter(x=>x&&x.file).map(x=>{
     let f=x.file.split('/').pop();try{f=decodeURIComponent(f)}catch(e){}
     if(!/\.svg$/i.test(f))return null;
     const base=f.replace(/\.svg$/i,''),label=x.name||base.replace(/\s*-\s*(.+)$/,' ($1)');
