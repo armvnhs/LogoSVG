@@ -1,0 +1,16 @@
+{
+  "name": "آپارات",
+  "en": "Aparat",
+  "category": "رسانه و سرگرمی",
+  "assets": [
+    {
+      "type": "Persian",
+      "file": "/logos/آپارات.svg"
+    },
+    {
+      "type": "Slogan",
+      "file": "/logos/آپارات با شعار.svg"
+    }
+  ],
+  "colors": []
+}

@@ -1,0 +1,39 @@
+name: build-brands
+
+on:
+  push:
+    branches: [main]
+    paths: ['data/brands/**']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build brands-data.json
+        run: |
+          node -e "
+          const fs = require('fs');
+          const dir = 'data/brands';
+          const brands = fs.readdirSync(dir)
+            .filter(f => f.endsWith('.json'))
+            .map(f => JSON.parse(fs.readFileSync(dir + '/' + f, 'utf8')))
+            .filter(x => x && Array.isArray(x.assets) && x.assets.length)
+            .sort((a, b) => String(a.name).localeCompare(String(b.name), 'fa'));
+          fs.writeFileSync('brands-data.json', JSON.stringify({ brands }, null, 2));
+          "
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add brands-data.json
+          if ! git diff --staged --quiet; then
+            git commit -m "Update brands-data.json"
+            git push
+          fi

@@ -1,0 +1,16 @@
+{
+  "name": "دیجی کالا",
+  "en": "Digikala",
+  "category": "خرید و فروش",
+  "assets": [
+    {
+      "type": "English",
+      "file": "/logos/دیجی کالا - انگلیسی.svg"
+    },
+    {
+      "type": "Persian",
+      "file": "/logos/دیجی کالا - فارسی.svg"
+    }
+  ],
+  "colors": []
+}

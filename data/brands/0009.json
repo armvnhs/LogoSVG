@@ -1,0 +1,16 @@
+{
+  "name": "تپسی",
+  "en": "Tapsi",
+  "category": "حمل‌ونقل و سفر",
+  "assets": [
+    {
+      "type": "English",
+      "file": "/logos/تپسی - انگلیسی.svg"
+    },
+    {
+      "type": "Persian",
+      "file": "/logos/تپسی - فارسی.svg"
+    }
+  ],
+  "colors": []
+}

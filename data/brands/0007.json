@@ -1,0 +1,16 @@
+{
+  "name": "ایرانسل",
+  "en": "Irancell",
+  "category": "مخابرات",
+  "assets": [
+    {
+      "type": "Persian",
+      "file": "/logos/ایرانسل.svg"
+    },
+    {
+      "type": "Old",
+      "file": "/logos/ایرانسل - قدیمی.svg"
+    }
+  ],
+  "colors": []
+}

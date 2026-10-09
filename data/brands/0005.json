@@ -1,0 +1,12 @@
+{
+  "name": "اسنپ فود",
+  "en": "Snapp Food",
+  "category": "غذا",
+  "assets": [
+    {
+      "type": "English",
+      "file": "/logos/اسنپ فود.svg"
+    }
+  ],
+  "colors": []
+}

@@ -1,0 +1,16 @@
+{
+  "name": "اسنپ",
+  "en": "Snapp",
+  "category": "حمل‌ونقل و سفر",
+  "assets": [
+    {
+      "type": "English",
+      "file": "/logos/اسنپ - انگلیسی.svg"
+    },
+    {
+      "type": "Persian",
+      "file": "/logos/اسنپ - فارسی.svg"
+    }
+  ],
+  "colors": []
+}

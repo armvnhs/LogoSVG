@@ -1,0 +1,196 @@
+{
+  "brands": [
+    {
+      "name": "آپارات",
+      "en": "Aparat",
+      "category": "رسانه و سرگرمی",
+      "assets": [
+        {
+          "type": "Persian",
+          "file": "/logos/آپارات.svg"
+        },
+        {
+          "type": "Slogan",
+          "file": "/logos/آپارات با شعار.svg"
+        }
+      ],
+      "colors": []
+    },
+    {
+      "name": "آکادمی همراه اول",
+      "en": "Hamrah-e Aval Academy",
+      "category": "آموزش",
+      "assets": [
+        {
+          "type": "Persian",
+          "file": "/logos/آکادمی همراه اول.svg"
+        }
+      ],
+      "colors": []
+    },
+    {
+      "name": "اسنپ",
+      "en": "Snapp",
+      "category": "حمل‌ونقل و سفر",
+      "assets": [
+        {
+          "type": "English",
+          "file": "/logos/اسنپ - انگلیسی.svg"
+        },
+        {
+          "type": "Persian",
+          "file": "/logos/اسنپ - فارسی.svg"
+        }
+      ],
+      "colors": []
+    },
+    {
+      "name": "اسنپ تریپ",
+      "en": "Snapp Trip",
+      "category": "حمل‌ونقل و سفر",
+      "assets": [
+        {
+          "type": "English",
+          "file": "/logos/اسنپ تریپ.svg"
+        }
+      ],
+      "colors": []
+    },
+    {
+      "name": "اسنپ فود",
+      "en": "Snapp Food",
+      "category": "غذا",
+      "assets": [
+        {
+          "type": "English",
+          "file": "/logos/اسنپ فود.svg"
+        }
+      ],
+      "colors": []
+    },
+    {
+      "name": "افق استودیو",
+      "en": "Ofoq Studio",
+      "category": "طراحی و خلاقیت",
+      "assets": [
+        {
+          "type": "English",
+          "file": "/logos/افق استودیو.svg"
+        }
+      ],
+      "colors": []
+    },
+    {
+      "name": "ایرانسل",
+      "en": "Irancell",
+      "category": "مخابرات",
+      "assets": [
+        {
+          "type": "Persian",
+          "file": "/logos/ایرانسل.svg"
+        },
+        {
+          "type": "Old",
+          "file": "/logos/ایرانسل - قدیمی.svg"
+        }
+      ],
+      "colors": []
+    },
+    {
+      "name": "ایرانسل من",
+      "en": "MyIrancell",
+      "category": "مخابرات",
+      "assets": [
+        {
+          "type": "Persian",
+          "file": "/logos/ایرانسل من.svg"
+        }
+      ],
+      "colors": []
+    },
+    {
+      "name": "تپسی",
+      "en": "Tapsi",
+      "category": "حمل‌ونقل و سفر",
+      "assets": [
+        {
+          "type": "English",
+          "file": "/logos/تپسی - انگلیسی.svg"
+        },
+        {
+          "type": "Persian",
+          "file": "/logos/تپسی - فارسی.svg"
+        }
+      ],
+      "colors": []
+    },
+    {
+      "name": "تپسی راننده",
+      "en": "Tapsi Driver",
+      "category": "حمل‌ونقل و سفر",
+      "assets": [
+        {
+          "type": "Persian",
+          "file": "/logos/تپسی راننده.svg"
+        }
+      ],
+      "colors": []
+    },
+    {
+      "name": "دیجی کالا",
+      "en": "Digikala",
+      "category": "خرید و فروش",
+      "assets": [
+        {
+          "type": "English",
+          "file": "/logos/دیجی کالا - انگلیسی.svg"
+        },
+        {
+          "type": "Persian",
+          "file": "/logos/دیجی کالا - فارسی.svg"
+        }
+      ],
+      "colors": []
+    },
+    {
+      "name": "دیوار",
+      "en": "Divar",
+      "category": "خرید و فروش",
+      "assets": [
+        {
+          "type": "Persian",
+          "file": "/logos/دیوار.svg"
+        }
+      ],
+      "colors": []
+    },
+    {
+      "name": "همراه اول",
+      "en": "Hamrah-e Aval MCI",
+      "category": "مخابرات",
+      "assets": [
+        {
+          "type": "Persian",
+          "file": "/logos/همراه اول.svg"
+        },
+        {
+          "type": "Old",
+          "file": "/logos/همراه اول - قدیمی.svg"
+        }
+      ],
+      "colors": []
+    },
+    {
+      "name": "کافه بازار",
+      "en": "Cafe Bazaar",
+      "category": "فناوری و اپلیکیشن",
+      "assets": [
+        {
+          "type": "Persian",
+          "file": "/logos/کافه بازار.svg"
+        }
+      ],
+      "colors": []
+    }
+  ]
+}

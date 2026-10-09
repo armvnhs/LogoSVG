@@ -1,0 +1,12 @@
+{
+  "name": "کافه بازار",
+  "en": "Cafe Bazaar",
+  "category": "فناوری و اپلیکیشن",
+  "assets": [
+    {
+      "type": "Persian",
+      "file": "/logos/کافه بازار.svg"
+    }
+  ],
+  "colors": []
+}

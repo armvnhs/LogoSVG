@@ -1,0 +1,12 @@
+{
+  "name": "ایرانسل من",
+  "en": "MyIrancell",
+  "category": "مخابرات",
+  "assets": [
+    {
+      "type": "Persian",
+      "file": "/logos/ایرانسل من.svg"
+    }
+  ],
+  "colors": []
+}

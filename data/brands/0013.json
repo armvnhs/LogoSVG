@@ -1,0 +1,16 @@
+{
+  "name": "همراه اول",
+  "en": "Hamrah-e Aval MCI",
+  "category": "مخابرات",
+  "assets": [
+    {
+      "type": "Persian",
+      "file": "/logos/همراه اول.svg"
+    },
+    {
+      "type": "Old",
+      "file": "/logos/همراه اول - قدیمی.svg"
+    }
+  ],
+  "colors": []
+}
