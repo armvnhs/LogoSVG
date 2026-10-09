@@ -1,13 +1,13 @@
-// sw.js
-self.addEventListener('install', (e) => {
-    console.log('[Service Worker] Installed');
-});
+self.addEventListener('install', () => self.skipWaiting());
+
+self.addEventListener('activate', (e) => e.waitUntil(self.clients.claim()));
 
 self.addEventListener('fetch', (e) => {
-    // یک رهگیری ساده برای اینکه مرورگر این سایت را PWA بشناسد
+    if (e.request.method !== 'GET') return;
     e.respondWith(
-        fetch(e.request).catch(() => {
-            return new Response('شما آفلاین هستید.');
-        })
+        fetch(e.request).catch(() => new Response('شما آفلاین هستید.', {
+            status: 503,
+            headers: { 'Content-Type': 'text/plain; charset=utf-8' }
+        }))
     );
 });
