@@ -84,19 +84,21 @@ h1{margin:30px 0 24px;font-size:clamp(2.1rem,7.5vw,5.6rem);font-weight:800;line-
 .chip2.on{background:var(--ink);color:#fff;box-shadow:0 0 0 1px var(--ink),0 6px 14px rgba(0,0,0,.2)}
 .chip2.on b{background:rgba(255,255,255,.18);color:#fff}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr));gap:clamp(14px,2vw,24px)}
-.card{position:relative;aspect-ratio:1;border-radius:30px;background:#fff;display:flex;flex-direction:column;align-items:center;padding:34px 26px 22px;box-shadow:0 0 0 1px var(--line);transition:transform .5s var(--spring),box-shadow .35s}
+.card{position:relative;overflow:hidden;min-width:0;aspect-ratio:1;border-radius:30px;background:#fff;display:flex;flex-direction:column;align-items:center;padding:34px 26px 22px;box-shadow:0 0 0 1px var(--line);transition:transform .5s var(--spring),box-shadow .35s}
 .card:hover,.card:focus-within{transform:scale(1.035);box-shadow:0 0 0 1.5px var(--b2),0 22px 48px rgba(31,95,214,.16)}
 .lg{flex:1;min-height:0;width:60%;object-fit:contain;padding:6px 0}
-.nm{height:38px;display:flex;align-items:center;font-weight:600;font-size:.92rem;color:var(--mute)}
-.seg{position:absolute;inset:auto 14px 14px;direction:ltr;display:flex;border-radius:14px;background:#fff;box-shadow:var(--sh);opacity:0;transform:translateY(14px) scale(.96);transition:opacity .2s,transform .5s var(--spring)}
-.card:hover .seg,.card:focus-within .seg{opacity:1;transform:none}
+.nm{height:38px;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;font-weight:600;font-size:.92rem;color:var(--mute)}
+.card::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(105deg,transparent 38%,rgba(120,170,255,.18) 46%,rgba(255,255,255,.95) 50%,rgba(120,170,255,.18) 54%,transparent 62%);transform:translateX(-115%)}
+.card:hover::after{transform:translateX(115%);transition:transform 1s ease}
+.seg{position:absolute;z-index:2;pointer-events:none;inset:auto 14px 14px;direction:ltr;display:flex;border-radius:14px;background:#fff;box-shadow:var(--sh);opacity:0;transform:translateY(14px) scale(.96);transition:opacity .2s,transform .5s var(--spring)}
+.card:hover .seg,.card:focus-within .seg,.card.open .seg{opacity:1;transform:none;pointer-events:auto}
 .seg i{position:absolute;inset:0 auto 0 0;width:33.333%;border-radius:14px;background:rgba(74,155,255,.14);opacity:0;transform:translateX(calc(var(--i,0)*100%));transition:transform .4s var(--spring),opacity .2s}
 .seg:hover i{opacity:1}
 .seg button{position:relative;flex:1;height:44px;display:flex;align-items:center;justify-content:center;gap:5px;border:0;background:none;border-radius:14px;font:700 .8rem Estedad,sans-serif;color:var(--ink);cursor:pointer;transition:transform .4s var(--spring)}
 .seg button+button::before{content:"";position:absolute;left:0;top:11px;bottom:11px;width:1px;background:var(--line)}
 .seg button:active{transform:scale(.92);transition-duration:.08s}
 .seg .i{width:15px;height:15px}
-@media(hover:none){.card{aspect-ratio:auto;padding-bottom:22px}.lg{height:110px;flex:none}.seg{position:relative;inset:auto;opacity:1;transform:none;width:100%;margin-top:14px}}
+@media(hover:none){.card.open{box-shadow:0 0 0 1.5px var(--b2),0 18px 40px rgba(31,95,214,.16)}.card:hover{transform:none}}
 .sk{aspect-ratio:1;border-radius:30px;background:var(--tint);animation:pl 1.3s ease-in-out infinite}
 @keyframes pl{50%{opacity:.5}}
 .empty{grid-column:1/-1;text-align:center;padding:70px 20px;color:var(--mute);line-height:2}
@@ -123,7 +125,7 @@ h1{margin:30px 0 24px;font-size:clamp(2.1rem,7.5vw,5.6rem);font-weight:800;line-
 .toast.err{background:#fff;color:var(--ink);box-shadow:0 0 0 2px var(--ink)}
 @media(max-width:1100px){.stats{grid-template-columns:1fr 1fr}.sc.blue{grid-column:1/-1;order:-1}}
 @media(max-width:900px){.pills{display:none}}
-@media(max-width:640px){.stats{grid-template-columns:1fr}.btn{padding:0 14px;height:42px}.kb{display:none}#q{padding-left:20px;height:58px}.sup{width:42px;padding:0}.sup .lbl{display:none}nav img{height:32px}.card{padding:26px 16px 16px;border-radius:24px}.seg{inset:auto 10px 10px}.seg button{height:40px;font-size:.75rem}.big{font-size:2rem}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.lib h3{font-size:1.35rem}.strip{padding:20px 0}}
+@media(max-width:640px){.stats{grid-template-columns:1fr}.btn{padding:0 14px;height:42px}.kb{display:none}#q{padding-left:20px;height:58px}.sup{width:42px;padding:0}.sup .lbl{display:none}nav img{height:32px}.card{padding:22px 14px 12px;border-radius:24px}.lg{width:72%}.seg .i{display:none}.seg{inset:auto 10px 10px}.seg button{height:40px;font-size:.75rem}.big{font-size:2rem}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.lib h3{font-size:1.35rem}.strip{padding:20px 0}}
 @media(max-width:380px){.acts{gap:6px}.btn.main{font-size:.85rem}.seg .i{display:none}}
 .stats{gap:12px;padding-bottom:clamp(36px,5vw,56px)}
 .sc{padding:clamp(14px,1.8vw,18px) clamp(16px,2vw,22px);border-radius:clamp(20px,2.2vw,26px);justify-content:center}
@@ -146,7 +148,7 @@ h1{margin:30px 0 24px;font-size:clamp(2.1rem,7.5vw,5.6rem);font-weight:800;line-
 <div class="frame">
 <div class="in" id="top">
   <nav>
-    <div class="brand"><button class="bm" id="bm" title="بوکمارک کردن سایت"><svg class="i" viewBox="0 0 24 24" data-i="bm"></svg><kbd id="bmk">Ctrl + D</kbd></button><a href="index-v2.html"><img src="file/LogoSVG.svg" alt="LogoSVG"></a></div>
+    <div class="brand"><button class="bm" id="bm" title="بوکمارک کردن سایت"><svg class="i" viewBox="0 0 24 24" data-i="bm"></svg><kbd id="bmk">Ctrl + D</kbd></button><a href="index-v2.html"><img src="https://logosvg.ir/file/LogoSVG.svg" alt="LogoSVG"></a></div>
         <div class="acts">
       <a class="btn sup" aria-label="حمایت مالی" href="https://daramet.com/armvnhs" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24" data-i="coffee"></svg><span class="lbl">حمایت مالی</span></a>
       <button class="btn main" onclick="modal(true)">ارسال لوگو<svg class="i" viewBox="0 0 24 24" data-i="send"></svg></button>
@@ -163,20 +165,6 @@ h1{margin:30px 0 24px;font-size:clamp(2.1rem,7.5vw,5.6rem);font-weight:800;line-
     </div>
   </header>
 
-  <section class="stats">
-    <div class="sc w">
-      <div class="row"><small>تعداد لوگوها</small><span class="chip">SVG و PNG</span></div>
-      <div class="big" id="cnt">...</div>
-    </div>
-    <div class="sc blue">
-      <span class="tag">کتابخانه متن‌باز</span>
-      <h2>جستجو کن. دانلود کن. استفاده کن.</h2>
-    </div>
-    <div class="sc w chart">
-      <div class="ct"><small>پردانلودترین لوگو</small><div class="big" id="topl">...</div><small id="topc"></small></div>
-      <div class="bars" id="bars"></div>
-    </div>
-  </section>
 
   <section class="lib" id="lib">
     <h3>همه لوگوها</h3>
@@ -257,7 +245,11 @@ async function act(a,f){
   }catch(e){toast('خطا در دریافت فایل. دوباره تلاش کنید.',1)}
 }
 
-grid.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b)act(b.dataset.a,b.parentElement.dataset.f)});
+grid.addEventListener('click',e=>{
+  const b=e.target.closest('[data-a]');if(b){act(b.dataset.a,b.parentElement.dataset.f);return}
+  const c=e.target.closest('.card');if(c&&matchMedia('(hover:none)').matches){const o=c.classList.contains('open');grid.querySelectorAll('.card.open').forEach(x=>x.classList.remove('open'));if(!o)c.classList.add('open')}
+});
+addEventListener('click',e=>{if(!e.target.closest('.card'))grid.querySelectorAll('.card.open').forEach(x=>x.classList.remove('open'))});
 grid.addEventListener('pointerover',e=>{const b=e.target.closest('.seg button');if(b){const s=b.parentElement;s.style.setProperty('--i',[...s.children].indexOf(b)-1)}});
 if(/Mac|iPhone|iPad/.test(navigator.userAgent))$('#bmk').textContent='⌘ D';
 $('#bm').addEventListener('click',()=>toast('برای بوکمارک، کلیدهای '+$('#bmk').textContent+' را بزنید'));
@@ -270,7 +262,7 @@ addEventListener('keydown',e=>{
 grid.innerHTML='<div class="sk"></div>'.repeat(8);
 Promise.all([fetch('logos.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.json()}),loadCats()]).then(([d])=>{
   items=d.filter(f=>/\.svg$/i.test(f)).map(f=>{const name=f.replace(/\.svg$/i,'');return{f,name,label:name.replace(/\s*-\s*(.+)$/,' ($1)'),n:norm(name),c:catMap[norm(name)]||''}});
-  buildCats();stats();render();
+  buildCats();render();
 }).catch(()=>{grid.innerHTML='<div class="empty"><b>بارگذاری لوگوها انجام نشد</b>صفحه را دوباره باز کنید یا بعداً سر بزنید.</div>'});
 
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
