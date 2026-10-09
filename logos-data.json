@@ -1,14 +1,14 @@
 {
   "logos": [
     {
-      "file": "/logos/آپارات با شعار.svg",
-      "name": "آپارات (با شعار)",
+      "file": "/logos/آپارات.svg",
+      "name": "آپارات",
       "en": "Aparat",
       "category": "رسانه و سرگرمی"
     },
     {
-      "file": "/logos/آپارات.svg",
-      "name": "آپارات",
+      "file": "/logos/آپارات با شعار.svg",
+      "name": "آپارات (با شعار)",
       "en": "Aparat",
       "category": "رسانه و سرگرمی"
     },
@@ -49,6 +49,12 @@
       "category": "طراحی و خلاقیت"
     },
     {
+      "file": "/logos/ایرانسل.svg",
+      "name": "ایرانسل",
+      "en": "Irancell",
+      "category": "مخابرات"
+    },
+    {
       "file": "/logos/ایرانسل - قدیمی.svg",
       "name": "ایرانسل (قدیمی)",
       "en": "Irancell",
@@ -58,12 +64,6 @@
       "file": "/logos/ایرانسل من.svg",
       "name": "ایرانسل من",
       "en": "MyIrancell",
-      "category": "مخابرات"
-    },
-    {
-      "file": "/logos/ایرانسل.svg",
-      "name": "ایرانسل",
-      "en": "Irancell",
       "category": "مخابرات"
     },
     {
@@ -103,10 +103,10 @@
       "category": "خرید و فروش"
     },
     {
-      "file": "/logos/همراه اول - قدیمی.svg",
-      "name": "همراه اول (قدیمی)",
-      "en": "Hamrah-e Aval MCI",
-      "category": "مخابرات"
+      "file": "/logos/کافه بازار.svg",
+      "name": "کافه بازار",
+      "en": "Cafe Bazaar",
+      "category": "فناوری و اپلیکیشن"
     },
     {
       "file": "/logos/همراه اول.svg",
@@ -115,10 +115,10 @@
       "category": "مخابرات"
     },
     {
-      "file": "/logos/کافه بازار.svg",
-      "name": "کافه بازار",
-      "en": "Cafe Bazaar",
-      "category": "فناوری و اپلیکیشن"
+      "file": "/logos/همراه اول - قدیمی.svg",
+      "name": "همراه اول (قدیمی)",
+      "en": "Hamrah-e Aval MCI",
+      "category": "مخابرات"
     }
   ]
 }
