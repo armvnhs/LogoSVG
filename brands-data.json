@@ -165,6 +165,18 @@
       "colors": []
     },
     {
+      "name": "کافه بازار",
+      "en": "Cafe Bazaar",
+      "category": "فناوری و اپلیکیشن",
+      "assets": [
+        {
+          "type": "Persian",
+          "file": "/logos/کافه بازار.svg"
+        }
+      ],
+      "colors": []
+    },
+    {
       "name": "همراه اول",
       "en": "Hamrah-e Aval MCI",
       "category": "مخابرات",
@@ -176,18 +188,6 @@
         {
           "type": "Old",
           "file": "/logos/همراه اول - قدیمی.svg"
-        }
-      ],
-      "colors": []
-    },
-    {
-      "name": "کافه بازار",
-      "en": "Cafe Bazaar",
-      "category": "فناوری و اپلیکیشن",
-      "assets": [
-        {
-          "type": "Persian",
-          "file": "/logos/کافه بازار.svg"
         }
       ],
       "colors": []
